@@ -15,18 +15,17 @@ CREATE SCHEMA IF NOT EXISTS `ohara` DEFAULT CHARACTER SET utf8 ;
 USE `ohara` ;
 
 -- -----------------------------------------------------
--- Table `ohara`.`Avaliador`
+-- Table `ohara`.`Usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ohara`.`Avaliador` (
-  `idAvaliador` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `ohara`.`Usuario` (
+  `idUsuario` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
   `avatar` VARCHAR(45) NULL,
-  PRIMARY KEY (`idAvaliador`),
+  PRIMARY KEY (`idUsuario`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `ohara`.`Manga`
@@ -52,14 +51,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`Lista` (
   `idLista` INT NOT NULL AUTO_INCREMENT,
-  `idAvaliador` INT NOT NULL,
+  `idUsuario` INT NOT NULL,
   `titulo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idLista`),
   UNIQUE INDEX `idLista_UNIQUE` (`idLista` ASC),
-  INDEX `idAvaliador_idx` (`idAvaliador` ASC),
-  CONSTRAINT `fk_Lista_Avaliador`
-    FOREIGN KEY (`idAvaliador`)
-    REFERENCES `ohara`.`Avaliador` (`idAvaliador`)
+  INDEX `idUsuario_idx` (`idUsuario` ASC),
+  CONSTRAINT `fk_Lista_Usuario`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `ohara`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -88,44 +87,44 @@ CREATE TABLE IF NOT EXISTS `ohara`.`ListaManga` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `ohara`.`AvaliadorAvaliaManga`
+-- Table `ohara`.`UsuarioAvaliaManga`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ohara`.`AvaliadorAvaliaManga` (
-  `idAvaliador` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioAvaliaManga` (
+  `idUsuario` INT NOT NULL,
   `idManga` INT NOT NULL,
   `nota` INT NOT NULL,
-  PRIMARY KEY (`idAvaliador`, `idManga`),
+  PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
-  CONSTRAINT `fk_AvaliadorAvaliaManga_Manga`
+  CONSTRAINT `fk_UsuarioAvaliaManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_AvaliadorAvaliaManga_Avaliador`
-    FOREIGN KEY (`idAvaliador`)
-    REFERENCES `ohara`.`Avaliador` (`idAvaliador`)
+  CONSTRAINT `fk_UsuarioAvaliaManga_Usuario`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `ohara`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `ohara`.`AvaliadorComentaManga`
+-- Table `ohara`.`UsuarioComentaManga`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ohara`.`AvaliadorComentaManga` (
-  `idAvaliadorComentaManga` INT NOT NULL AUTO_INCREMENT,
-  `idAvaliador` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioComentaManga` (
+  `idUsuarioComentaManga` INT NOT NULL AUTO_INCREMENT,
+  `idUsuario` INT NOT NULL,
   `idManga` INT NOT NULL,
   `descricao` VARCHAR(500) NOT NULL,
-  PRIMARY KEY (`idAvaliadorComentaManga`),
-  UNIQUE INDEX `idAvaliadorComentaManga_UNIQUE` (`idAvaliadorComentaManga` ASC),
-  INDEX `idAvaliador_idx` (`idAvaliador` ASC),
+  PRIMARY KEY (`idUsuarioComentaManga`),
+  UNIQUE INDEX `idUsuarioComentaManga_UNIQUE` (`idUsuarioComentaManga` ASC),
+  INDEX `idUsuario_idx` (`idUsuario` ASC),
   INDEX `idManga_idx` (`idManga` ASC),
-  CONSTRAINT `fk_AvaliadorComentaManga_Avaliador`
-    FOREIGN KEY (`idAvaliador`)
-    REFERENCES `ohara`.`Avaliador` (`idAvaliador`)
+  CONSTRAINT `fk_UsuarioComentaManga_Usuario`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `ohara`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_AvaliadorComentaManga_Manga`
+  CONSTRAINT `fk_UsuarioComentaManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
     ON DELETE NO ACTION
@@ -133,84 +132,81 @@ CREATE TABLE IF NOT EXISTS `ohara`.`AvaliadorComentaManga` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `ohara`.`AvaliadorMarcaCurtidaManga`
+-- Table `ohara`.`UsuarioMarcaCurtidaManga`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ohara`.`AvaliadorMarcaCurtidaManga` (
-  `idAvaliador` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioMarcaCurtidaManga` (
+  `idUsuario` INT NOT NULL,
   `idManga` INT NOT NULL,
-  PRIMARY KEY (`idAvaliador`, `idManga`),
+  PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
-  CONSTRAINT `idAvaliador`
-    FOREIGN KEY (`idAvaliador`)
-    REFERENCES `ohara`.`Avaliador` (`idAvaliador`)
+  CONSTRAINT `fk_UsuarioMarcaCurtidaManga_Usuario`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `ohara`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `idManga`
+  CONSTRAINT `fk_UsuarioMarcaCurtidaManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `ohara`.`AvaliadorMarcaLidoManga`
+-- Table `ohara`.`UsuarioMarcaLidoManga`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ohara`.`AvaliadorMarcaLidoManga` (
-  `idAvaliador` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioMarcaLidoManga` (
+  `idUsuario` INT NOT NULL,
   `idManga` INT NOT NULL,
-  PRIMARY KEY (`idAvaliador`, `idManga`),
+  PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
-  CONSTRAINT `idAvaliador`
-    FOREIGN KEY (`idAvaliador`)
-    REFERENCES `ohara`.`Avaliador` (`idAvaliador`)
+  CONSTRAINT `fk_UsuarioMarcaLidoManga_Usuario`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `ohara`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `idManga`
+  CONSTRAINT `fk_UsuarioMarcaLidoManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `ohara`.`AvaliadorMarcaLerDepoisManga`
+-- Table `ohara`.`UsuarioMarcaLerDepoisManga`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ohara`.`AvaliadorMarcaLerDepoisManga` (
-  `idAvaliador` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioMarcaLerDepoisManga` (
+  `idUsuario` INT NOT NULL,
   `idManga` INT NOT NULL,
-  PRIMARY KEY (`idAvaliador`, `idManga`),
+  PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
-  CONSTRAINT `idManga`
+  CONSTRAINT `fk_UsuarioMarcaLerDepoisManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `idAvaliador`
-    FOREIGN KEY (`idAvaliador`)
-    REFERENCES `ohara`.`Avaliador` (`idAvaliador`)
+  CONSTRAINT `fk_UsuarioMarcaLerDepoisManga_Usuario`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `ohara`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `ohara`.`AvaliadorSegueAvaliador`
+-- Table `ohara`.`UsuarioSegueUsuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ohara`.`AvaliadorSegueAvaliador` (
-  `idAvaliadorSegue` INT NOT NULL,
-  `idAvaliadorSeguido` INT NOT NULL,
-  PRIMARY KEY (`idAvaliadorSegue`, `idAvaliadorSeguido`),
-  INDEX `idAvaliadorSeguido_idx` (`idAvaliadorSeguido` ASC),
-  CONSTRAINT `idAvaliadorSegue`
-    FOREIGN KEY (`idAvaliadorSegue`)
-    REFERENCES `ohara`.`Avaliador` (`idAvaliador`)
+CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioSegueUsuario` (
+  `idUsuarioSegue` INT NOT NULL,
+  `idUsuarioSeguido` INT NOT NULL,
+  PRIMARY KEY (`idUsuarioSegue`, `idUsuarioSeguido`),
+  INDEX `idUsuarioSeguido_idx` (`idUsuarioSeguido` ASC),
+  CONSTRAINT `fk_UsuarioSegueUsuario_Seguido`
+    FOREIGN KEY (`idUsuarioSeguido`)
+    REFERENCES `ohara`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `idAvaliadorSeguido`
-    FOREIGN KEY (`idAvaliadorSeguido`)
-    REFERENCES `ohara`.`Avaliador` (`idAvaliador`)
+  CONSTRAINT `fk_UsuarioSegueUsuario_Seguindo`
+    FOREIGN KEY (`idUsuarioSegue`)
+    REFERENCES `ohara`.`Usuario` (`idUsuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
