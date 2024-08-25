@@ -1,0 +1,7 @@
+{
+  "name": "ohara",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

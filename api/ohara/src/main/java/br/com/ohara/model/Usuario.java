@@ -28,7 +28,7 @@ public class Usuario {
     private String email;
 
     @NotBlank(message = "Senha não pode ser vazia")
-    @Size(min = 6, max = 45, message = "Senha deve ter entre 6 e 45 caracteres")
+    @Size(min = 1, max = 45, message = "Senha deve ter entre 6 e 45 caracteres")
     private String senha;
 
     @Size(max = 45, message = "Avatar não pode exceder 45 caracteres")

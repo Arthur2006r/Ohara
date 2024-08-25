@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{usuario.nome}}</ion-title>
+
+    <ion-icon slot="end" name="create" routerLink="editar-perfil"></ion-icon>
+
+    <ion-segment value="all">
+      <ion-segment-button value="perfil">
+        <ion-label>Perfil</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="curtidos">
+        <ion-label>Curtidos</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="lerDepois">
+        <ion-label>Ler Depois</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="listas">
+        <ion-label>Listas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-img src="/assets/imagens/avatarDefault.jpg" alt="Logo Ohara"></ion-img>
+  </ion-row>
+
+  <ion-text>
+    <p>0</p>
+    <p>Seguidores</p>
+  </ion-text>
+
+  <ion-text>
+    <p>0</p>
+    <p>Seguidos</p>
+  </ion-text>
+
+  <ion-text>
+    <p>0</p>
+    <p>Mangás</p>
+  </ion-text>
+</ion-content>

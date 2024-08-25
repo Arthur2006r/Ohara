@@ -33,4 +33,8 @@ public interface UsuarioDao {
 
 	@SqlUpdate("DELETE FROM Usuario WHERE idUsuario = :idUsuario")
 	Long delete(@Bind("idUsuario") Long id);
+	
+	@SqlQuery("SELECT * FROM usuario WHERE email = :email AND senha = :senha")
+    @RegisterBeanMapper(Usuario.class)
+    Usuario findByEmailAndSenha(String email, String senha);
 }

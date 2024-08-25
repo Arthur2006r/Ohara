@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -82,5 +83,14 @@ public class UsuarioService {
         }
 
         return uAux;
+    }
+    
+    public Usuario autenticar(String email, String senha) {
+        Usuario usuario = usuarioDao.findByEmailAndSenha(email, senha);
+        if (usuario == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado com o email e a senha.");
+        }
+        
+        return usuario;
     }
 }

@@ -3,6 +3,7 @@ package br.com.ohara.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/usuario")
+@CrossOrigin(origins = "http://localhost:8100")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -49,5 +51,10 @@ public class UsuarioController {
     @DeleteMapping({"/{id}"})
     public ResponseEntity<Usuario> excluir(@PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.excluir(id));
+    }
+    
+    @GetMapping("/{email}/{senha}/autenticar")
+    public ResponseEntity<Usuario> autenticar(@PathVariable String email, @PathVariable String senha) {
+        return ResponseEntity.ok(usuarioService.autenticar(email, senha));
     }
 }
