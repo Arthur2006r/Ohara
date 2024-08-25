@@ -1,5 +1,3 @@
--- MySQL Workbench Forward Engineering
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -42,7 +40,6 @@ CREATE TABLE IF NOT EXISTS `ohara`.`Manga` (
   `qtdDeVolumes` INT NOT NULL,
   `status` ENUM('Em lançamento', 'Finalizado') NOT NULL,
   PRIMARY KEY (`idManga`),
-  UNIQUE INDEX `idManga_UNIQUE` (`idManga` ASC),
   UNIQUE INDEX `titulo_UNIQUE` (`titulo` ASC))
 ENGINE = InnoDB;
 
@@ -59,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `ohara`.`Lista` (
   CONSTRAINT `fk_Lista_Usuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `ohara`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -77,12 +74,12 @@ CREATE TABLE IF NOT EXISTS `ohara`.`ListaManga` (
   CONSTRAINT `fk_ListaManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ListaManga_Lista`
     FOREIGN KEY (`idLista`)
     REFERENCES `ohara`.`Lista` (`idLista`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -98,12 +95,12 @@ CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioAvaliaManga` (
   CONSTRAINT `fk_UsuarioAvaliaManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_UsuarioAvaliaManga_Usuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `ohara`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -122,12 +119,12 @@ CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioComentaManga` (
   CONSTRAINT `fk_UsuarioComentaManga_Usuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `ohara`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_UsuarioComentaManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -142,12 +139,12 @@ CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioMarcaCurtidaManga` (
   CONSTRAINT `fk_UsuarioMarcaCurtidaManga_Usuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `ohara`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_UsuarioMarcaCurtidaManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -162,12 +159,12 @@ CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioMarcaLidoManga` (
   CONSTRAINT `fk_UsuarioMarcaLidoManga_Usuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `ohara`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_UsuarioMarcaLidoManga_Manga`
     FOREIGN KEY (`idManga`)
     REFERENCES `ohara`.`Manga` (`idManga`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -179,15 +176,15 @@ CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioMarcaLerDepoisManga` (
   `idManga` BIGINT NOT NULL,
   PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
-  CONSTRAINT `fk_UsuarioMarcaLerDepoisManga_Manga`
-    FOREIGN KEY (`idManga`)
-    REFERENCES `ohara`.`Manga` (`idManga`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_UsuarioMarcaLerDepoisManga_Usuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `ohara`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_UsuarioMarcaLerDepoisManga_Manga`
+    FOREIGN KEY (`idManga`)
+    REFERENCES `ohara`.`Manga` (`idManga`)
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -202,12 +199,12 @@ CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioSegueUsuario` (
   CONSTRAINT `fk_UsuarioSegueUsuario_Seguido`
     FOREIGN KEY (`idUsuarioSeguido`)
     REFERENCES `ohara`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_UsuarioSegueUsuario_Seguindo`
     FOREIGN KEY (`idUsuarioSegue`)
     REFERENCES `ohara`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
