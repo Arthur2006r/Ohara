@@ -24,17 +24,14 @@ public interface UsuarioDao {
 	@SqlQuery("SELECT * FROM Usuario ORDER BY nome")
 	List<Usuario> getAll();
 
-	@SqlUpdate("UPDATE Usuario SET nome = :nome," 
-	+ "email = :email," 
-	+ "senha = :senha," 
-	+ "avatar = :avatar"
+	@SqlUpdate("UPDATE Usuario SET nome = :nome, " + "email = :email, " + "senha = :senha, " + "avatar = :avatar "
 			+ "WHERE idUsuario = :idUsuario")
-	Long update(@BindBean Usuario usuario);
+	Integer update(@BindBean Usuario usuario);
 
 	@SqlUpdate("DELETE FROM Usuario WHERE idUsuario = :idUsuario")
 	Long delete(@Bind("idUsuario") Long id);
-	
+
 	@SqlQuery("SELECT * FROM usuario WHERE email = :email AND senha = :senha")
-    @RegisterBeanMapper(Usuario.class)
-    Usuario findByEmailAndSenha(String email, String senha);
+	@RegisterBeanMapper(Usuario.class)
+	Usuario findByEmailAndSenha(String email, String senha);
 }

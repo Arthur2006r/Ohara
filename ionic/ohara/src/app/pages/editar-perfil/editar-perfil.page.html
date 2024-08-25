@@ -1,13 +1,44 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>editarPerfil</ion-title>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defautHref="/meu-perfil" text="cancelar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edição do Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editarPerfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <form [formGroup]="formGroup" (ngSubmit)="salvar()">
+    <!-- Campo para upload de imagem -->
+    <ion-item>
+      <ion-label position="stacked">Avatar</ion-label>
+      <input type="file" (change)="onFileChange($event)" accept="image/*">
+    </ion-item>
+
+    <!-- Pré-visualização da imagem -->
+    <ion-item *ngIf="avatarPreview">
+      <ion-img [src]="avatarPreview"></ion-img>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input type="text" formControlName="nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Senha</ion-label>
+      <ion-input type="password" formControlName="senha">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+    </ion-item>
+
+    <ion-button type="submit" expand="block" color="success" [disabled]="!formGroup.valid">Salvar</ion-button>
+  </form>
+
 </ion-content>

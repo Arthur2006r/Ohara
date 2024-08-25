@@ -18,7 +18,7 @@ USE `ohara` ;
 -- Table `ohara`.`Usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`Usuario` (
-  `idUsuario` INT NOT NULL AUTO_INCREMENT,
+  `idUsuario` BIGINT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
@@ -31,7 +31,7 @@ ENGINE = InnoDB;
 -- Table `ohara`.`Manga`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`Manga` (
-  `idManga` INT NOT NULL AUTO_INCREMENT,
+  `idManga` BIGINT NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(45) NOT NULL,
   `autor` VARCHAR(45) NOT NULL,
   `sinopse` VARCHAR(500) NOT NULL,
@@ -50,8 +50,8 @@ ENGINE = InnoDB;
 -- Table `ohara`.`Lista`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`Lista` (
-  `idLista` INT NOT NULL AUTO_INCREMENT,
-  `idUsuario` INT NOT NULL,
+  `idLista` BIGINT NOT NULL AUTO_INCREMENT,
+  `idUsuario` BIGINT NOT NULL,
   `titulo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idLista`),
   UNIQUE INDEX `idLista_UNIQUE` (`idLista` ASC),
@@ -67,9 +67,9 @@ ENGINE = InnoDB;
 -- Table `ohara`.`ListaManga`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`ListaManga` (
-  `idListaManga` INT NOT NULL AUTO_INCREMENT,
-  `idLista` INT NOT NULL,
-  `idManga` INT NOT NULL,
+  `idListaManga` BIGINT NOT NULL AUTO_INCREMENT,
+  `idLista` BIGINT NOT NULL,
+  `idManga` BIGINT NOT NULL,
   PRIMARY KEY (`idListaManga`, `idLista`, `idManga`),
   UNIQUE INDEX `idListaManga_UNIQUE` (`idListaManga` ASC),
   INDEX `idManga_idx` (`idManga` ASC),
@@ -90,8 +90,8 @@ ENGINE = InnoDB;
 -- Table `ohara`.`UsuarioAvaliaManga`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioAvaliaManga` (
-  `idUsuario` INT NOT NULL,
-  `idManga` INT NOT NULL,
+  `idUsuario` BIGINT NOT NULL,
+  `idManga` BIGINT NOT NULL,
   `nota` INT NOT NULL,
   PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
@@ -111,9 +111,9 @@ ENGINE = InnoDB;
 -- Table `ohara`.`UsuarioComentaManga`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioComentaManga` (
-  `idUsuarioComentaManga` INT NOT NULL AUTO_INCREMENT,
-  `idUsuario` INT NOT NULL,
-  `idManga` INT NOT NULL,
+  `idUsuarioComentaManga` BIGINT NOT NULL AUTO_INCREMENT,
+  `idUsuario` BIGINT NOT NULL,
+  `idManga` BIGINT NOT NULL,
   `descricao` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`idUsuarioComentaManga`),
   UNIQUE INDEX `idUsuarioComentaManga_UNIQUE` (`idUsuarioComentaManga` ASC),
@@ -135,8 +135,8 @@ ENGINE = InnoDB;
 -- Table `ohara`.`UsuarioMarcaCurtidaManga`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioMarcaCurtidaManga` (
-  `idUsuario` INT NOT NULL,
-  `idManga` INT NOT NULL,
+  `idUsuario` BIGINT NOT NULL,
+  `idManga` BIGINT NOT NULL,
   PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
   CONSTRAINT `fk_UsuarioMarcaCurtidaManga_Usuario`
@@ -155,8 +155,8 @@ ENGINE = InnoDB;
 -- Table `ohara`.`UsuarioMarcaLidoManga`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioMarcaLidoManga` (
-  `idUsuario` INT NOT NULL,
-  `idManga` INT NOT NULL,
+  `idUsuario` BIGINT NOT NULL,
+  `idManga` BIGINT NOT NULL,
   PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
   CONSTRAINT `fk_UsuarioMarcaLidoManga_Usuario`
@@ -175,8 +175,8 @@ ENGINE = InnoDB;
 -- Table `ohara`.`UsuarioMarcaLerDepoisManga`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioMarcaLerDepoisManga` (
-  `idUsuario` INT NOT NULL,
-  `idManga` INT NOT NULL,
+  `idUsuario` BIGINT NOT NULL,
+  `idManga` BIGINT NOT NULL,
   PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
   CONSTRAINT `fk_UsuarioMarcaLerDepoisManga_Manga`
@@ -195,8 +195,8 @@ ENGINE = InnoDB;
 -- Table `ohara`.`UsuarioSegueUsuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`UsuarioSegueUsuario` (
-  `idUsuarioSegue` INT NOT NULL,
-  `idUsuarioSeguido` INT NOT NULL,
+  `idUsuarioSegue` BIGINT NOT NULL,
+  `idUsuarioSeguido` BIGINT NOT NULL,
   PRIMARY KEY (`idUsuarioSegue`, `idUsuarioSeguido`),
   INDEX `idUsuarioSeguido_idx` (`idUsuarioSeguido` ASC),
   CONSTRAINT `fk_UsuarioSegueUsuario_Seguido`
@@ -216,7 +216,7 @@ USE `ohara` ;
 -- -----------------------------------------------------
 -- Placeholder table for view `ohara`.`view1`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ohara`.`view1` (`id` INT);
+CREATE TABLE IF NOT EXISTS `ohara`.`view1` (`id` BIGINT);
 
 -- -----------------------------------------------------
 -- View `ohara`.`view1`

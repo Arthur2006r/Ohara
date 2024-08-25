@@ -21,11 +21,15 @@ public class UsuarioService {
     }
 
     public Usuario inserir(Usuario u) {
-        if (u.getIdUsuario() != 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Id - informação ilegal.");
+        if (u.getIdUsuario() != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID deve ser nulo ao inserir um novo usuário.");
         }
 
         Long id = usuarioDao.insert(u);
+        if (id == null) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar ID para o novo usuário.");
+        }
+
         u.setIdUsuario(id);
         return u;
     }
@@ -55,10 +59,8 @@ public class UsuarioService {
         }
 
         // Alteração da entidade
-        Long qtd = usuarioDao.update(u);
-
-        // Validar se a entidade foi alterada corretamente.
-        if (qtd != 1) {
+        Integer qtd = usuarioDao.update(u);
+        if (qtd == null || qtd != 1) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "A quantidade de entidades alteradas é " + qtd + ".");
         }
 

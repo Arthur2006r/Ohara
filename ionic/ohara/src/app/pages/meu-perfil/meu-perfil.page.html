@@ -1,30 +1,43 @@
+<!-- Menu de opções -->
+<ion-menu side="end" content-id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>{{usuario.nome}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+    <ion-list>
+      <!-- Consertar rota dos itens -->
+      <ion-item *ngFor="let item of menu" [routerLink]="[item.rota]" (click)="item.click ? item.click() : null">
+        <ion-icon slot="start" [name]="item.icone" [color]="item.cor"></ion-icon>
+        <ion-label>{{item.titulo}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<!-- Header da página -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{usuario.nome}}</ion-title>
+    <ion-title>{{ usuario.nome }}</ion-title>
 
-    <ion-icon slot="end" name="create" routerLink="editar-perfil"></ion-icon>
+    <!-- Botão para chamar o menu -->
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
 
+    <!-- Cadeia dos botões do segments -->
     <ion-segment value="all">
-      <ion-segment-button value="perfil">
-        <ion-label>Perfil</ion-label>
-      </ion-segment-button>
-
-      <ion-segment-button value="curtidos">
-        <ion-label>Curtidos</ion-label>
-      </ion-segment-button>
-
-      <ion-segment-button value="lerDepois">
-        <ion-label>Ler Depois</ion-label>
-      </ion-segment-button>
-
-      <ion-segment-button value="listas">
-        <ion-label>Listas</ion-label>
+      <ion-segment-button *ngFor="let item of segment" [value]="item.value">
+        <ion-label>{{ item.titulo }}</ion-label>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content id="main-content" [fullscreen]="true">
   <ion-row>
     <ion-img src="/assets/imagens/avatarDefault.jpg" alt="Logo Ohara"></ion-img>
   </ion-row>

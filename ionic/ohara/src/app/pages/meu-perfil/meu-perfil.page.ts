@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { NavController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -12,13 +11,25 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class MeuPerfilPage implements OnInit {
   usuario: Usuario;
 
-  constructor(private usuarioService: UsuarioService, private toastController: ToastController, private navController: NavController) {
+  menu = [
+    { titulo: "Editar Perfil", rota: "/editar-perfil", icone: "person-circle", cor: "primary", click: null },
+    { titulo: 'Deslogar', rota: null, icone: 'exit', cor: "danger", click: () => this.sair() }
+  ];
+
+  segment = [
+    { titulo: 'Perfil', value: 'perfil' },
+    { titulo: 'Curtidos', value: 'curtidos' },
+    { titulo: 'Ler Depois', value: 'lerDepois' },
+    { titulo: 'Listas', value: 'listas' }
+  ];
+
+  constructor(private usuarioService: UsuarioService, private alertController: AlertController, private navController: NavController) {
     this.usuario = new Usuario();
   }
 
   ngOnInit() {
     let idUsuario = this.usuarioService.recuperarAutenticacao();
-  
+
     if (idUsuario) {
       this.usuarioService.buscarPorId(idUsuario)
         .then((json) => {
@@ -31,5 +42,22 @@ export class MeuPerfilPage implements OnInit {
       console.warn('ID do usuário não encontrado');
     }
   }
-  
+
+  async sair() {
+    const alert = await this.alertController.create({
+      header: 'Sair da sua conta?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        }, {
+          text: 'Sair',
+          cssClass: 'danger',
+          handler: () => {
+            this.navController.navigateBack('/inicio');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }
