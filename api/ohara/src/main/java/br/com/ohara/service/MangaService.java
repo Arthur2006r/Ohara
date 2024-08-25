@@ -49,10 +49,10 @@ public class MangaService {
         }
         
         //Alteracao da entidade
-        Long qtd = mangaDao.update(m);
+        Integer qtd = mangaDao.update(m);
         
         //Validar se a entidade foi alterada corretamente.
-        if (qtd != 1){
+        if (qtd == null || qtd != 1){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "A quantidade de entidades alteradas eh " +qtd+ ".");
         }
         

@@ -41,7 +41,7 @@ public interface MangaDao {
 			" quantidadeVolumes = :quantidadeVolumes" + 
 			" quantidadeCapitulos = :quantidadeCapitulos" +
 			" where idManga = :idManga;")
-	Long update(@BindBean Manga manga);
+	Integer update(@BindBean Manga manga);
 	
 	@SqlUpdate("delete " +
 			" from manga " +
