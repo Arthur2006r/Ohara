@@ -17,7 +17,7 @@ export class CadastroUsuarioPage implements OnInit {
   constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService, private toastController: ToastController, private navController: NavController) {
     this.usuario = new Usuario();
     this.formGroup = this.formBuilder.group({
-      'avatar': [null, Validators.compose([Validators.required])],
+      'avatar': [null, null],
       'nome': ["", Validators.compose([Validators.required])],
       'email': ["", Validators.compose([Validators.required, Validators.email])],
       'senha': ["", Validators.compose([Validators.required])],

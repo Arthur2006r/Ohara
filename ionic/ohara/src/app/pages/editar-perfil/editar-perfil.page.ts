@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -15,7 +15,7 @@ export class EditarPerfilPage implements OnInit {
   formGroup: FormGroup;
   avatarPreview: string | ArrayBuffer | null = null;
 
-  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService, private toastController: ToastController, private navController: NavController) {
+  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService, private toastController: ToastController, private navController: NavController, private alertController: AlertController) {
     this.usuario = new Usuario();
     this.formGroup = this.formBuilder.group({
       'nome': [this.usuario.nome, Validators.compose([Validators.required])],
@@ -74,6 +74,49 @@ export class EditarPerfilPage implements OnInit {
         this.exibirMensagem('Erro ao salvar o registro! Erro: ' + erro['mensage']);
       }));
 
+  }
+
+  async excluir() {
+    const alert = await this.alertController.create({
+      header: 'Você deseja excluir sua conta permanentemente?',
+      inputs: [
+        {
+          name: 'senha',
+          type: 'password',
+          placeholder: 'Confirme com sua senha'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Excluir Conta',
+          cssClass: 'danger',
+          handler: (data) => {
+            this.usuarioService.validarSenha(this.usuario.idUsuario, data.senha)
+              .then((json) => {
+                let result = <boolean>(json);
+                if (result) {
+                  this.usuarioService.excluir(this.usuario.idUsuario)
+                    .then(() => {
+                      this.exibirMensagem('Registro excluído com sucesso!!!');
+                      this.navController.navigateBack("/inicio")
+                    }).catch(() => {
+                      this.exibirMensagem('Erro ao excluir o registro.');
+                    });
+                } else {
+                  this.exibirMensagem('Senha incorreta.');
+                }
+              }).catch(() => {
+                this.exibirMensagem('Erro ao excluir o registro.');
+              });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async exibirMensagem(texto: string) {

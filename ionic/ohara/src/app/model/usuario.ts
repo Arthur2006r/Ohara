@@ -1,12 +1,12 @@
 export class Usuario {
-    idUsuario: number;
+    idUsuario: number | null;
     nome: string;
     email: string;
     senha: string;
     // avatar: string;
 
     constructor() {
-        this.idUsuario = 0;
+        this.idUsuario = null;
         this.nome = "";
         this.email = "";
         this.senha = "";

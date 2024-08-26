@@ -77,7 +77,7 @@ public class UsuarioService {
         }
 
         // Exclusão da entidade
-        Long qtd = usuarioDao.delete(id);
+        Integer qtd = usuarioDao.delete(id);
 
         // Validar se a entidade foi excluída corretamente.
         if (qtd != 1) {
