@@ -1,26 +1,34 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="dark">
+  <ion-toolbar color="">
     <ion-buttons slot="start">
       <ion-back-button defautHref="/inicio" text="voltar"></ion-back-button>
     </ion-buttons>
-    <ion-title>Login</ion-title>
+    <ion-title style="text-align: center;">Página de Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="masters">
+
   <ion-row>
-    <ion-img src="/assets/imagens/logo.jpeg" alt="Logo Ohara"></ion-img>
+    <ion-img src="/assets/imagens/icone-login.png" alt="Icone"></ion-img>
   </ion-row>
 
+  <hr>
+
   <form [formGroup]="formGroup" (ngSubmit)="autenticar()">
-    <ion-item>
-      <ion-label position="stacked">Email</ion-label>
-      <ion-input type="text" formControlName="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Senha</ion-label>
-      <ion-input type="password" formControlName="senha"></ion-input>
-    </ion-item>
-    <ion-button type="submit" expand="block" color="success" [disabled]="!formGroup.valid">Entrar</ion-button>
+
+    <div class="label1">
+      <ion-input label="Email" fill="solid" type="text" formControlName="email">
+      </ion-input>
+    </div>
+    <div class="label2">
+      <ion-input label="Senha" fill="solid" type="password" formControlName="senha">
+        <ion-input-password-toggle color="dark" slot="end"></ion-input-password-toggle>
+      </ion-input>
+    </div>
+    <hr>
+
+    <ion-button type="submit" expand="block" color="dark" class="custom-button"
+      [disabled]="!formGroup.valid">Entrar</ion-button>
   </form>
 </ion-content>

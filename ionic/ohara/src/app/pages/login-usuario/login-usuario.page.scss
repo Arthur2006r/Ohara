@@ -1,0 +1,53 @@
+ion-content{
+    --ion-background-color: #2E2E2E;
+}
+
+h2{
+    text-align: center;
+}
+
+ion-img{
+
+    margin-bottom: none;
+    margin-top: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30vw;
+    height: 30vh;
+}
+
+hr{
+    margin-top: none;
+    background-color: #fff;
+    width: 90%;
+}
+
+#label-cor{
+    background-color: #2E2E2E;
+}
+
+.label1{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+    border-radius: 1%;
+}
+
+.label2{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;    
+    border-radius: 10vw;
+}
+
+.custom-button {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    border: 2px;
+}
+

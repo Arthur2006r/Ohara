@@ -1,23 +1,13 @@
-<ion-content [fullscreen]="true" class="ion-padding">
 
-  <ion-row>
-    <ion-img src="/assets/imagens/logo.jpeg" alt="Logo Ohara"></ion-img>
-  </ion-row>
+<ion-content class="ion-padding" fullscreen>
+  <div class="container">
 
-  <ion-row>
-    <p>Ohara</p>
-  </ion-row>
-
-  <ion-row>
-    <ion-button routerLink="/login-usuario">
-      Fazer Login
-    </ion-button>
-  </ion-row>
-
-  <ion-row>
-    <ion-button routerLink="/cadastro-usuario">
-      Cadastrar-se
-    </ion-button>
-  </ion-row>
-
+    <ion-img src="/assets/imagens/logo-figma.png" alt="Logo Ohara" class="logo"></ion-img>
+    
+    <h2 class="title">Ohara</h2>
+    
+    <ion-button color="light" routerLink ="/login-usuario" expand="block" class="custom-button" >Página de Login</ion-button>
+    
+    <ion-button color="light" routerLink="/cadastro-usuario" expand="block" class="custom-button" >Cadastre-se</ion-button>
+  </div>
 </ion-content>
