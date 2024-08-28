@@ -16,22 +16,22 @@ public interface UsuarioDao {
 
 	@GetGeneratedKeys
 	@SqlUpdate("INSERT INTO Usuario (nome, email, senha, avatar)" + "VALUES (:nome, :email, :senha, :avatar)")
-	Long insert(@BindBean Usuario usuario);
+	Long inserir(@BindBean Usuario usuario);
 
 	@SqlQuery("SELECT * FROM Usuario WHERE idUsuario = :idUsuario")
-	Usuario get(@Bind("idUsuario") Long id);
+	Usuario consultarPorId(@Bind("idUsuario") Long id);
 
 	@SqlQuery("SELECT * FROM Usuario ORDER BY nome")
-	List<Usuario> getAll();
+	List<Usuario> consultarTodos();
 
 	@SqlUpdate("UPDATE Usuario SET nome = :nome, " + "email = :email, " + "senha = :senha, " + "avatar = :avatar "
 			+ "WHERE idUsuario = :idUsuario")
-	Integer update(@BindBean Usuario usuario);
+	Integer alterar(@BindBean Usuario usuario);
 
 	@SqlUpdate("DELETE FROM Usuario WHERE idUsuario = :idUsuario")
-	Integer delete(@Bind("idUsuario") Long id);
+	Integer excluir(@Bind("idUsuario") Long id);
 
 	@SqlQuery("SELECT * FROM usuario WHERE email = :email AND senha = :senha")
 	@RegisterBeanMapper(Usuario.class)
-	Usuario findByEmailAndSenha(String email, String senha);
+	Usuario autenticar(String email, String senha);
 }

@@ -23,17 +23,17 @@ public class MangaService {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Id - informacao ilegal.");
         }
 
-        Long id = mangaDao.insert(m);
+        Long id = mangaDao.inserir(m);
         m.setIdManga(id);
         return m;
 	}
 	
 	public List<Manga> consultarTodos() {
-		return mangaDao.getAll();
+		return mangaDao.consultarTodos();
 	}
 	
 	public Manga consultarPorId(Long id) {
-		return mangaDao.get(id);
+		return mangaDao.consultarPorId(id);
 	}
 	
 	public Manga alterar(Manga m) {
@@ -43,13 +43,13 @@ public class MangaService {
             throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Id eh informacao obrigatoria.");
         }
         
-        Manga mAux = mangaDao.get(id);
+        Manga mAux = mangaDao.consultarPorId(id);
         if (mAux == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Manga nao encontrado com o id: " +id+ ".");
         }
         
         //Alteracao da entidade
-        Integer qtd = mangaDao.update(m);
+        Integer qtd = mangaDao.alterar(m);
         
         //Validar se a entidade foi alterada corretamente.
         if (qtd == null || qtd != 1){
@@ -57,19 +57,19 @@ public class MangaService {
         }
         
         //Retornar a informacao alterada no banco de dados.
-        mAux = mangaDao.get(id);
+        mAux = mangaDao.consultarPorId(id);
         return mAux;
 	}
 	
 	public Manga excluir(Long id) {
 		//Validacoes extras das informacoes
-        Manga mAux = mangaDao.get(id);
+        Manga mAux = mangaDao.consultarPorId(id);
         if (mAux == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Manga nao encontrado com o id: " +id+ ".");
         }
         
         //Alteracao da entidade
-        Long qtd = mangaDao.delete(id);
+        Long qtd = mangaDao.excluir(id);
         
         //Validar se a entidade foi alterada corretamente.
         if (qtd != 1){

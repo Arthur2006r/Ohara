@@ -25,7 +25,7 @@ public class UsuarioService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID deve ser nulo ao inserir um novo usuário.");
         }
 
-        Long id = usuarioDao.insert(u);
+        Long id = usuarioDao.inserir(u);
         if (id == null) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar ID para o novo usuário.");
         }
@@ -35,11 +35,11 @@ public class UsuarioService {
     }
 
     public List<Usuario> consultarTodos() {
-        return usuarioDao.getAll();
+        return usuarioDao.consultarTodos();
     }
 
     public Usuario consultarPorId(Long id) {
-        Usuario usuario = usuarioDao.get(id);
+        Usuario usuario = usuarioDao.consultarPorId(id);
         if (usuario == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado com o id: " + id + ".");
         }
@@ -53,31 +53,31 @@ public class UsuarioService {
             throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Id é informação obrigatória.");
         }
 
-        Usuario uAux = usuarioDao.get(id);
+        Usuario uAux = usuarioDao.consultarPorId(id);
         if (uAux == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado com o id: " + id + ".");
         }
 
         // Alteração da entidade
-        Integer qtd = usuarioDao.update(u);
+        Integer qtd = usuarioDao.alterar(u);
         if (qtd == null || qtd != 1) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "A quantidade de entidades alteradas é " + qtd + ".");
         }
 
         // Retornar a informação alterada no banco de dados.
-        uAux = usuarioDao.get(id);
+        uAux = usuarioDao.consultarPorId(id);
         return uAux;
     }
 
     public Usuario excluir(Long id) {
         // Validações extras das informações
-        Usuario uAux = usuarioDao.get(id);
+        Usuario uAux = usuarioDao.consultarPorId(id);
         if (uAux == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado com o id: " + id + ".");
         }
 
         // Exclusão da entidade
-        Integer qtd = usuarioDao.delete(id);
+        Integer qtd = usuarioDao.excluir(id);
 
         // Validar se a entidade foi excluída corretamente.
         if (qtd != 1) {
@@ -88,7 +88,7 @@ public class UsuarioService {
     }
     
     public Usuario autenticar(String email, String senha) {
-        Usuario usuario = usuarioDao.findByEmailAndSenha(email, senha);
+        Usuario usuario = usuarioDao.autenticar(email, senha);
         if (usuario == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado com o email e a senha.");
         }
