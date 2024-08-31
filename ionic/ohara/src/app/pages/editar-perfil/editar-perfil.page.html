@@ -1,45 +1,50 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="dark">
-    <ion-buttons slot="start">
-      <ion-back-button defautHref="/meu-perfil" text="cancelar"></ion-back-button>
+  <ion-toolbar color="">
+    <ion-buttons slot="start" (click)="voltar()">
+      <img class="botao-voltar" src="/assets/imagens/botao-voltar.png">
     </ion-buttons>
-    <ion-title>Edição do Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
+  <h2>Editar Perfil</h2>
+
+  <hr>
+
   <form [formGroup]="formGroup" (ngSubmit)="salvar()">
-    <!-- Campo para upload de imagem -->
-    <ion-item>
-      <ion-label position="stacked">Avatar</ion-label>
-      <input type="file" (change)="onFileChange($event)" accept="image/*">
-    </ion-item>
 
     <!-- Pré-visualização da imagem -->
-    <ion-item *ngIf="avatarPreview">
-      <ion-img [src]="avatarPreview"></ion-img>
-    </ion-item>
+    <div class="previewImagem" *ngIf="avatarPreview">
+      <div class="circle-container">
+        <ion-img [src]="avatarPreview" class="circle-image"></ion-img>
+      </div>
+    </div>
 
-    <ion-item>
-      <ion-label position="stacked">Nome</ion-label>
-      <ion-input type="text" formControlName="nome"></ion-input>
-    </ion-item>
+    <!-- Campo para upload de imagem -->
+    <div class="campoAvatar">
 
-    <ion-item>
-      <ion-label position="stacked">Email</ion-label>
-      <ion-input type="text" formControlName="email"></ion-input>
-    </ion-item>
+      <input type="file" (change)="onFileChange($event)" accept="image/*">
+    </div>
 
-    <ion-item>
-      <ion-label position="stacked">Senha</ion-label>
-      <ion-input type="password" formControlName="senha">
+    <div class="personalizacao-campos">
+      <ion-input label="Nome" fill="solid" type="text" formControlName="nome"></ion-input>
+    </div>
+
+    <div class="personalizacao-campos">
+      <ion-input label="Email" fill="solid" type="text" formControlName="email"></ion-input>
+    </div>
+
+    <div class="personalizacao-campos">
+      <ion-input label="Senha" fill="solid" type="password" formControlName="senha">
         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
       </ion-input>
-    </ion-item>
+    </div>
 
-    <ion-button type="submit" expand="block" color="success" [disabled]="!formGroup.valid">Salvar</ion-button>
+    <ion-button type="submit" expand="block" color="dark" class="custom-button" [disabled]="!formGroup.valid">Salvar</ion-button>
   </form>
 
-  <ion-button type="submit" expand="block" color="danger" (click)="excluir()" [disabled]="!formGroup.valid">Excluir Conta</ion-button>
+  <ion-button type="submit" expand="block" color="danger" class="custom-button" (click)="excluir()" [disabled]="!formGroup.valid">Excluir
+    Conta</ion-button>
+
 </ion-content>

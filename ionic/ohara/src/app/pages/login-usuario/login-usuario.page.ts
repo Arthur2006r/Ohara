@@ -43,6 +43,10 @@ export class LoginUsuarioPage implements OnInit {
     }));
   }
 
+  voltar(){
+    this.navController.back();
+  }
+
   async exibirMensagem(texto: string){
     const toast = await this.toastController.create({
       message: texto,

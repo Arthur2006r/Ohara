@@ -1,44 +1,47 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="">
-    <ion-buttons slot="start">
-      <ion-back-button defautHref="/inicio" text="voltar"></ion-back-button>
+    <ion-buttons slot="start" (click)="voltar()">
+      <img class="botao-voltar" src="/assets/imagens/botao-voltar.png">
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-row>
-    <ion-img src="/assets/imagens/logo.jpeg" alt="Logo Ohara"></ion-img>
-  </ion-row>
+  <div class="container">
 
-  <form [formGroup]="formGroup" (ngSubmit)="cadastrar()">
-    <!-- Campo para upload de imagem -->
-    <ion-item>
-      <ion-label position="stacked">Avatar</ion-label>
-      <input type="file" (change)="onFileChange($event)" accept="image/*">
-    </ion-item>
-  
-    <!-- Pré-visualização da imagem -->
-    <ion-item *ngIf="avatarPreview">
-      <ion-img [src]="avatarPreview"></ion-img>
-    </ion-item>
-    
-    <ion-item>
-      <ion-label position="stacked">Nome</ion-label>
-      <ion-input type="text" formControlName="nome"></ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label position="stacked">Email</ion-label>
-      <ion-input type="text" formControlName="email"></ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label position="stacked">Senha</ion-label>
-      <ion-input type="password" formControlName="senha"></ion-input>
-    </ion-item>
-    
-    <ion-button type="submit" expand="block" color="success" [disabled]="!formGroup.valid">Cadastrar</ion-button>
-  </form>
-  
+    <form [formGroup]="formGroup" (ngSubmit)="cadastrar()">
+
+      <h2>Cadastrar Usuário</h2>
+
+      <!-- Pré-visualização da imagem -->
+      <div class="previewImagem" *ngIf="avatarPreview">
+        <div class="circle-container">
+          <ion-img [src]="avatarPreview" class="circle-image"></ion-img>
+        </div>
+      </div>
+
+
+      <!-- Campo para upload de imagem -->
+      <div class="campoAvatar">
+        <input type="file" (change)="onFileChange($event)" accept="image/*">
+      </div>
+
+      <hr>
+
+      <div class="personalizacao-campos">
+        <ion-input label="Nome" fill="solid" type="text" formControlName="nome"></ion-input>
+      </div>
+
+      <div class="personalizacao-campos">
+        <ion-input label="Email" fill="solid" type="text" formControlName="email"></ion-input>
+      </div>
+
+      <div class="personalizacao-campos">
+        <ion-input label="Senha" fill="solid" type="password" formControlName="senha"></ion-input>
+      </div>
+
+      <ion-button type="submit" expand="block" color="dark" class="custom-button" [disabled]="!formGroup.valid">Cadastrar</ion-button>
+    </form>
+  </div>
+
 </ion-content>

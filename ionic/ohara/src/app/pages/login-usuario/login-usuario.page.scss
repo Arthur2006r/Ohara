@@ -1,32 +1,37 @@
-ion-content{
+ion-content {
     --ion-background-color: #2E2E2E;
 }
 
-h2{
+.botao-voltar {
+    height: 5vh;
+}
+
+
+h2 {
+    margin-top: 5vh;
     text-align: center;
 }
 
-ion-img{
+ion-img {
 
     margin-bottom: none;
-    margin-top: 2px;
     margin-left: auto;
     margin-right: auto;
-    width: 30vw;
-    height: 30vh;
+    width: 40vw;
+    height: 40vh;
 }
 
-hr{
+hr {
     margin-top: none;
     background-color: #fff;
     width: 90%;
 }
 
-#label-cor{
+#label-cor {
     background-color: #2E2E2E;
 }
 
-.label1{
+.campoEmail {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
@@ -34,12 +39,12 @@ hr{
     border-radius: 1%;
 }
 
-.label2{
+.campoSenha {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5vh;
-    margin-bottom: 5vh;    
+    margin-bottom: 5vh;
     border-radius: 10vw;
 }
 
@@ -50,4 +55,3 @@ hr{
     width: 90%;
     border: 2px;
 }
-

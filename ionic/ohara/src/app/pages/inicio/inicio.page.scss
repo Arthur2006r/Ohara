@@ -16,19 +16,16 @@
     font-size: 34px;
     font-weight: bold;
     margin-bottom: 40px;
-    color: #1d1b1b; /* Altere conforme a cor desejada */
+    color: #1d1b1b; 
   }
  
   .custom-button {
-    
+    margin-top: 3vh;
+    width: 90%;
     width: 80%;
     border: 2px;
   }
 
-  .custom-button:hover{
-    background-color: white;
-    color: white;
-    transform: scale(1.2)
-}
+  
   
 

@@ -4,6 +4,7 @@ import { AlertController, NavController, ToastController } from '@ionic/angular'
 import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
+
 @Component({
   selector: 'app-editar-perfil',
   templateUrl: './editar-perfil.page.html',
@@ -117,6 +118,10 @@ export class EditarPerfilPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  voltar(){
+    this.navController.back();
   }
 
   async exibirMensagem(texto: string) {

@@ -1,13 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="">
-    <ion-buttons slot="start">
-      <ion-back-button defautHref="/inicio" text="voltar"></ion-back-button>
+    <ion-buttons slot="start" (click)="voltar()">
+      <img class="botao-voltar" src="/assets/imagens/botao-voltar.png">
     </ion-buttons>
-    <ion-title style="text-align: center;">Página de Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="masters">
+
+  <h2>Página de Login</h2>
 
   <ion-row>
     <ion-img src="/assets/imagens/icone-login.png" alt="Icone"></ion-img>
@@ -17,11 +18,11 @@
 
   <form [formGroup]="formGroup" (ngSubmit)="autenticar()">
 
-    <div class="label1">
+    <div class="campoEmail">
       <ion-input label="Email" fill="solid" type="text" formControlName="email">
       </ion-input>
     </div>
-    <div class="label2">
+    <div class="campoSenha">
       <ion-input label="Senha" fill="solid" type="password" formControlName="senha">
         <ion-input-password-toggle color="dark" slot="end"></ion-input-password-toggle>
       </ion-input>
