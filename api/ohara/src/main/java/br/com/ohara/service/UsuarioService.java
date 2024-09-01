@@ -89,10 +89,6 @@ public class UsuarioService {
     
     public Usuario autenticar(String email, String senha) {
         Usuario usuario = usuarioDao.autenticar(email, senha);
-        if (usuario == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado com o email e a senha.");
-        }
-        
         return usuario;
     }
 }

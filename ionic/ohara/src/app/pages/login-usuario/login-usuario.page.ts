@@ -31,11 +31,11 @@ export class LoginUsuarioPage implements OnInit {
     .then((json)=>{
       let usuario = <Usuario>(json);
 
-      if(usuario === undefined){
-        this.exibirMensagem('Email e/ou senha inválidos!!!')
+      if(usuario === null){
+        this.exibirMensagem('Email e/ou senha inválidos!');
       }else{
         this.usuarioService.registrarAutenticacao(usuario);
-        this.navController.navigateBack('/tabs/meu-perfil')
+        this.navController.navigateBack('/tabs/meu-perfil');
       }
     })
     .catch((erro=>{

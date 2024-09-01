@@ -80,13 +80,6 @@ export class EditarPerfilPage implements OnInit {
   async excluir() {
     const alert = await this.alertController.create({
       header: 'Você deseja excluir sua conta permanentemente?',
-      inputs: [
-        {
-          name: 'senha',
-          type: 'password',
-          placeholder: 'Confirme com sua senha'
-        }
-      ],
       buttons: [
         {
           text: 'Cancelar'
@@ -94,21 +87,11 @@ export class EditarPerfilPage implements OnInit {
         {
           text: 'Excluir Conta',
           cssClass: 'danger',
-          handler: (data) => {
-            this.usuarioService.validarSenha(this.usuario.idUsuario, data.senha)
-              .then((json) => {
-                let result = <boolean>(json);
-                if (result) {
-                  this.usuarioService.excluir(this.usuario.idUsuario)
-                    .then(() => {
-                      this.exibirMensagem('Registro excluído com sucesso!!!');
-                      this.navController.navigateBack("/inicio")
-                    }).catch(() => {
-                      this.exibirMensagem('Erro ao excluir o registro.');
-                    });
-                } else {
-                  this.exibirMensagem('Senha incorreta.');
-                }
+          handler: () => {
+            this.usuarioService.excluir(this.usuario.idUsuario)
+              .then(() => {
+                this.exibirMensagem('Registro excluído com sucesso!!!');
+                this.navController.navigateBack("/inicio")
               }).catch(() => {
                 this.exibirMensagem('Erro ao excluir o registro.');
               });
@@ -120,7 +103,7 @@ export class EditarPerfilPage implements OnInit {
     await alert.present();
   }
 
-  voltar(){
+  voltar() {
     this.navController.back();
   }
 

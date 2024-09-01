@@ -5,14 +5,13 @@
       <ion-title>{{usuario.nome}}</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-content class="ion-padding">
     <ion-list>
       <!-- Consertar rota dos itens -->
-      <ion-item *ngFor="let item of menu" [routerLink]="[item.rota]" (click)="item.click ? item.click() : null">
+      <ion-item *ngFor="let item of menu" [routerLink]="item.rota ? [item.rota] : null" (click)="item.click ? item.click() : null">
         <ion-icon slot="start" [name]="item.icone" [color]="item.cor"></ion-icon>
         <ion-label>{{item.titulo}}</ion-label>
-        
       </ion-item>
     </ion-list>
   </ion-content>
@@ -23,21 +22,18 @@
 <ion-header>
   <ion-toolbar>
     <ion-title class="nomeDoUsuario">{{ usuario.nome }}</ion-title>
-    
-    
 
     <!-- Botão para chamar o menu -->
     <ion-buttons slot="end">
       <ion-menu-button class="menu"></ion-menu-button>
     </ion-buttons>
-
   </ion-toolbar>
 
-    <!-- Cadeia dos botões do segments -->
+  <!-- Cadeia dos botões do segments -->
   <ion-toolbar>
     <ion-segment value="all">
       <ion-segment-button class="menu-opcoes" *ngFor="let item of segment" [value]="item.value">
-        <ion-label >{{ item.titulo }}</ion-label>
+        <ion-label>{{ item.titulo }}</ion-label>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -46,6 +42,7 @@
 <ion-content id="main-content" [fullscreen]="true">
   <ion-row>
     <ion-img class="avatar" src="/assets/imagens/avatarDefault.jpg" alt="Logo Ohara"></ion-img>
+
     <ion-text class="dados-usuario">
       <p>0</p>
       <p>Seguidores</p>
@@ -55,7 +52,7 @@
       <p>0</p>
       <p>Seguidos</p>
     </ion-text>
-  
+
     <ion-text class="dados-usuario">
       <p>0</p>
       <p>Mangás</p>

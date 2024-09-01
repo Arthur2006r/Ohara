@@ -44,14 +44,6 @@ export class UsuarioService {
     return await firstValueFrom(this.httpClient.get<Usuario>(urlAuxiliar));
   }
 
-  async validarSenha(id: number | null, senha: string): Promise<boolean> {
-    if(senha === (await this.buscarPorId(id)).senha) {
-      return true;
-    }
-
-    return false;
-  }
-
   registrarAutenticacao(usuario: Usuario){
     localStorage.setItem('usuarioAutenticado', JSON.stringify(usuario.idUsuario));
   }
