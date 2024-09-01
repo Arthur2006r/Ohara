@@ -37,10 +37,13 @@
       </div>
 
       <div class="personalizacao-campos">
-        <ion-input label="Senha" fill="solid" type="password" formControlName="senha"></ion-input>
+        <ion-input label="Senha" fill="solid" type="password" formControlName="senha">
+          <ion-input-password-toggle color="dark" slot="end"></ion-input-password-toggle>
+        </ion-input>
       </div>
 
-      <ion-button type="submit" expand="block" color="dark" class="custom-button" [disabled]="!formGroup.valid">Cadastrar</ion-button>
+      <ion-button type="submit" expand="block" color="dark" class="custom-button"
+        [disabled]="!formGroup.valid">Cadastrar</ion-button>
     </form>
   </div>
 
