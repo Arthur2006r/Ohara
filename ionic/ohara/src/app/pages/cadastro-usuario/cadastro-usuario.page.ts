@@ -48,22 +48,32 @@ export class CadastroUsuarioPage implements OnInit {
     this.usuario.email = this.formGroup.value.email;
     this.usuario.senha = this.formGroup.value.senha;
 
-    this.usuarioService.salvar(this.usuario)
-      .then((json) => {
-        let usuario = <Usuario>(json);
+    this.usuarioService.validarEmail(this.usuario).then((json) => {
+      let result = <boolean>(json);
+      if (result) {
+        this.usuarioService.salvar(this.usuario)
+          .then((json) => {
+            let usuario = <Usuario>(json);
 
-        if (usuario === undefined) {
-          this.exibirMensagem('Email e/ou senha inválidos!!!')
-        } else {
-          this.navController.navigateBack('/login-usuario')
-        }
-      })
+            if (usuario === undefined) {
+              this.exibirMensagem('Email e/ou senha inválidos!!!')
+            } else {
+              this.navController.navigateBack('/login-usuario')
+            }
+          })
+          .catch((erro => {
+            this.exibirMensagem('Erro ao salvar o registro! Erro: ' + erro['mensage']);
+          }));
+      } else {
+        this.exibirMensagem('Esse email já está sendo usado')
+      }
+    })
       .catch((erro => {
-        this.exibirMensagem('Erro ao salvar o registro! Erro: ' + erro['mensage']);
+        this.exibirMensagem('Erro: ' + erro['mensage']);
       }));
   }
 
-  voltar(){
+  voltar() {
     this.navController.back();
   }
 

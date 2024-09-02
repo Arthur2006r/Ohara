@@ -9,13 +9,13 @@ import { firstValueFrom } from 'rxjs';
 export class UsuarioService {
 
   httpHeaders = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
   url: string = 'http://localhost:8087/api/v1/usuario';
-  
 
-  constructor(private httpClient: HttpClient) { } 
+
+  constructor(private httpClient: HttpClient) { }
 
   async salvar(usuario: Usuario): Promise<Usuario> {
     if (usuario.idUsuario === null) {
@@ -30,30 +30,39 @@ export class UsuarioService {
     return await firstValueFrom(this.httpClient.delete<Usuario>(urlAuxiliar));
   }
 
-  async listar(): Promise<Usuario[]>{   
+  async listar(): Promise<Usuario[]> {
     return await firstValueFrom(this.httpClient.get<Usuario[]>(this.url));
   }
-  
+
   async buscarPorId(id: number | null): Promise<Usuario> {
-    let urlAuxiliar = this.url + "/" + id;    
+    let urlAuxiliar = this.url + "/" + id;
     return await firstValueFrom(this.httpClient.get<Usuario>(urlAuxiliar));
   }
 
-  async autenticar(email:string, senha: string): Promise<Usuario>{
-    let urlAuxiliar = this.url + "/" + email + "/" + senha + "/autenticar";    
+  async autenticar(email: string, senha: string): Promise<Usuario> {
+    let urlAuxiliar = this.url + "/" + email + "/" + senha + "/autenticar";
     return await firstValueFrom(this.httpClient.get<Usuario>(urlAuxiliar));
   }
 
-  registrarAutenticacao(usuario: Usuario){
+  async validarEmail(usuario: Usuario): Promise<boolean> {
+    let usuarios = await this.listar();
+    if (usuario.idUsuario == 0) {
+      return !usuarios.some(u => u.email === usuario.email);
+    } else {
+      return !usuarios.some(u => u.email === usuario.email && u.idUsuario !== usuario.idUsuario);
+    }
+  }
+
+  registrarAutenticacao(usuario: Usuario) {
     localStorage.setItem('usuarioAutenticado', JSON.stringify(usuario.idUsuario));
   }
 
-  recuperarAutenticacao(): number{
-    let idUsuario =  JSON.parse(localStorage.getItem('usuarioAutenticado') || "{}");
+  recuperarAutenticacao(): number {
+    let idUsuario = JSON.parse(localStorage.getItem('usuarioAutenticado') || "{}");
     return idUsuario;
   }
 
-  encerrarAutenticacao(){
+  encerrarAutenticacao() {
     localStorage.removeItem('usuarioAutenticado');
   }
 }

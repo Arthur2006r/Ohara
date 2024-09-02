@@ -63,16 +63,28 @@ export class EditarPerfilPage implements OnInit {
     this.usuario.email = this.formGroup.value.email;
     this.usuario.senha = this.formGroup.value.senha;
 
-    this.usuarioService.salvar(this.usuario)
-      .then((json) => {
-        this.usuario = <Usuario>(json);
-        if (this.usuario) {
-          this.exibirMensagem('Registro salvo com sucesso!!!')
-          this.navController.navigateBack('/meu-perfil')
-        }
-      })
+    this.usuarioService.validarEmail(this.usuario).then((json) => {
+      let result = <boolean>(json);
+      if (result) {
+        this.usuarioService.salvar(this.usuario)
+          .then((json) => {
+            this.usuario = <Usuario>json;
+            if (this.usuario) {
+              this.exibirMensagem('Registro salvo com sucesso!!!');
+              this.navController.navigateBack('/meu-perfil').then(() => {
+                window.location.reload();
+              });
+            }
+          })
+          .catch((erro => {
+            this.exibirMensagem('Erro ao salvar o registro!');
+          }));
+      } else {
+        this.exibirMensagem('Esse email já está sendo usado')
+      }
+    })
       .catch((erro => {
-        this.exibirMensagem('Erro ao salvar o registro! Erro: ' + erro['mensage']);
+        this.exibirMensagem('Erro: ' + erro['mensage']);
       }));
 
   }
