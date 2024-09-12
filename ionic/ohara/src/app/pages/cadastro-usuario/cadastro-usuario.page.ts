@@ -58,6 +58,7 @@ export class CadastroUsuarioPage implements OnInit {
             if (usuario === undefined) {
               this.exibirMensagem('Email e/ou senha inválidos!!!')
             } else {
+              //this.usuarioService.salvarImagem(usuario, );
               this.navController.navigateBack('/login-usuario')
             }
           })

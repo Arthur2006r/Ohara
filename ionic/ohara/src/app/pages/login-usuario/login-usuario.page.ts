@@ -35,7 +35,7 @@ export class LoginUsuarioPage implements OnInit {
         this.exibirMensagem('Email e/ou senha inválidos!');
       }else{
         this.usuarioService.registrarAutenticacao(usuario);
-        this.navController.navigateBack('/tabs/meu-perfil');
+        this.navController.navigateBack('/tabs/home');
       }
     })
     .catch((erro=>{

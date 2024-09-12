@@ -30,6 +30,14 @@ const routes: Routes = [
   {
     path: 'meu-perfil',
     loadChildren: () => import('./pages/meu-perfil/meu-perfil.module').then( m => m.MeuPerfilPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'manga',
+    loadChildren: () => import('./pages/manga/manga.module').then( m => m.MangaPageModule)
   }
 ];
 

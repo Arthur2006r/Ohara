@@ -29,16 +29,16 @@ ENGINE = InnoDB;
 -- Table `ohara`.`Manga`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`Manga` (
-  `idManga` BIGINT NOT NULL AUTO_INCREMENT,
+  `idManga` BIGINT NOT NULL,
   `titulo` VARCHAR(45) NOT NULL,
   `autor` VARCHAR(45) NOT NULL,
   `sinopse` VARCHAR(500) NOT NULL,
   `capa` VARCHAR(45) NOT NULL,
-  `banner` VARCHAR(45) NOT NULL,
   `anoDePublicacao` INT NOT NULL,
   `qtdDeCapitulos` INT NOT NULL,
   `qtdDeVolumes` INT NOT NULL,
-  `status` ENUM('Em lançamento', 'Finalizado') NOT NULL,
+  `popularidade` INT NOT NULL,
+  `status` ENUM('Em lançamento', 'Finalizado', 'Cancelado') NOT NULL,
   PRIMARY KEY (`idManga`),
   UNIQUE INDEX `titulo_UNIQUE` (`titulo` ASC))
 ENGINE = InnoDB;

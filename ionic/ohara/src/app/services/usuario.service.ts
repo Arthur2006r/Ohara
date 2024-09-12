@@ -65,4 +65,8 @@ export class UsuarioService {
   encerrarAutenticacao() {
     localStorage.removeItem('usuarioAutenticado');
   }
+
+  salvarImagem(usuario: Usuario, imagem: File) {
+    JSON.parse(localStorage.getItem('imagemUsuarios') || "{}");
+  }
 }
