@@ -1,8 +1,12 @@
 package br.com.alimentadorOhara.dao;
 
+import java.util.List;
+
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
+import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
+import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import br.com.alimentadorOhara.model.Manga;
@@ -11,6 +15,11 @@ import br.com.alimentadorOhara.model.Manga;
 public interface MangaDao {
 
 	@GetGeneratedKeys
-	@SqlUpdate("insert into manga (titulo, sinopse, autor, qtdDeVolumes, qtdDeCapitulos) values (:titulo, :sinopse, :autor, :qtdDeVolumes, :qtdDeCapitulos)")
+	@SqlUpdate("INSERT INTO Manga (idManga, titulo, sinopse, autor, qtdDeVolumes, qtdDeCapitulos, capa, anoDePublicacao, popularidade, status) " +
+	           "VALUES (:idManga, :titulo, :sinopse, :autor, :qtdDeVolumes, :qtdDeCapitulos, :capa, :anoDePublicacao, :popularidade, :status)")
 	Long inserir(@BindBean Manga manga);
+
+	
+	@SqlQuery("select *" + " from manga " + " order by titulo;")
+	List<Manga> consultarTodos();
 }

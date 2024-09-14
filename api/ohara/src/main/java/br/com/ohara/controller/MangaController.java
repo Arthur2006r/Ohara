@@ -26,10 +26,7 @@ public class MangaController {
         this.mangaService = mangaService;
     }
 
-    @PostMapping({"/", ""})
-    public ResponseEntity<Manga> inserir(@Valid @RequestBody Manga m) {
-        return ResponseEntity.ok(mangaService.inserir(m));
-    }
+  
 
     @GetMapping({"/", ""})
     public ResponseEntity<List<Manga>> consultar() {
@@ -49,5 +46,10 @@ public class MangaController {
     @DeleteMapping({"/{id}"})
     public ResponseEntity<Manga> excluir(@PathVariable Long id) {
         return ResponseEntity.ok(mangaService.excluir(id));
+    }
+    
+    @PostMapping({"/", ""})
+    public ResponseEntity<List<Manga>> inserirMangas(@Valid @RequestBody List<Manga> mangas) {
+        return ResponseEntity.ok(mangaService.inserirMangas(mangas));
     }
 }

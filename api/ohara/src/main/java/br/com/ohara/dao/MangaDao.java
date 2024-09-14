@@ -15,8 +15,10 @@ import br.com.ohara.model.Manga;
 public interface MangaDao {
 
 	@GetGeneratedKeys
-	@SqlUpdate("insert into manga (titulo, sinopse, autor, quantidadeVolumes, quantidadeCapitulos) values (:titulo, :sinopse, :autor, :quantidadeVolumes, :quantidadeVolumes)")
+	@SqlUpdate("INSERT INTO Manga (idManga, titulo, sinopse, autor, qtdDeVolumes, qtdDeCapitulos, capa, anoDePublicacao, popularidade, status) " +
+	           "VALUES (:idManga, :titulo, :sinopse, :autor, :qtdDeVolumes, :qtdDeCapitulos, :capa, :anoDePublicacao, :popularidade, :status)")
 	Long inserir(@BindBean Manga manga);
+
 
 	@SqlQuery("select *" + " from manga " + " where idManga = :idManga;")
 	Manga consultarPorId(@Bind("idManga") Long id);

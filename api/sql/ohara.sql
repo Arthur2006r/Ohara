@@ -34,11 +34,11 @@ CREATE TABLE IF NOT EXISTS `ohara`.`Manga` (
   `autor` VARCHAR(45) NOT NULL,
   `sinopse` VARCHAR(500) NOT NULL,
   `capa` VARCHAR(45) NOT NULL,
-  `anoDePublicacao` INT NOT NULL,
+  `anoDePublicacao` VARCHAR(45) NOT NULL,
   `qtdDeCapitulos` INT NOT NULL,
   `qtdDeVolumes` INT NOT NULL,
   `popularidade` INT NOT NULL,
-  `status` ENUM('Em lançamento', 'Finalizado', 'Cancelado') NOT NULL,
+  `status` ENUM('Em lançamento', 'Finalizado', 'Cancelado', 'Em hiato') NOT NULL,
   PRIMARY KEY (`idManga`),
   UNIQUE INDEX `titulo_UNIQUE` (`titulo` ASC))
 ENGINE = InnoDB;

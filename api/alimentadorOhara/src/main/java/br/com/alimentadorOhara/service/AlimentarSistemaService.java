@@ -21,10 +21,13 @@ public class AlimentarSistemaService {
     public List<Manga> inserirMangas(List<Manga> mangas) {
         List<Manga> mangasInseridos = new ArrayList<>();
         for (Manga manga : mangas) {
-            Long id = mangaDao.inserir(manga);
-            manga.setIdManga(id);
-            mangasInseridos.add(manga);
+        	System.out.println(manga);
+            mangaDao.inserir(manga);
         }
         return mangasInseridos;
     }
+    
+    public List<Manga> consultarTodos() {
+		return mangaDao.consultarTodos();
+	}
 }

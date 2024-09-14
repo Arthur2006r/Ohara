@@ -24,18 +24,23 @@ public class Manga {
 	@Size(min=4, max=500)
 	private String sinopse;
 	
-//	@NotNull
-//	@FutureOrPresent(message = "Data de publicação não pode ser no futuro")
-//	private Date dataPublicacao;
+	@NotNull
+	private String capa;
+	
+	@NotNull
+	private String anoDePublicacao;
 	
 	@NotNull
 	@Min(value = 1, message = "Quantidade de volumes deve ser maior que zero")
-	private int quantidadeVolumes;
+	private int qtdDeVolumes;
 	
 	@NotNull
 	@Min(value = 1, message = "Quantidade de capítulos deve ser maior que zero")
-	private int quantidadeCapitulos;
+	private int qtdDeCapitulos;
 	
-//	@NotNull
-//	private Status status;
+	@NotNull
+	private int popularidade;
+	
+	@NotNull
+	private String status;
 }

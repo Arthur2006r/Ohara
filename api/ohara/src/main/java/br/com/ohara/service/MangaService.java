@@ -1,5 +1,6 @@
 package br.com.ohara.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jdbi.v3.core.Jdbi;
@@ -78,4 +79,13 @@ public class MangaService {
         
         return mAux;
 	}
+	
+	public List<Manga> inserirMangas(List<Manga> mangas) {
+        List<Manga> mangasInseridos = new ArrayList<>();
+        for (Manga manga : mangas) {
+        	System.out.println(manga);
+            mangaDao.inserir(manga);
+        }
+        return mangasInseridos;
+    }
 }
