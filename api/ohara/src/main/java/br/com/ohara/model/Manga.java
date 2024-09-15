@@ -21,7 +21,6 @@ public class Manga {
 	
 	@NotNull
 	@NotBlank(message = "Sinopse é obrigatório")
-	@Size(min=4, max=500)
 	private String sinopse;
 	
 	@NotNull
@@ -31,11 +30,11 @@ public class Manga {
 	private String anoDePublicacao;
 	
 	@NotNull
-	@Min(value = 1, message = "Quantidade de volumes deve ser maior que zero")
+	@Min(value = 0, message = "Quantidade de volumes deve ser maior ou igual a zero")
 	private int qtdDeVolumes;
 	
 	@NotNull
-	@Min(value = 1, message = "Quantidade de capítulos deve ser maior que zero")
+	@Min(value = 0, message = "Quantidade de capítulos deve ser maior ou igual a zero")
 	private int qtdDeCapitulos;
 	
 	@NotNull

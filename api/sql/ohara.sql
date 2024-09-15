@@ -1,3 +1,5 @@
+drop database ohara;
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -30,35 +32,36 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`Manga` (
   `idManga` BIGINT NOT NULL,
-  `titulo` VARCHAR(45) NOT NULL,
-  `autor` VARCHAR(45) NOT NULL,
-  `sinopse` VARCHAR(500) NOT NULL,
-  `capa` VARCHAR(45) NOT NULL,
-  `anoDePublicacao` VARCHAR(45) NOT NULL,
+  `titulo` VARCHAR(255) NOT NULL,
+  `autor` VARCHAR(255) NOT NULL,
+  `sinopse` TEXT NOT NULL,
+  `capa` VARCHAR(255) NOT NULL,
+  `anoDePublicacao` YEAR NOT NULL,
   `qtdDeCapitulos` INT NOT NULL,
   `qtdDeVolumes` INT NOT NULL,
   `popularidade` INT NOT NULL,
   `status` ENUM('Em lançamento', 'Finalizado', 'Cancelado', 'Em hiato') NOT NULL,
   PRIMARY KEY (`idManga`),
-  UNIQUE INDEX `titulo_UNIQUE` (`titulo` ASC))
-ENGINE = InnoDB;
+  UNIQUE INDEX `titulo_UNIQUE` (`titulo` ASC)
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `ohara`.`Lista`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ohara`.`Lista` (
-  `idLista` BIGINT NOT NULL AUTO_INCREMENT,
-  `idUsuario` BIGINT NOT NULL,
-  `titulo` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idLista`),
-  UNIQUE INDEX `idLista_UNIQUE` (`idLista` ASC),
-  INDEX `idUsuario_idx` (`idUsuario` ASC),
-  CONSTRAINT `fk_Lista_Usuario`
-    FOREIGN KEY (`idUsuario`)
-    REFERENCES `ohara`.`Usuario` (`idUsuario`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `ohara`.`Manga` (
+  `idManga` BIGINT NOT NULL,
+  `titulo` VARCHAR(255) NOT NULL,
+  `autor` VARCHAR(255) NOT NULL,
+  `sinopse` TEXT NOT NULL,
+  `capa` VARCHAR(255) NOT NULL,
+  `anoDePublicacao` YEAR NOT NULL,
+  `qtdDeCapitulos` INT NOT NULL,
+  `qtdDeVolumes` INT NOT NULL,
+  `popularidade` INT NOT NULL,
+  `status` ENUM('Em lançamento', 'Finalizado', 'Cancelado', 'Em hiato') NOT NULL,
+  PRIMARY KEY (`idManga`),
+  UNIQUE INDEX `titulo_UNIQUE` (`titulo` ASC)
+) ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `ohara`.`ListaManga`
