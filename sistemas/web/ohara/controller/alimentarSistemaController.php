@@ -7,4 +7,3 @@ set_time_limit(0);
 $mangas = listarMangas();
 alimentarSistema($mangas);
 
-?>

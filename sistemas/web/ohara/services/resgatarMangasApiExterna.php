@@ -88,7 +88,7 @@ function listarMangas()
             }
 
             $page++;
-            if($page == 100) {
+            if($page == 2) {
                 break;
             }
         } catch (Exception $e) {
