@@ -21,37 +21,41 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 public class JdbiConfiguration {
 
-	@Value("${jdbi.showsql}")
-	private boolean showsql;
+    @Value( "${jdbi.showsql}" )
+    private boolean showsql;
 
-	@Bean
-	@ConfigurationProperties("spring.datasource")
-	DataSource driverManagerDataSource() {
-		return new DriverManagerDataSource();
-	}
+    @Bean
+    @ConfigurationProperties("spring.datasource")
+    DataSource driverManagerDataSource() {
+        return new DriverManagerDataSource();
+    }
 
-	@Bean
-	DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource) {
-		DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
-		dataSourceTransactionManager.setDataSource(dataSource);
-		return dataSourceTransactionManager;
-	}
+    @Bean
+    DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource) {
+        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
+        dataSourceTransactionManager.setDataSource(dataSource);
+        return dataSourceTransactionManager;
+    }
 
-	@Bean
-	Jdbi jdbi(DataSource dataSource) {
-		Jdbi jdbiRet = Jdbi.create(dataSource).installPlugin(new SqlObjectPlugin());
+    @Bean
+    Jdbi jdbi(DataSource dataSource) {
+        Jdbi jdbiRet = Jdbi.create(dataSource)
+                .installPlugin(new SqlObjectPlugin());
 
-		if (showsql) {
-			SqlLogger sqlLogger = new SqlLogger() {
-				@Override
-				public void logAfterExecution(StatementContext context) {
-					log.info("JDBI.SQL: \n {} \n PARAMETERS: {} \n TIME: {} ms", context.getRenderedSql(),
-							context.getBinding().toString(), context.getElapsedTime(ChronoUnit.MILLIS));
-				}
-			};
-			jdbiRet.setSqlLogger(sqlLogger);
-		}
+        if (showsql) {
+            SqlLogger sqlLogger = new SqlLogger() {
+                @Override
+                public void logAfterExecution(StatementContext context) {
+                    log.info("JDBI.SQL: \n {} \n PARAMETERS: {} \n TIME: {} ms",
+                            context.getRenderedSql(),
+                            context.getBinding().toString(),
+                            context.getElapsedTime(ChronoUnit.MILLIS));
+                }
+            };
+            jdbiRet.setSqlLogger(sqlLogger);
+        }
 
-		return jdbiRet;
-	}
+        return jdbiRet;
+    }
 }
+
