@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'manga',
     loadChildren: () => import('./pages/manga/manga.module').then( m => m.MangaPageModule)
+  },  {
+    path: 'visualizar-manga',
+    loadChildren: () => import('./pages/visualizar-manga/visualizar-manga.module').then( m => m.VisualizarMangaPageModule)
   }
+
 ];
 
 @NgModule({
