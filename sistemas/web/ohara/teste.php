@@ -3,7 +3,8 @@ include_once 'services/alimentarSistemaService.php';
 
 echo "Carregando...";
 
-$usuarios = teste();
+
+
 
 if (!empty($usuarios) && is_array($usuarios)) {
     // Acessa o primeiro usuário e imprime seus valores do array associativo

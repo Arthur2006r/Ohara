@@ -7,10 +7,61 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">visualizar-manga</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="espaco-banner">
+    <img class="banner" src="/assets/imagens/capa.jpg">
+  </div>
+
+  <div *ngIf="manga" class="container">
+
+    <div class="espaco-capa">
+      <img class="capa" [src]="getCapa()" />
+    </div>
+
+    <div class="titulo-favorito">
+      <h2 class="titulo">{{ manga?.titulo }}</h2>
+
+      <div class="container-coracao" (click)="favoritar()">
+        <img [src]="isFavorite ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'" class="favorito" />
+      </div> <!-- Alterna entre o coração em branco e o vermelho -->   
+    </div>
+
+    <div class="container-autor">
+      <p class="autor"> por {{ manga?.autor}}</p>
+    </div>
+
+    <p class="status">{{ manga?.status }}</p>
+
+    <div class="informacoes-adicionais">
+
+      <div class="infos">
+        <ion-img class="icone" src="/assets/imagens/capitulos.png"></ion-img>
+        <p class="qtdDeCapitulos"> {{ manga?.qtdDeCapitulos}} Capitulos</p>
+      </div>
+
+      <div class="infos">
+        <ion-img class="icone" src="/assets/imagens/volumes.png"></ion-img>
+        <p class="qtdDeVolumes"> {{ manga?.qtdDeVolumes}} Volumes</p>
+      </div>
+
+      <div class="infos">
+        <ion-img class="icone" src="/assets/imagens/calendario.png"></ion-img>
+        <p class="anoP">{{ manga?.anoDePublicacao | date:'yyyy' }}</p> <!-- Mostrar somente o ano -->
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="sinopse-container"> <!-- Colocar opção de "ler mais" -->
+      <p class="sinopse" [class.expanded]="isExpanded">{{ Sinopse }}</p>
+      <button (click)="expandir()">
+        <ion-icon name="{{ isExpanded ? 'chevron-up' : 'chevron-down' }}"></ion-icon>
+      </button>
+    </div>
+
+    <hr>
+
+  </div>
+
 </ion-content>

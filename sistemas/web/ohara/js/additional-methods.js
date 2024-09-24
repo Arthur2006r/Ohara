@@ -6,6 +6,9 @@
  * Copyright (c) 2021 Jörn Zaefferer
  * Released under the MIT license
  */
+
+
+
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 		define( ["jquery", "./jquery.validate"], factory );

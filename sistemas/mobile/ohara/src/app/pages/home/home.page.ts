@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MangaService } from 'src/app/services/manga.service';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +9,41 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit {
 
-  constructor(private router: Router) { }
+  mangas: any[] = []; 
+
+  constructor(private router: Router, private mangaService: MangaService) { }
 
   ngOnInit() {
+    this.mangaService.listarMangas()
+      .then((data) => {
+        this.mangas = data; 
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar mangás', error);
+      });
+  }
+  
+
+  getTitulo(manga: any): string {
+    return manga?.titulo; 
   }
 
-  verMais(){
-    console.log("Teste!")
+  getCapa(manga: any): string{
+    return manga?.capa
   }
 
-  onMangaClick(): void {
-    this.router.navigate(['/visualizar-manga']); // Redireciona para a página de detalhes
+  verMais(): any {
+    console.log("teste")
   }
+
+  onMangaClick(idManga: number): void {
+    this.router.navigate(['/visualizar-manga', idManga]);
+  }
+
+  getTop20Mangas(): any[] {
+    return this.mangas
+      .sort((a, b) => a.popularidade - b.popularidade)
+      .slice(0, 20); // Pega os 20 mangás mais populares
+  }
+
 }

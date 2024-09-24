@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <h2 class="title">Ohara</h2>
+    <h2 class="titulo">Ohara</h2>
   </ion-toolbar>
 </ion-header>
 
@@ -12,25 +12,14 @@
       <ion-text>Populares</ion-text>
       <hr>
       <span class="ver-mais" (click)="verMais()">Ver mais</span>
+      
     </div>
 
   </div>
 
-  <div class="image-row">
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg" (click)="onMangaClick()"></ion-img>
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
-    <ion-img src="https://cdn.myanimelist.net/images/anime/1770/97704l.jpg"></ion-img>
+  <div class="manga-list">
+    <div *ngFor="let manga of getTop20Mangas()" class="manga-item">
+      <img class="ion-img" [src]="getCapa(manga)" alt="Capa do Mangá" (click)="onMangaClick(manga.idManga)" /> 
+    </div>
   </div>
-
 </ion-content>

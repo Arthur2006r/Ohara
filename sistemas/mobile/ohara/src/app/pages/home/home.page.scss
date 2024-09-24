@@ -1,4 +1,4 @@
-.title {
+.titulo {
     font-weight: bold;
     color: #ffffff;
     text-align: center;
@@ -27,21 +27,21 @@
     margin-top: 8vh;
 }
 
-.image-row {
+.manga-list {
     display: grid;
-    grid-template-columns: repeat(4, 90px); /* 4 colunas com largura fixa de 100px */
-    grid-template-rows: repeat(4, 120px);
-    gap: 2vw; /* Espaçamento entre as imagens */
-
+    grid-template-columns: repeat(4, 90px); 
+    grid-template-rows: repeat(4, 150px);
+    gap: 2vw; 
+    margin-top: 2vh;
 }
 
-.image-row ion-img:first-child {
-    margin-left: 1vw; /* Define a margem esquerda apenas para a primeira imagem */
+.manga-list img:first-child {
+    margin-left: 1vw;
 }
 
-ion-img{
-    height: 25vh;
-    width: 22vw;
+img{
+    height: 18vh;
+    width: 30vw;
     margin-left:1vw;
 }
 

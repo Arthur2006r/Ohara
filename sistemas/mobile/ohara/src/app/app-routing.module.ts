@@ -38,8 +38,9 @@ const routes: Routes = [
   {
     path: 'manga',
     loadChildren: () => import('./pages/manga/manga.module').then( m => m.MangaPageModule)
-  },  {
-    path: 'visualizar-manga',
+  },
+  {
+    path: 'visualizar-manga/:id',
     loadChildren: () => import('./pages/visualizar-manga/visualizar-manga.module').then( m => m.VisualizarMangaPageModule)
   }
 
