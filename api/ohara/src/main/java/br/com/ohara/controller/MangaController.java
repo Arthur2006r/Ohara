@@ -14,8 +14,6 @@ import br.com.ohara.service.MangaService;
 
 @RestController  
 @RequestMapping("/api/v1/manga")
-@CrossOrigin(origins = "http://localhost:8100") // Permite que busque dados nessa API
-
 public class MangaController {
 
     private final MangaService mangaService;

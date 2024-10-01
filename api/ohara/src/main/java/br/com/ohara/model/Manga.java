@@ -1,4 +1,4 @@
-package br.com.ohara.model;
+	package br.com.ohara.model;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
