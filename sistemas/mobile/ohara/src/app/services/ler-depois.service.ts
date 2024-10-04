@@ -31,7 +31,7 @@ export class LerDepoisService {
   }
 
   async excluir(idManga: number | null, idUsuario: number | null): Promise<LerDepois> {
-    let urlAuxiliar = this.url + "/" + idManga + "/" + idUsuario;
+    let urlAuxiliar = this.url + "/" + idUsuario + "/" + idManga;
     return await firstValueFrom(this.httpClient.delete<LerDepois>(urlAuxiliar));
   }
 }

@@ -12,7 +12,7 @@ export class VistoService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  url: string = 'http://localhost:8087/api/v1/visto';
+  url: string = 'http://localhost:8087/api/v1/lido';
 
 
   constructor(private httpClient: HttpClient) { }
@@ -31,7 +31,7 @@ export class VistoService {
   }
 
   async excluir(idManga: number | null, idUsuario: number | null): Promise<Visto> {
-    let urlAuxiliar = this.url + "/" + idManga + "/" + idUsuario;
+    let urlAuxiliar = this.url + "/" + idUsuario + "/" + idManga;
     return await firstValueFrom(this.httpClient.delete<Visto>(urlAuxiliar));
   }
 }

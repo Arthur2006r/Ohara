@@ -16,10 +16,9 @@ import br.com.ohara.model.Review;
 @RegisterBeanMapper(Avaliacao.class)
 public interface AvaliacaoDao {
 	
-	@GetGeneratedKeys
     @SqlUpdate("INSERT INTO Avaliacao (idUsuario, idManga, nota) " +
                "VALUES (:idUsuario, :idManga, :nota)")
-    Long inserir(@BindBean Avaliacao usuarioAvaliaManga);
+    int inserir(@BindBean Avaliacao usuarioAvaliaManga);
 
 	@SqlQuery("SELECT * FROM Avaliacao WHERE idUsuario = :idUsuario and idManga = :idManga")
 	Avaliacao consultarPorId(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);

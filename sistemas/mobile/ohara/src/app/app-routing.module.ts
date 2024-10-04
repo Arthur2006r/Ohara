@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/manga/manga.module').then( m => m.MangaPageModule)
   },
   {
-    path: 'visualizar-manga/:id',
+    path: 'visualizar-manga/:idManga',
     loadChildren: () => import('./pages/visualizar-manga/visualizar-manga.module').then( m => m.VisualizarMangaPageModule)
   },
   {
@@ -50,14 +50,6 @@ const routes: Routes = [
   {
     path: 'avaliacoes/:idManga',
     loadChildren: () => import('./pages/avaliacoes/avaliacoes.module').then( m => m.AvaliacoesPageModule)
-  },
-  {
-    path: 'curtidos/:idUsuario',
-    loadChildren: () => import('./pages/curtidos/curtidos.module').then( m => m.CurtidosPageModule)
-  },
-  {
-    path: 'ler-depois/:idUsuario',
-    loadChildren: () => import('./pages/ler-depois/ler-depois.module').then( m => m.LerDepoisPageModule)
   },
   {
     path: 'add-review',

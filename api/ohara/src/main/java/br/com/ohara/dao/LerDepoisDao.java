@@ -13,12 +13,12 @@ import br.com.ohara.model.Curtida;
 import br.com.ohara.model.LerDepois;
 import br.com.ohara.model.Usuario;
 
-@RegisterBeanMapper(LerDepoisDao.class)
+@RegisterBeanMapper(LerDepois.class)
 public interface LerDepoisDao {
-	@GetGeneratedKeys
+
     @SqlUpdate("INSERT INTO LerDepois (idUsuario, idManga) " +
                "VALUES (:idUsuario, :idManga)")
-    Long inserir(@BindBean LerDepois usuarioAvaliaManga);
+    int inserir(@BindBean LerDepois usuarioAvaliaManga);
 
 	@SqlQuery("SELECT * FROM LerDepois WHERE idUsuario = :idUsuario and idManga = :idManga")
 	LerDepois consultarPorId(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);

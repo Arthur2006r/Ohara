@@ -17,31 +17,31 @@ import br.com.ohara.service.LidoService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/visto")
-public class VistoController {
-	private final LidoService vistoService;
+@RequestMapping("/api/v1/lido")
+public class LidoController {
+	private final LidoService lidoService;
 
-	public VistoController(LidoService vistoService) {
-		this.vistoService = vistoService;
+	public LidoController(LidoService vistoService) {
+		this.lidoService = vistoService;
 	}
 
 	@PostMapping({ "/", "" })
-	public ResponseEntity<Lido> inserir(@Valid @RequestBody Lido visto) {
-		return ResponseEntity.ok(vistoService.inserir(visto));
+	public ResponseEntity<Lido> inserir(@Valid @RequestBody Lido lido) {
+		return ResponseEntity.ok(lidoService.inserir(lido));
 	}
 	
 	@GetMapping({"/", ""})
     public ResponseEntity<List<Lido>> consultarTodos() {
-        return ResponseEntity.ok(vistoService.consultarTodos());
+        return ResponseEntity.ok(lidoService.consultarTodos());
     }
 	
 	@GetMapping({"/meu/{idManga}/{idUsuario}"})
-    public ResponseEntity<Lido> consultarMeuLerDepois(@PathVariable Long idManga, @PathVariable Long idUsuario) {
-        return ResponseEntity.ok(vistoService.consultarMeuLido(idManga, idUsuario));
+    public ResponseEntity<Lido> consultarMeuLido(@PathVariable Long idManga, @PathVariable Long idUsuario) {
+        return ResponseEntity.ok(lidoService.consultarMeuLido(idManga, idUsuario));
     }
 
 	@DeleteMapping({ "/{idUsuario}/{idManga}" })
 	public ResponseEntity<Lido> excluir(@PathVariable Long idUsuario, Long idManga) {
-		return ResponseEntity.ok(vistoService.excluir(idUsuario, idManga));
+		return ResponseEntity.ok(lidoService.excluir(idUsuario, idManga));
 	}
 }

@@ -20,10 +20,10 @@ public class LidoService {
     }
 
     public Lido inserir(Lido l) {   	
-        Long id = lidoDao.inserir(l);
-        if (id == null) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar ID para a marcação de lido.");
-        }
+        int linhasAfetadas = lidoDao.inserir(l);
+        if (linhasAfetadas <= 0) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao inserir a nova curtida.");
+		}
 
         return l;
     }

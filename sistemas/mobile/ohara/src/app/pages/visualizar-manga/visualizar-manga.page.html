@@ -22,18 +22,11 @@
       <h2 class="titulo">{{ manga?.titulo }}</h2>
 
       <div class="container-coracao" (click)="marcarCurtida()">
-        <img [src]="curtida.idManga !== 0 ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'" class="favorito" />
-      </div> <!-- Alterna entre o coração em branco e o vermelho -->   
+        <img [src]="curtida.idManga !== 0 ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'"
+          class="favorito" />
+      </div> <!-- Alterna entre o coração em branco e o vermelho -->
 
-      <!-- corrigir (conteiner do ler depois)-->
-      <div class="container-coracao" (click)="marcarLerDepois()"></div>
-        <img [src]="lerDepois.idManga !== 0 ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'" class="favorito" />
-      </div>
-
-      <!-- corrigir (conteiner do visto)-->
-      <div class="container-coracao" (click)="marcarVisto()"></div>
-        <img [src]="visto.idManga !== 0 ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'" class="favorito" />
-      </div>
+    
     </div>
 
     <div class="container-autor">

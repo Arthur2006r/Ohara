@@ -1,6 +1,6 @@
 export class Avaliacao {
-    idUsuario: number;
-    idManga: number;
+    idUsuario: number | null;
+    idManga: number | null;
     nota: number;
 
     constructor() {

@@ -1,6 +1,6 @@
 export class LerDepois {
-    idUsuario: number;
-    idManga: number;
+    idUsuario: number | null;
+    idManga: number | null;
 
     constructor() {
         this.idUsuario = 0;

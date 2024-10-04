@@ -16,13 +16,13 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class AvaliacoesPage implements OnInit {
 
   idUsuario: number;
-  idManga: number;
+  manga: Manga;
   avaliacoes: Avaliacao[];
   valorSegment: string;
 
   constructor(private avaliacaoService: AvaliacaoService, private usuarioService: UsuarioService, private mangaService: MangaService, private activatedRoute: ActivatedRoute, private loadingController: LoadingController) {
     this.idUsuario = 0;
-    this.idManga = 0;
+    this.manga = new Manga();
     this.avaliacoes = [];
     this.valorSegment = 'todos';
   }
@@ -32,8 +32,16 @@ export class AvaliacoesPage implements OnInit {
 
     if (idUsuario !== 0) {
       let idManga = parseFloat(this.activatedRoute.snapshot.params['idManga']);
-      if (idManga === 0) {
-        console.warn('ID do mangá não encontrado');
+      if (!isNaN(idManga)) {
+        this.mangaService.buscarPorId(idManga)
+          .then((json) => {
+            this.manga = <Manga>json;
+          })
+          .catch(error => {
+            console.error('Erro ao buscar mangá', error);
+          });
+      } else {
+        console.error('Id do mangá não encontrado na rota.');
       }
     } else {
       console.warn('ID do usuário não encontrado');
@@ -52,11 +60,11 @@ export class AvaliacoesPage implements OnInit {
 
   async filtraravaliacoes() {
     if (this.valorSegment === 'seguidos') {
-      await this.avaliacaoService.listarSeguidosManga(this.idManga, this.idUsuario).then((json) => {
+      await this.avaliacaoService.listarSeguidosManga(this.manga.idManga, this.idUsuario).then((json) => {
         this.avaliacoes = <Avaliacao[]>(json);
       });
     } else {
-      await this.avaliacaoService.listarTodosManga(this.idManga).then((json) => {
+      await this.avaliacaoService.listarTodosManga(this.manga.idManga).then((json) => {
         this.avaliacoes = <Avaliacao[]>(json);
       });
     }

@@ -27,7 +27,7 @@ export class CurtidaService {
   }
 
   async excluir(idManga: number | null, idUsuario: number | null): Promise<Curtida> {
-    let urlAuxiliar = this.url + "/" + idManga + "/" + idUsuario;
+    let urlAuxiliar = this.url + "/" + idUsuario + "/" + idManga;
     return await firstValueFrom(this.httpClient.delete<Curtida>(urlAuxiliar));
   }
 }

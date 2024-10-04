@@ -22,10 +22,10 @@ public class LerDepoisService {
     }
 
     public LerDepois inserir(LerDepois lD) {   	
-        Long id = lerDepoisDao.inserir(lD);
-        if (id == null) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar ID para a marcação de ler depois.");
-        }
+        int linhasAfetadas = lerDepoisDao.inserir(lD);
+        if (linhasAfetadas <= 0) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao inserir a nova curtida.");
+		}
 
         return lD;
     }

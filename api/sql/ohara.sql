@@ -54,11 +54,10 @@ CREATE TABLE IF NOT EXISTS `ohara`.`Lista` (
 -- Table `ohara`.`Avaliacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`Avaliacao` (
-  `idAvaliacao` BIGINT NOT NULL AUTO_INCREMENT,
   `idUsuario` BIGINT NOT NULL,
   `idManga` BIGINT NOT NULL,
   `nota` INT NOT NULL,
-  PRIMARY KEY (`idAvaliacao`),
+  PRIMARY KEY (`idUsuario`, `idManga`),
   INDEX `idManga_idx` (`idManga` ASC),
   CONSTRAINT `fk_Avaliacao_Manga`
     FOREIGN KEY (`idManga`)

@@ -16,13 +16,13 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class ReviewsPage implements OnInit {
 
   idUsuario: number;
-  idManga: number;
+  manga: Manga;
   reviews: Review[];
   valorSegment: string;
 
   constructor(private reviewService: ReviewService, private usuarioService: UsuarioService, private activatedRoute: ActivatedRoute, private loadingController: LoadingController) {
     this.idUsuario = 0;
-    this.idManga = 0;
+    this.manga = new Manga();
     this.reviews = [];
     this.valorSegment = 'todos';
   }
@@ -53,15 +53,15 @@ export class ReviewsPage implements OnInit {
 
   async filtrarReviews() {
     if (this.valorSegment === 'meus') {
-      await this.reviewService.listarMeusManga(this.idManga, this.idUsuario).then((json) => {
+      await this.reviewService.listarMeusManga(this.manga.idManga, this.idUsuario).then((json) => {
         this.reviews = <Review[]>(json);
       });
     } else if (this.valorSegment === 'seguidos') {
-      await this.reviewService.listarSeguidosManga(this.idManga, this.idUsuario).then((json) => {
+      await this.reviewService.listarSeguidosManga(this.manga.idManga, this.idUsuario).then((json) => {
         this.reviews = <Review[]>(json);
       });
     } else {
-      await this.reviewService.listarTodosManga(this.idManga).then((json) => {
+      await this.reviewService.listarTodosManga(this.manga.idManga).then((json) => {
         this.reviews = <Review[]>(json);
       });
     }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MangaService } from 'src/app/services/manga.service';
-<<<<<<< HEAD
 import { CurtidaService } from 'src/app/services/curtida.service';
 import { Curtida } from 'src/app/model/curtida';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -12,11 +11,8 @@ import { Visto } from 'src/app/model/visto';
 import { VistoService } from 'src/app/services/visto.service';
 import { Avaliacao } from 'src/app/model/avaliacao';
 import { AvaliacaoService } from 'src/app/services/avaliacao.service';
-=======
-import { MarcarCurtidaService } from 'src/app/services/marcar-curtida.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { Manga } from 'src/app/model/manga';
 
->>>>>>> ab838e80440377587cf37d6f13f28d0958fc1392
 @Component({
   selector: 'app-visualizar-manga',
   templateUrl: './visualizar-manga.page.html',
@@ -24,8 +20,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class VisualizarMangaPage implements OnInit {
 
-  manga: any;
-<<<<<<< HEAD
+  manga: Manga;
   idUsuario: number;
 
   isExpanded = false;
@@ -35,51 +30,35 @@ export class VisualizarMangaPage implements OnInit {
   lerDepois: LerDepois;
   visto: Visto;
 
-  constructor(private avaliacaoService: AvaliacaoService, private curtidaService: CurtidaService, private lerDepoisService: LerDepoisService, private vistoService: VistoService, private usuarioService: UsuarioService, private navController: NavController, private route: ActivatedRoute, private mangaService: MangaService) {
+  constructor(private avaliacaoService: AvaliacaoService, private curtidaService: CurtidaService, private lerDepoisService: LerDepoisService, private vistoService: VistoService, private usuarioService: UsuarioService, private navController: NavController, private route: ActivatedRoute, private mangaService: MangaService, private activatedRoute: ActivatedRoute) {
+    this.manga = new Manga();
     this.idUsuario = 0;
     this.avaliacao = new Avaliacao();
     this.curtida = new Curtida();
     this.lerDepois = new LerDepois();
     this.visto = new Visto();
   }
-=======
-  isExpanded = false;
-  isFavorite = false;
-  idUsuario!: number; 
-
-  constructor(
-    private navController: NavController,
-    private route: ActivatedRoute,
-    private mangaService: MangaService,
-    private marcarCurtidaService: MarcarCurtidaService,
-    private usuarioService: UsuarioService
-  ) { }
->>>>>>> ab838e80440377587cf37d6f13f28d0958fc1392
-
   ngOnInit() {
     this.idUsuario = this.usuarioService.recuperarAutenticacao();
 
-    this.route.paramMap.subscribe(params => {
-      const mangaId = params.get('id');
-      if (mangaId) {
-        const idManga = +mangaId;
-        this.mangaService.buscarPorId(idManga)
-          .then(data => {
-            this.manga = data;
+    let idManga = parseFloat(this.activatedRoute.snapshot.params['idManga']);
 
-            this.recuperarAvaliacao();
-            this.recuperarCurtida();
-            this.recuperarLerDepois();
-            this.recuperarVisto();
-          })
-          .catch(error => {
-            console.error('Erro ao buscar mangá', error);
-          });
-      } else {
-        console.error('Id do mangá não encontrado na rota.');
-      }
-    });
+    if (!isNaN(idManga)) {
+      this.mangaService.buscarPorId(idManga)
+        .then((json) => {
+          this.manga = <Manga>json;
 
+          this.recuperarAvaliacao();
+          this.recuperarCurtida();
+          this.recuperarLerDepois();
+          this.recuperarVisto();
+        })
+        .catch(error => {
+          console.error('Erro ao buscar mangá', error);
+        });
+    } else {
+      console.error('Id do mangá não encontrado na rota.');
+    }
     this.idUsuario = this.usuarioService.recuperarAutenticacao();
   }
 
@@ -139,7 +118,6 @@ export class VisualizarMangaPage implements OnInit {
     this.isExpanded = !this.isExpanded;
   }
 
-<<<<<<< HEAD
   marcarCurtida() {
     if (this.curtida.idManga === 0) {
       this.curtida.idManga = this.manga.idManga;
@@ -175,28 +153,30 @@ export class VisualizarMangaPage implements OnInit {
     this.visto.idUsuario = this.idUsuario;
     // this.avaliacao.nota = *nota do input*;
     this.vistoService.salvar(this.avaliacao);
-=======
-  favoritar() {
-    if (!this.isFavorite) {
-      this.marcarCurtidaService.favoritar(this.idUsuario, this.manga.idManga)
-        .then(() => {
-          this.isFavorite = true;
-          console.log('Mangá favoritado!');
-        })
-        .catch(error => {
-          console.error('Erro ao favoritar o mangá', error);
-        });
-    } else {
-      this.marcarCurtidaService.desfavoritar(this.idUsuario, this.manga.idManga)
-        .then(() => {
-          this.isFavorite = false;
-          console.log('Mangá desfavoritado!');
-        })
-        .catch(error => {
-          console.error('Erro ao desfavoritar o mangá', error);
-        });
-    }
->>>>>>> ab838e80440377587cf37d6f13f28d0958fc1392
   }
   
+  /*
+    favoritar() {
+      if (!this.isFavorite) {
+        this.marcarCurtidaService.favoritar(this.idUsuario, this.manga.idManga)
+          .then(() => {
+            this.isFavorite = true;
+            console.log('Mangá favoritado!');
+          })
+          .catch(error => {
+            console.error('Erro ao favoritar o mangá', error);
+          });
+      } else {
+        this.marcarCurtidaService.desfavoritar(this.idUsuario, this.manga.idManga)
+          .then(() => {
+            this.isFavorite = false;
+            console.log('Mangá desfavoritado!');
+          })
+          .catch(error => {
+            console.error('Erro ao desfavoritar o mangá', error);
+          });
+      }
+  >>>>>>> ab838e80440377587cf37d6f13f28d0958fc1392
+    }
+   */
 }

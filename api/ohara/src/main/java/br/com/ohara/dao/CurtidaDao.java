@@ -12,14 +12,13 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import br.com.ohara.model.Curtida;
 import br.com.ohara.model.Review;
 
-@RegisterBeanMapper(Review.class)
+@RegisterBeanMapper(Curtida.class)
 public interface CurtidaDao {
-	@GetGeneratedKeys
-    @SqlUpdate("INSERT INTO Curtida (idUsuario, idManga) " +
-               "VALUES (:idUsuario, :idManga)")
-    Long inserir(@BindBean Curtida usuarioAvaliaManga);
+	
+	@SqlUpdate("INSERT INTO Curtida (idUsuario, idManga) VALUES (:idUsuario, :idManga)")
+	int inserir(@BindBean Curtida curtida);
 
-	@SqlQuery("SELECT * FROM Curtida WHERE idUsuario = :idUsuario and idManga = :idManga")
+	@SqlQuery("SELECT * FROM Curtida WHERE idUsuario = :idUsuario AND idManga = :idManga")
 	Curtida consultarPorId(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);
 
 	@SqlQuery("SELECT * FROM Curtida")
@@ -28,6 +27,6 @@ public interface CurtidaDao {
 	@SqlQuery("SELECT * FROM Curtida WHERE idManga = :idManga AND idUsuario = :idUsuario")
 	Curtida consultarMinhaCurtida(@Bind("idManga") Long idManga, @Bind("idUsuario") Long idUsuario);
 
-	@SqlUpdate("DELETE FROM Curtida WHERE idUsuarioComentaManga = :idUsuarioComentaManga and idManga = :idManga")
+	@SqlUpdate("DELETE FROM Curtida WHERE idUsuario = :idUsuario AND idManga = :idManga")
 	Integer excluir(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);
 }

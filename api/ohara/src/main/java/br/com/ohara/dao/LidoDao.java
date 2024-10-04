@@ -14,10 +14,10 @@ import br.com.ohara.model.Lido;
 
 @RegisterBeanMapper(Lido.class)
 public interface LidoDao {
-	@GetGeneratedKeys
+
     @SqlUpdate("INSERT INTO Lido (idUsuario, idManga) " +
                "VALUES (:idUsuario, :idManga)")
-    Long inserir(@BindBean Lido usuarioAvaliaManga);
+    int inserir(@BindBean Lido usuarioAvaliaManga);
 
 	@SqlQuery("SELECT * FROM Lido WHERE idUsuario = :idUsuario and idManga = :idManga")
 	Lido consultarPorId(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);

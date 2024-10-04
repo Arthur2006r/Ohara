@@ -3,6 +3,7 @@ package br.com.ohara.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ohara.model.Curtida;
-import br.com.ohara.model.LerDepois;
-import br.com.ohara.model.Usuario;
 import br.com.ohara.service.CurtidaService;
 import jakarta.validation.Valid;
 
@@ -27,8 +26,8 @@ public class CurtidaController {
 	}
 
 	@PostMapping({ "/", "" })
-	public ResponseEntity<Curtida> inserir(@Valid @RequestBody Curtida usuarioMarcaCurtidaManga) {
-		return ResponseEntity.ok(curtidaService.inserir(usuarioMarcaCurtidaManga));
+	public ResponseEntity<Curtida> inserir(@Valid @RequestBody Curtida curtida) {
+		return ResponseEntity.ok(curtidaService.inserir(curtida));
 	}
 	
 	@GetMapping({"/", ""})
@@ -42,7 +41,7 @@ public class CurtidaController {
     }
 
 	@DeleteMapping({ "/{idUsuario}/{idManga}" })
-	public ResponseEntity<Curtida> excluir(@PathVariable Long idUsuario, Long idManga) {
+	public ResponseEntity<Curtida> excluir(@PathVariable Long idUsuario, @PathVariable Long idManga) {
 		return ResponseEntity.ok(curtidaService.excluir(idUsuario, idManga));
 	}
 }

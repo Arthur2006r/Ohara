@@ -20,10 +20,10 @@ public class AvaliacaoService {
     }
 
     public Avaliacao inserir(Avaliacao u) {
-        Long id = avaliacaoDao.inserir(u);
-        if (id == null) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar ID para a nova avaliação.");
-        }
+        int linhasAfetadas = avaliacaoDao.inserir(u);
+        if (linhasAfetadas <= 0) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao inserir a nova curtida.");
+		}
 
         return u;
     }
