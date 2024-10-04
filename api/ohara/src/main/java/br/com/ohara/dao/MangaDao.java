@@ -11,10 +11,17 @@ import br.com.ohara.model.Manga;
 @RegisterBeanMapper(Manga.class)
 public interface MangaDao {
 
-	@SqlQuery("select *" + " from manga " + " where idManga = :idManga;")
-	Manga consultarPorId(@Bind("idManga") Long id);
-
-	@SqlQuery("select *" + " from manga " + " order by titulo;")
+	@SqlQuery("select *" + " from Manga " + " order by titulo;")
 	List<Manga> consultarTodos();
 
+	// !!! consertar logica !!!!
+	@SqlQuery("select *" + " from Manga " + " order by titulo;")
+	List<Manga> consultarCurtidosUsuario(@Bind("idUsuario") Long idUsuario);
+
+	// !!! consertar logica !!!!
+	@SqlQuery("select *" + " from Manga " + " order by titulo;")
+	List<Manga> consultarLerDepoisUsuario(@Bind("idUsuario") Long idUsuario);
+
+	@SqlQuery("select *" + " from Manga " + " where idManga = :idManga;")
+	Manga consultarPorId(@Bind("idManga") Long id);
 }

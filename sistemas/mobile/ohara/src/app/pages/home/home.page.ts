@@ -14,7 +14,7 @@ export class HomePage implements OnInit {
   constructor(private router: Router, private mangaService: MangaService) { }
 
   ngOnInit() {
-    this.mangaService.listarMangas()
+    this.mangaService.consultarTodos()
       .then((data) => {
         this.mangas = data; 
       })

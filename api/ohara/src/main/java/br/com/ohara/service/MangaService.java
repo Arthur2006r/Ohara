@@ -19,6 +19,14 @@ public class MangaService {
 	public List<Manga> consultarTodos() {
 		return mangaDao.consultarTodos();
 	}
+	
+	public List<Manga> consultarCurtidosUsuario(Long idUsuario) {
+		return mangaDao.consultarCurtidosUsuario(idUsuario);
+	}
+	
+	public List<Manga> consultarLerDepoisUsuario(Long idUsuario) {
+		return mangaDao.consultarLerDepoisUsuario(idUsuario);
+	}
 
 	public Manga consultarPorId(Long id) {
 		return mangaDao.consultarPorId(id);

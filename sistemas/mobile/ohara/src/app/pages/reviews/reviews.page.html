@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/visualizar-manga"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Reviews do {{manga.titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-segment value="default" (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="todos">
+    <ion-label>Todos</ion-label>
+  </ion-segment-button>
+
+  <ion-segment-button value="seguidos">
+    <ion-label>Seguidos</ion-label>
+  </ion-segment-button>
+
+  <ion-segment-button value="meus">
+    <ion-label>Meus</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let review of reviews">
+      <ion-item>
+        <ion-label>
+          <h2>Por {{review.idUsuario}}</h2>
+          <p>{{review.descricao}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

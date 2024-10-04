@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MangaService } from 'src/app/services/manga.service';
+import { CurtidaService } from 'src/app/services/curtida.service';
+import { Curtida } from 'src/app/model/curtida';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { LerDepois } from 'src/app/model/ler-depois';
+import { LerDepoisService } from 'src/app/services/ler-depois.service';
+import { Visto } from 'src/app/model/visto';
+import { VistoService } from 'src/app/services/visto.service';
+import { Avaliacao } from 'src/app/model/avaliacao';
+import { AvaliacaoService } from 'src/app/services/avaliacao.service';
 @Component({
   selector: 'app-visualizar-manga',
   templateUrl: './visualizar-manga.page.html',
@@ -10,21 +19,38 @@ import { MangaService } from 'src/app/services/manga.service';
 export class VisualizarMangaPage implements OnInit {
 
   manga: any;
+  idUsuario: number;
 
   isExpanded = false;
-  
-  isFavorite = false;
 
-  constructor(private navController: NavController, private route: ActivatedRoute, private mangaService: MangaService) { }
+  avaliacao: Avaliacao;
+  curtida: Curtida;
+  lerDepois: LerDepois;
+  visto: Visto;
+
+  constructor(private avaliacaoService: AvaliacaoService, private curtidaService: CurtidaService, private lerDepoisService: LerDepoisService, private vistoService: VistoService, private usuarioService: UsuarioService, private navController: NavController, private route: ActivatedRoute, private mangaService: MangaService) {
+    this.idUsuario = 0;
+    this.avaliacao = new Avaliacao();
+    this.curtida = new Curtida();
+    this.lerDepois = new LerDepois();
+    this.visto = new Visto();
+  }
 
   ngOnInit() {
+    this.idUsuario = this.usuarioService.recuperarAutenticacao();
+
     this.route.paramMap.subscribe(params => {
       const mangaId = params.get('id');
       if (mangaId) {
         const idManga = +mangaId;
-        this.mangaService.consultarMangaPorId(idManga)
+        this.mangaService.buscarPorId(idManga)
           .then(data => {
             this.manga = data;
+
+            this.recuperarAvaliacao();
+            this.recuperarCurtida();
+            this.recuperarLerDepois();
+            this.recuperarVisto();
           })
           .catch(error => {
             console.error('Erro ao buscar mangá', error);
@@ -33,6 +59,46 @@ export class VisualizarMangaPage implements OnInit {
         console.error('Id do mangá não encontrado na rota.');
       }
     });
+  }
+
+  recuperarAvaliacao() {
+    this.avaliacaoService.consultarMinhaAvaliacao(this.manga.idManga, this.idUsuario)
+      .then((json) => {
+        this.avaliacao = <Avaliacao>json;
+      })
+      .catch((erro) => {
+        console.error('Erro ao buscar curtida:', erro);
+      });
+  }
+
+  recuperarCurtida() {
+    this.curtidaService.consultarMinhaCurtida(this.manga.idManga, this.idUsuario)
+      .then((json) => {
+        this.curtida = <Curtida>json;
+      })
+      .catch((erro) => {
+        console.error('Erro ao buscar curtida:', erro);
+      });
+  }
+
+  recuperarLerDepois() {
+    this.lerDepoisService.consultarMeuLerDepois(this.manga.idManga, this.idUsuario)
+      .then((json) => {
+        this.lerDepois = <LerDepois>json;
+      })
+      .catch((erro) => {
+        console.error('Erro ao buscar ler depois:', erro);
+      });
+  }
+
+  recuperarVisto() {
+    this.vistoService.consultarMeuLido(this.manga.idManga, this.idUsuario)
+      .then((json) => {
+        this.visto = <Visto>json;
+      })
+      .catch((erro) => {
+        console.error('Erro ao buscar visto:', erro);
+      });
   }
 
   voltar() {
@@ -51,8 +117,41 @@ export class VisualizarMangaPage implements OnInit {
     this.isExpanded = !this.isExpanded; // Expandir, não expandir
   }
 
-  favoritar() {
-    this.isFavorite = !this.isFavorite; // Alterna o estado de favorito
+  marcarCurtida() {
+    if (this.curtida.idManga === 0) {
+      this.curtida.idManga = this.manga.idManga;
+      this.curtida.idUsuario = this.idUsuario;
+      this.curtidaService.salvar(this.curtida);
+    } else {
+      this.curtidaService.excluir(this.manga.idManga, this.idUsuario);
+    }
+  }
+
+  marcarLerDepois() {
+    if (this.lerDepois.idManga === 0) {
+      this.lerDepois.idManga = this.manga.idManga;
+      this.lerDepois.idUsuario = this.idUsuario;
+      this.lerDepoisService.salvar(this.lerDepois);
+    } else {
+      this.lerDepoisService.excluir(this.manga.idManga, this.idUsuario);
+    }
+  }
+
+  marcarVisto() {
+    if (this.visto.idManga === 0) {
+      this.visto.idManga = this.manga.idManga;
+      this.visto.idUsuario = this.idUsuario;
+      this.vistoService.salvar(this.visto);
+    } else {
+      this.vistoService.excluir(this.manga.idManga, this.idUsuario);
+    }
+  }
+
+  avaliar() {
+    this.avaliacao.idManga = this.manga.idManga;
+    this.visto.idUsuario = this.idUsuario;
+    // this.avaliacao.nota = *nota do input*;
+    this.vistoService.salvar(this.avaliacao);
   }
 }
 

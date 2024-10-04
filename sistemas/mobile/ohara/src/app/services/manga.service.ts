@@ -13,12 +13,23 @@ export class MangaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  listarMangas(): Promise<Manga[]> {
+  async consultarTodos(): Promise<Manga[]> {
     return firstValueFrom(this.httpClient.get<Manga[]>(this.url));
   }
 
-  consultarMangaPorId(id: number): Promise<any> {
-    return firstValueFrom(this.httpClient.get<any>(`${this.url}/${id}`));
+  async consultarCurtidosUsuario(idUsuario: number | null): Promise<Manga[]> {
+    let urlAuxiliar = this.url + "/" + "curtidos" + "/" + idUsuario;
+    return firstValueFrom(this.httpClient.get<Manga[]>(urlAuxiliar));
+  }
+
+  async consultarLerDepoisUsuario(idUsuario: number | null): Promise<Manga[]> {
+    let urlAuxiliar = this.url + "/" + "lerDepois" + "/" + idUsuario;
+    return firstValueFrom(this.httpClient.get<Manga[]>(urlAuxiliar));
+  }
+
+  async buscarPorId(idManga: number | null): Promise<Manga> {
+    let urlAuxiliar = this.url + "/" + idManga;
+    return await firstValueFrom(this.httpClient.get<Manga>(urlAuxiliar));
   }
  
 }

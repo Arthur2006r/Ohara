@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/visualizar-manga"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastro de Review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formGroup" (ngSubmit)="salvar()">
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="stacked">Descrição</ion-label>
+          <ion-input type="text" formControlName="descricao" placeholder="Adicione a descrição aqui"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" expand="block" color="success" [disabled]="!formGroup.valid">Salvar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

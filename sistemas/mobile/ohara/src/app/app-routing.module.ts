@@ -42,6 +42,34 @@ const routes: Routes = [
   {
     path: 'visualizar-manga/:id',
     loadChildren: () => import('./pages/visualizar-manga/visualizar-manga.module').then( m => m.VisualizarMangaPageModule)
+  },
+  {
+    path: 'reviews/:idManga',
+    loadChildren: () => import('./pages/reviews/reviews.module').then( m => m.ReviewsPageModule)
+  },
+  {
+    path: 'avaliacoes/:idManga',
+    loadChildren: () => import('./pages/avaliacoes/avaliacoes.module').then( m => m.AvaliacoesPageModule)
+  },
+  {
+    path: 'curtidos/:idUsuario',
+    loadChildren: () => import('./pages/curtidos/curtidos.module').then( m => m.CurtidosPageModule)
+  },
+  {
+    path: 'ler-depois/:idUsuario',
+    loadChildren: () => import('./pages/ler-depois/ler-depois.module').then( m => m.LerDepoisPageModule)
+  },
+  {
+    path: 'add-review',
+    loadChildren: () => import('./pages/add-review/add-review.module').then( m => m.AddReviewPageModule)
+  },
+  {
+    path: 'add-review/:idManga/:idReview',
+    loadChildren: () => import('./pages/add-review/add-review.module').then( m => m.AddReviewPageModule)
+  },
+  {
+    path: 'associacoes-usuario-manga/:associacao/:idUsuario',
+    loadChildren: () => import('./pages/associacoes-usuario-manga/associacoes-usuario-manga.module').then( m => m.AssociacoesUsuarioMangaPageModule)
   }
 
 ];

@@ -23,8 +23,18 @@ public class MangaController {
     }
 
     @GetMapping({"/", ""})
-    public ResponseEntity<List<Manga>> consultar() {
+    public ResponseEntity<List<Manga>> consultarTodos() {
         return ResponseEntity.ok(mangaService.consultarTodos());
+    }
+    
+    @GetMapping("/curtidos/{idUsuario}")
+    public ResponseEntity<List<Manga>> consultarCurtidosUsuario(@PathVariable Long idUsuario) {
+        return ResponseEntity.ok(mangaService.consultarCurtidosUsuario(idUsuario));
+    }
+    
+    @GetMapping("/lerDepois/{idUsuario}")
+    public ResponseEntity<List<Manga>> consultarLerDepoisUsuario(@PathVariable Long idUsuario) {
+        return ResponseEntity.ok(mangaService.consultarLerDepoisUsuario(idUsuario));
     }
 
     @GetMapping({"/{id}"})
