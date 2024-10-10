@@ -25,11 +25,11 @@ export class HomePage implements OnInit {
   
 
   getTitulo(manga: any): string {
-    return manga?.titulo; 
+    return manga.titulo; 
   }
 
   getCapa(manga: any): string{
-    return manga?.capa
+    return manga.capa
   }
 
   verMais(): any {

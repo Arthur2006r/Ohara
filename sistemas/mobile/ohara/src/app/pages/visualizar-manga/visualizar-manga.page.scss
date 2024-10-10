@@ -20,6 +20,10 @@
   /* Centraliza as informações do Mangá e define a posição da capa sob o banner */
 }
 
+.espaco-capa{
+  position: relative;
+}
+
 .capa {
   width: 40vw;
   height: 25vh;
@@ -41,9 +45,23 @@
   text-align: center;      
 }
 
-.favorito{
+.estrelas{
+ height: 10vh;
+ width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
+ margin-top: -3vh;
+}
+
+.acoes-usuario-icone{
   height: 4vh;
   margin-top: 2vh;
+}
+
+.acoes-usuario{
+  display: flex;
+  justify-content: center;
+  gap:3vw
 }
 
 .titulo-favorito {
@@ -52,12 +70,8 @@
   position: relative;         /* Necessario para posicionar o icone no canto direito */
 }
 
-.container-coracao {
-  position: absolute;        
-  right: 4vw;                   /* Alinha o icone a direita */
-}
-
 .status {
+  margin-top: -2vh;
   color: green;
 }
 
@@ -72,6 +86,7 @@
   justify-content: center;
   gap: 10vw;
 }
+
 
 .informacoes-adicionais,
 .p {
@@ -96,4 +111,26 @@ hr {
   background-color: #fcfcfc;
   width: 90%;
 }
+
+.mais-opcoes {
+  position: absolute;
+  --border-radius: 50%;
+  width: 2vw;
+  height: 0.5vh;  
+  margin-top: -27vh;
+  margin-left: 16vw;
+}
+
+.botoes{
+  margin-top: 3vh;
+}
+
+.botao-reviews{
+  margin-left: 5vw;
+}
+
+.botao-avaliacoes{
+  margin-right: 5vw;
+}
+
 

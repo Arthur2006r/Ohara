@@ -32,7 +32,7 @@ function fazerRequisicaoApiExterna($url, $metodo = 'GET', $dados = null)
 function listarMangas()
 {
     global $base_url;
-    $page = 2;
+    $page = 1;
     $mangas = [];
 
     while (true) {
@@ -88,7 +88,7 @@ function listarMangas()
             }
 
             $page++;
-            if($page == 5) {
+            if($page == 2) {
                 break;
             }
         } catch (Exception $e) {

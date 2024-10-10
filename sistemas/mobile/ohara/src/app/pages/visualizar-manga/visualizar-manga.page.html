@@ -16,40 +16,58 @@
 
     <div class="espaco-capa">
       <img class="capa" [src]="getCapa()" />
+      <ion-button color="light" class="mais-opcoes" id="abrir-opcoes">...</ion-button>
+      <ion-action-sheet trigger="abrir-opcoes" header="O que deseja fazer?"
+        [buttons]="actionSheetButtons"></ion-action-sheet>
     </div>
 
     <div class="titulo-favorito">
-      <h2 class="titulo">{{ manga?.titulo }}</h2>
-
-      <div class="container-coracao" (click)="marcarCurtida()">
-        <img [src]="curtida.idManga !== 0 ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'"
-          class="favorito" />
-      </div> <!-- Alterna entre o coração em branco e o vermelho -->
-
-    
+      <h2 class="titulo">{{ manga.titulo }}</h2>
     </div>
 
     <div class="container-autor">
-      <p class="autor"> por {{ manga?.autor}}</p>
+      <p class="autor"> por {{ manga.autor}}</p>
     </div>
 
-    <p class="status">{{ manga?.status }}</p>
+    <ion-img class="estrelas" src="/assets/imagens/estrelas.png"></ion-img>
+
+
+    <p class="status">{{ manga.status }}</p>
+
+    <div class="acoes-usuario">
+
+      <div class="acoes" (click)="marcarVisto()">
+        <img [src]="visto.idManga !== 0 ? 'assets/imagens/visto.png' : 'assets/imagens/nao-visto.png'"
+          class="acoes-usuario-icone" /> 
+      </div>
+
+      <div class="acoes" (click)="marcarLerDepois()">
+        <img [src]="lerDepois.idManga !== 0 ? 'assets/imagens/nao-ler.png' : 'assets/imagens/ler-depois.png'"
+          class="acoes-usuario-icone" />
+      </div>
+
+      <div class="acoes" (click)="marcarCurtida()">
+        <img [src]="curtida.idManga !== 0 ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'"
+          class="acoes-usuario-icone" />
+      </div>
+
+    </div>
 
     <div class="informacoes-adicionais">
 
       <div class="infos">
         <ion-img class="icone" src="/assets/imagens/capitulos.png"></ion-img>
-        <p class="qtdDeCapitulos"> {{ manga?.qtdDeCapitulos}} Capitulos</p>
+        <p class="qtdDeCapitulos"> {{ manga.qtdDeCapitulos}} Capitulos</p>
       </div>
 
       <div class="infos">
         <ion-img class="icone" src="/assets/imagens/volumes.png"></ion-img>
-        <p class="qtdDeVolumes"> {{ manga?.qtdDeVolumes}} Volumes</p>
+        <p class="qtdDeVolumes"> {{ manga.qtdDeVolumes}} Volumes</p>
       </div>
 
       <div class="infos">
         <ion-img class="icone" src="/assets/imagens/calendario.png"></ion-img>
-        <p class="anoP">{{ manga?.anoDePublicacao | date:'yyyy' }}</p> <!-- Mostrar somente o ano -->
+        <p class="anoP">{{ manga.anoDePublicacao | date:'yyyy' }}</p> <!-- Mostrar somente o ano -->
       </div>
 
     </div>
@@ -64,6 +82,18 @@
     </div>
 
     <hr>
+
+    <div class="botoes">
+      <ion-button class="botao-avaliacoes" size="medium" (click)="abrirAvaliacoes()">
+        <ion-icon slot="start" name="star"></ion-icon>
+        Avaliações
+      </ion-button>
+
+      <ion-button class="botao-reviews" color="success" size="medium">
+        <ion-icon slot="start" name="reader-outline"></ion-icon>
+        Reviews
+      </ion-button>
+    </div>
 
   </div>
 

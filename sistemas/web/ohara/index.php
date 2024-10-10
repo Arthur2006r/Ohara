@@ -11,6 +11,11 @@
 </head>
 
 <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script src="js/localization/messages_pt_BR.js"></script>
     <div class="container">
         <h1 class="titulo mt-5">Sistema Privado da OHARA</h1>
         <hr>
@@ -34,8 +39,8 @@
 
 
     <script>
-        $(document).ready(function () {
-            $('#alimentarForm').on('submit', function (event) {
+        $(document).ready(function() {
+            $('#alimentarForm').on('submit', function(event) {
                 event.preventDefault();
 
                 $('#loader').css('display', 'flex');
@@ -44,15 +49,15 @@
                     url: 'controller/alimentarSistemaController.php',
                     method: 'POST',
                     data: $(this).serialize(),
-                    success: function (response) {
+                    success: function(response) {
                         $('#loader').css('display', 'none');
 
                         $('#successMessage').show();
-                        setTimeout(function () {
+                        setTimeout(function() {
                             $('#successMessage').hide();
                         }, 2000);
                     },
-                    error: function () {
+                    error: function() {
                         $('#loader').css('display', 'none');
                         alert('Ocorreu um erro durante o processamento.');
                     }
@@ -61,11 +66,7 @@
         });
     </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/additional-methods.js"></script>
-<script src="js/localization/messages_pt_BR.js"></script>
+
 </body>
 
 

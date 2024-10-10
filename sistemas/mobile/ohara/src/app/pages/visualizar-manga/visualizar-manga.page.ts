@@ -12,6 +12,7 @@ import { VistoService } from 'src/app/services/visto.service';
 import { Avaliacao } from 'src/app/model/avaliacao';
 import { AvaliacaoService } from 'src/app/services/avaliacao.service';
 import { Manga } from 'src/app/model/manga';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-visualizar-manga',
@@ -29,8 +30,9 @@ export class VisualizarMangaPage implements OnInit {
   curtida: Curtida;
   lerDepois: LerDepois;
   visto: Visto;
+  
 
-  constructor(private avaliacaoService: AvaliacaoService, private curtidaService: CurtidaService, private lerDepoisService: LerDepoisService, private vistoService: VistoService, private usuarioService: UsuarioService, private navController: NavController, private route: ActivatedRoute, private mangaService: MangaService, private activatedRoute: ActivatedRoute) {
+  constructor(private avaliacaoService: AvaliacaoService, private curtidaService: CurtidaService, private lerDepoisService: LerDepoisService, private vistoService: VistoService, private usuarioService: UsuarioService, private navController: NavController, private route: ActivatedRoute, private mangaService: MangaService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.manga = new Manga();
     this.idUsuario = 0;
     this.avaliacao = new Avaliacao();
@@ -61,6 +63,38 @@ export class VisualizarMangaPage implements OnInit {
     }
     this.idUsuario = this.usuarioService.recuperarAutenticacao();
   }
+
+  public actionSheetButtons = [
+    {
+      text: 'Curtir',
+      icon: 'heart',
+      data: {
+        action: 'marcarCurtida()',
+      },
+    },
+    {
+      text: 'Marcar como Lido',
+      icon: 'eye',
+      data: {
+        action: 'marcarLerDepois()',
+      },
+    },
+    {
+      text: 'Ler Depois',
+      icon: 'alarm-outline',
+      data: {
+        action: 'marcarVisto()',
+      },
+    },
+
+    {
+      text: 'Voltar',
+      role: 'cancel',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
 
   recuperarAvaliacao() {
     this.avaliacaoService.consultarMinhaAvaliacao(this.manga.idManga, this.idUsuario)
@@ -107,7 +141,7 @@ export class VisualizarMangaPage implements OnInit {
   }
 
   getCapa(): string {
-    return this.manga?.capa;
+    return this.manga.capa;
   }
 
   get Sinopse() {
@@ -154,29 +188,9 @@ export class VisualizarMangaPage implements OnInit {
     // this.avaliacao.nota = *nota do input*;
     this.vistoService.salvar(this.avaliacao);
   }
-  
-  /*
-    favoritar() {
-      if (!this.isFavorite) {
-        this.marcarCurtidaService.favoritar(this.idUsuario, this.manga.idManga)
-          .then(() => {
-            this.isFavorite = true;
-            console.log('Mangá favoritado!');
-          })
-          .catch(error => {
-            console.error('Erro ao favoritar o mangá', error);
-          });
-      } else {
-        this.marcarCurtidaService.desfavoritar(this.idUsuario, this.manga.idManga)
-          .then(() => {
-            this.isFavorite = false;
-            console.log('Mangá desfavoritado!');
-          })
-          .catch(error => {
-            console.error('Erro ao desfavoritar o mangá', error);
-          });
-      }
-  >>>>>>> ab838e80440377587cf37d6f13f28d0958fc1392
-    }
-   */
+
+  abrirAvaliacoes(): void{
+    this.router.navigate(['/avaliacoes']);
+  }
+   
 }
