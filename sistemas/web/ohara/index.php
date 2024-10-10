@@ -37,7 +37,10 @@
 
     <div id="successMessage">Processo concluído com sucesso!</div>
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script src="js/localization/messages_pt_BR.js"></script>
     <script>
         $(document).ready(function() {
             $('#alimentarForm').on('submit', function(event) {
@@ -68,7 +71,5 @@
 
 
 </body>
-
-
 
 </html>

@@ -17,6 +17,11 @@ export class MangaService {
     return firstValueFrom(this.httpClient.get<Manga[]>(this.url));
   }
 
+  async consultarTop10(): Promise<Manga[]> {
+    let urlAuxiliar = this.url + "/" + "top10";
+    return firstValueFrom(this.httpClient.get<Manga[]>(urlAuxiliar));
+  }
+
   async consultarCurtidosUsuario(idUsuario: number | null): Promise<Manga[]> {
     let urlAuxiliar = this.url + "/" + "curtidos" + "/" + idUsuario;
     return firstValueFrom(this.httpClient.get<Manga[]>(urlAuxiliar));

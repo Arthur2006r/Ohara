@@ -13,6 +13,9 @@ public interface MangaDao {
 
 	@SqlQuery("select *" + " from Manga " + " order by titulo;")
 	List<Manga> consultarTodos();
+	
+	@SqlQuery("SELECT * FROM Manga LIMIT 10")
+	List<Manga> consultarTop10();
 
 	// !!! consertar logica !!!!
 	@SqlQuery("select *" + " from Manga " + " order by titulo;")

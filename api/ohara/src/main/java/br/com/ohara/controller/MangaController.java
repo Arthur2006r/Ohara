@@ -27,6 +27,11 @@ public class MangaController {
         return ResponseEntity.ok(mangaService.consultarTodos());
     }
     
+    @GetMapping({"/top10"})
+    public ResponseEntity<List<Manga>> consultarTop10() {
+        return ResponseEntity.ok(mangaService.consultarTop10());
+    }
+    
     @GetMapping("/curtidos/{idUsuario}")
     public ResponseEntity<List<Manga>> consultarCurtidosUsuario(@PathVariable Long idUsuario) {
         return ResponseEntity.ok(mangaService.consultarCurtidosUsuario(idUsuario));

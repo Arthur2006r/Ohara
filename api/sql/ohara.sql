@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `ohara`.`Usuario` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`Manga` (
   `idManga` BIGINT NOT NULL AUTO_INCREMENT,
-  `titulo` VARCHAR(255) NOT NULL,
+  `titulo` VARCHAR(500) NOT NULL,
   `autor` VARCHAR(255) NOT NULL,
   `sinopse` TEXT NOT NULL,
   `capa` VARCHAR(255) NOT NULL,
