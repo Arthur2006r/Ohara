@@ -28,6 +28,6 @@ public interface LidoDao {
 	@SqlQuery("SELECT * FROM Lido WHERE idManga = :idManga AND idUsuario = :idUsuario")
 	Lido consultarMeuLido(@Bind("idManga") Long idManga, @Bind("idUsuario") Long idUsuario);
 
-	@SqlUpdate("DELETE FROM Lido WHERE idUsuarioComentaManga = :idUsuarioComentaManga and idManga = :idManga")
+	@SqlUpdate("DELETE FROM Lido WHERE idUsuario = :idUsuario and idManga = :idManga")
 	Integer excluir(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);
 }

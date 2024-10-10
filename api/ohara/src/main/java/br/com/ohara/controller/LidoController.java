@@ -41,7 +41,7 @@ public class LidoController {
     }
 
 	@DeleteMapping({ "/{idUsuario}/{idManga}" })
-	public ResponseEntity<Lido> excluir(@PathVariable Long idUsuario, Long idManga) {
+	public ResponseEntity<Lido> excluir(@PathVariable Long idUsuario, @PathVariable Long idManga) {
 		return ResponseEntity.ok(lidoService.excluir(idUsuario, idManga));
 	}
 }

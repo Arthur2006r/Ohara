@@ -42,7 +42,7 @@ public class LerDepoisController {
     }
 
 	@DeleteMapping({ "/{idUsuario}/{idManga}" })
-	public ResponseEntity<LerDepois> excluir(@PathVariable Long idUsuario, Long idManga) {
+	public ResponseEntity<LerDepois> excluir(@PathVariable Long idUsuario, @PathVariable Long idManga) {
 		return ResponseEntity.ok(lerDepoisService.excluir(idUsuario, idManga));
 	}
 }

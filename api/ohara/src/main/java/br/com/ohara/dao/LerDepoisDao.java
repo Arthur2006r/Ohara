@@ -29,6 +29,6 @@ public interface LerDepoisDao {
 	@SqlQuery("SELECT * FROM LerDepois WHERE idManga = :idManga AND idUsuario = :idUsuario")
 	LerDepois consultarMinhaCurtida(@Bind("idManga") Long idManga, @Bind("idUsuario") Long idUsuario);
 
-	@SqlUpdate("DELETE FROM LerDepois	 WHERE idUsuarioComentaManga = :idUsuarioComentaManga and idManga = :idManga")
+	@SqlUpdate("DELETE FROM LerDepois WHERE idManga = :idManga and idManga = :idManga")
 	Integer excluir(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);
 }
