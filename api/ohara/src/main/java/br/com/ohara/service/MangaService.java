@@ -20,6 +20,10 @@ public class MangaService {
 		return mangaDao.consultarTodos();
 	}
 	
+	public List<Manga> consultarTop10() {
+		return mangaDao.consultarTop10();
+	}
+	
 	public List<Manga> consultarCurtidosUsuario(Long idUsuario) {
 		return mangaDao.consultarCurtidosUsuario(idUsuario);
 	}

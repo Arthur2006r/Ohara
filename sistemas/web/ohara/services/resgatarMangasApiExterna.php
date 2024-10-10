@@ -1,7 +1,7 @@
 <?php
-include_once '../model/Manga.php';
+include_once 'C:\xampp\htdocs\PWII2023\Ohara\ohara\model\Manga.php';
 
-$base_url = "https://api.jikan.moe/v4";
+$base_url = "https://api.jikan.moe/v4/top/manga?page=";
 
 function fazerRequisicaoApiExterna($url, $metodo = 'GET', $dados = null)
 {
@@ -29,10 +29,10 @@ function fazerRequisicaoApiExterna($url, $metodo = 'GET', $dados = null)
     return json_decode($resposta, true);
 }
 
-function listarMangas()
+function listarMangas($contador)
 {
-    global $base_url;
-    $page = 2;
+    $page = $contador;
+    $limite = $contador + 60;
     $mangas = [];
 
     while (true) {
@@ -41,13 +41,12 @@ function listarMangas()
             $data = fazerRequisicaoApiExterna($url);
 
             if (!isset($data['data'])) {
-                echo "Estrutura de resposta inesperada.";
-                break;
+                return $mangas;
             }
 
             $mangasPage = $data['data'];
             if (empty($mangasPage)) {
-                break;
+                return $mangas;
             }
 
             foreach ($mangasPage as $manga) {
@@ -88,7 +87,7 @@ function listarMangas()
             }
 
             $page++;
-            if($page == 5) {
+            if($page == $limite) {
                 break;
             }
         } catch (Exception $e) {
@@ -98,6 +97,18 @@ function listarMangas()
     }
 
     return $mangas;
+}
+
+function obterTotalPaginas()
+{
+    $url = "https://api.jikan.moe/v4/top/manga?page=1";
+    try {
+        $data = fazerRequisicaoApiExterna($url);
+        return $data['pagination']['last_visible_page']?? 0;
+    } catch (Exception $e) {
+        echo "Erro ao acessar a API: " . $e->getMessage();
+        return 0;
+    }
 }
 
 function formatarNomeAutor($nome)

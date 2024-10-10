@@ -23,25 +23,28 @@
     border-top: 1px solid #ccc;
 }
 
-.populares .ver-mais{
+.populares .ver-mais {
     margin-top: 8vh;
 }
 
+/* Ajustar a lista de mangas */
 .manga-list {
     display: grid;
-    grid-template-columns: repeat(4, 90px); 
+    justify-content: center; /* Centraliza a grade no meio */
+    grid-template-columns: repeat(4, 90px); /* Ajustar o número de colunas conforme necessário */
     grid-template-rows: repeat(4, 150px);
-    gap: 2vw; 
+    gap: 2vw; /* Espaçamento entre os elementos */
     margin-top: 2vh;
 }
 
-.manga-list img:first-child {
-    margin-left: 1vw;
+/* Ajustar o estilo dos itens */
+.manga-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-img{
+img {
     height: 18vh;
-    width: 30vw;
-    margin-left:1vw;
+    width: auto; /* Mantém a proporção da imagem */
 }
-

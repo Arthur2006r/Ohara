@@ -18,8 +18,8 @@
   </div>
 
   <div class="manga-list">
-    <div *ngFor="let manga of getTop20Mangas()" class="manga-item">
-      <img class="ion-img" [src]="getCapa(manga)" alt="Capa do Mangá" (click)="onMangaClick(manga.idManga)" /> 
+    <div *ngFor="let manga of mangas" class="manga-item">
+      <img class="ion-img" [src]="manga.capa" alt="Capa do Mangá" (click)="onMangaClick(manga.idManga)" /> 
     </div>
   </div>
 </ion-content>

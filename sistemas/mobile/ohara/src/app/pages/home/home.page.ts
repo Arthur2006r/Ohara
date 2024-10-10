@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
+import { Manga } from 'src/app/model/manga';
 import { MangaService } from 'src/app/services/manga.service';
 
 @Component({
@@ -9,26 +11,33 @@ import { MangaService } from 'src/app/services/manga.service';
 })
 export class HomePage implements OnInit {
 
-  mangas: any[] = []; 
+  mangas: Manga[];
 
-  constructor(private router: Router, private mangaService: MangaService) { }
+  constructor(private router: Router, private mangaService: MangaService, private loadingController: LoadingController) {
+    this.mangas = [];
+  }
 
   ngOnInit() {
-    this.mangaService.consultarTodos()
-      .then((data) => {
-        this.mangas = data; 
+    this.carregarMangas();
+  }
+
+  async carregarMangas() {
+    this.exibirLoader();
+    this.mangaService.consultarTop10()
+      .then((json) => {
+        this.mangas = json;
       })
       .catch((error) => {
         console.error('Erro ao buscar mangás', error);
       });
+    this.fecharLoader();
   }
-  
 
   getTitulo(manga: any): string {
-    return manga?.titulo; 
+    return manga?.titulo;
   }
 
-  getCapa(manga: any): string{
+  getCapa(manga: any): string {
     return manga?.capa
   }
 
@@ -36,14 +45,25 @@ export class HomePage implements OnInit {
     console.log("teste")
   }
 
-  onMangaClick(idManga: number): void {
+  onMangaClick(idManga: number | null): void {
     this.router.navigate(['/visualizar-manga', idManga]);
   }
 
-  getTop20Mangas(): any[] {
-    return this.mangas
-      .sort((a, b) => a.popularidade - b.popularidade)
-      .slice(0, 20); // Pega os 20 mangás mais populares
+
+  exibirLoader() {
+    this.loadingController.create({
+      message: 'Carregando...'
+    }).then((res) => {
+      res.present();
+    });
   }
 
+  fecharLoader() {
+    setTimeout(() => {
+      this.loadingController.dismiss().then(() => {
+      }).catch((erro) => {
+        console.log('Erro: ', erro);
+      });
+    }, 500);
+  }
 }

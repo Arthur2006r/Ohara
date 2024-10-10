@@ -20,6 +20,14 @@ public class AlimentadorOharaService {
 	public List<Manga> inserirMangas(List<Manga> mangas) {
 		List<Manga> mangasInseridos = new ArrayList<>();
 		for (Manga manga : mangas) {
+			if(manga.getStatus() == null) {
+				manga.setStatus("Em hiato");
+			}
+			
+			if (manga.getAnoDePublicacao() == null || manga.getAnoDePublicacao().isEmpty()) {
+		        manga.setAnoDePublicacao("0"); 
+		    }
+			
 			int ct = mangaDao.countByTitulo(manga.getTitulo());
 
 			if (ct == 0) {
