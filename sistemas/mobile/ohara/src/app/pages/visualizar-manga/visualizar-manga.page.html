@@ -34,25 +34,6 @@
 
     <p class="status">{{ manga.status }}</p>
 
-    <div class="acoes-usuario">
-
-      <div class="acoes" (click)="marcarVisto()">
-        <img [src]="visto.idManga !== 0 ? 'assets/imagens/visto.png' : 'assets/imagens/nao-visto.png'"
-          class="acoes-usuario-icone" /> 
-      </div>
-
-      <div class="acoes" (click)="marcarLerDepois()">
-        <img [src]="lerDepois.idManga !== 0 ? 'assets/imagens/nao-ler.png' : 'assets/imagens/ler-depois.png'"
-          class="acoes-usuario-icone" />
-      </div>
-
-      <div class="acoes" (click)="marcarCurtida()">
-        <img [src]="curtida.idManga !== 0 ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'"
-          class="acoes-usuario-icone" />
-      </div>
-
-    </div>
-
     <div class="informacoes-adicionais">
 
       <div class="infos">
@@ -84,12 +65,12 @@
     <hr>
 
     <div class="botoes">
-      <ion-button class="botao-avaliacoes" size="medium" (click)="abrirAvaliacoes()">
+      <ion-button class="botao-avaliacoes" size="medium" (click)="abrirAvaliacoes(manga.idManga)">
         <ion-icon slot="start" name="star"></ion-icon>
         Avaliações
       </ion-button>
 
-      <ion-button class="botao-reviews" color="success" size="medium">
+      <ion-button class="botao-reviews" color="success" size="medium" (click)="abrirReviews(manga.idManga)">
         <ion-icon slot="start" name="reader-outline"></ion-icon>
         Reviews
       </ion-button>

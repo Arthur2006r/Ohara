@@ -13,6 +13,7 @@ import { Avaliacao } from 'src/app/model/avaliacao';
 import { AvaliacaoService } from 'src/app/services/avaliacao.service';
 import { Manga } from 'src/app/model/manga';
 import { Router } from '@angular/router';
+import { text } from 'ionicons/icons';
 
 @Component({
   selector: 'app-visualizar-manga',
@@ -25,12 +26,13 @@ export class VisualizarMangaPage implements OnInit {
   idUsuario: number;
 
   isExpanded = false;
+  isCurtido = false;
 
   avaliacao: Avaliacao;
   curtida: Curtida;
   lerDepois: LerDepois;
   visto: Visto;
-  
+
 
   constructor(private avaliacaoService: AvaliacaoService, private curtidaService: CurtidaService, private lerDepoisService: LerDepoisService, private vistoService: VistoService, private usuarioService: UsuarioService, private navController: NavController, private route: ActivatedRoute, private mangaService: MangaService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.manga = new Manga();
@@ -66,25 +68,30 @@ export class VisualizarMangaPage implements OnInit {
 
   public actionSheetButtons = [
     {
-      text: 'Curtir',
-      icon: 'heart',
-      data: {
-        action: 'marcarCurtida()',
-      },
+      text: this.isCurtido ? 'Descurtir' : 'Curtir',
+      icon: this.isCurtido ? 'heart' : 'heart-outline',
+      handler: () =>
+        this.marcarCurtida()
     },
+
     {
       text: 'Marcar como Lido',
       icon: 'eye',
-      data: {
-        action: 'marcarLerDepois()',
-      },
+      handler: () =>
+        this.marcarVisto()
     },
+
     {
       text: 'Ler Depois',
       icon: 'alarm-outline',
-      data: {
-        action: 'marcarVisto()',
-      },
+      handler: () =>
+        this.marcarLerDepois()
+    },
+
+    {
+      text: 'Realizar Review',
+      handler: () =>
+        this.addReview()
     },
 
     {
@@ -157,8 +164,10 @@ export class VisualizarMangaPage implements OnInit {
       this.curtida.idManga = this.manga.idManga;
       this.curtida.idUsuario = this.idUsuario;
       this.curtidaService.salvar(this.curtida);
+      this.isCurtido = true;
     } else {
       this.curtidaService.excluir(this.manga.idManga, this.idUsuario);
+      this.isCurtido = false;
     }
   }
 
@@ -189,8 +198,16 @@ export class VisualizarMangaPage implements OnInit {
     this.vistoService.salvar(this.avaliacao);
   }
 
-  abrirAvaliacoes(): void{
-    this.router.navigate(['/avaliacoes']);
+  addReview(){
+    this.router.navigate(['/add-review']);
   }
-   
+
+  abrirAvaliacoes(idManga: number | null): void {
+    this.router.navigate(['/avaliacoes', idManga]);
+  }
+
+  abrirReviews(idManga: number | null): void {
+    this.router.navigate(['/reviews', idManga]);
+  }
+
 }

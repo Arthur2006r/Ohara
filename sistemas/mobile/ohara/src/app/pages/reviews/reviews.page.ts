@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/model/usuario';
 import { MangaService } from 'src/app/services/manga.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reviews',
@@ -20,7 +21,7 @@ export class ReviewsPage implements OnInit {
   reviews: Review[];
   valorSegment: string;
 
-  constructor(private reviewService: ReviewService, private usuarioService: UsuarioService, private activatedRoute: ActivatedRoute, private loadingController: LoadingController) {
+  constructor(private reviewService: ReviewService, private usuarioService: UsuarioService, private activatedRoute: ActivatedRoute, private loadingController: LoadingController, private mangaService: MangaService, private navController: NavController) {
     this.idUsuario = 0;
     this.manga = new Manga();
     this.reviews = [];
@@ -38,6 +39,19 @@ export class ReviewsPage implements OnInit {
       }
     } else {
       console.warn('ID do usuário não encontrado');
+    }
+
+    let idManga = parseFloat(this.activatedRoute.snapshot.params['idManga']);
+    if (!isNaN(idManga)) {
+      this.mangaService.buscarPorId(idManga)
+        .then((json) => {
+          this.manga = <Manga>json; // Aqui você garante que o manga é atribuído
+        })
+        .catch(error => {
+          console.error('Erro ao buscar mangá', error);
+        });
+    } else {
+      console.error('Id do mangá não encontrado na rota.');
     }
   }
 
@@ -87,5 +101,9 @@ export class ReviewsPage implements OnInit {
         console.log('Erro: ', erro);
       });
     }, 500);
+  }
+
+  voltar() {
+    this.navController.back();
   }
 }
