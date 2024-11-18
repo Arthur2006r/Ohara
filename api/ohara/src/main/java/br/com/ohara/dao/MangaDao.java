@@ -1,10 +1,14 @@
 package br.com.ohara.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
+import org.jdbi.v3.sqlobject.customizer.AllowUnusedBindings;
 import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.customizer.DefineNamedBindings;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
+import org.jdbi.v3.stringtemplate4.UseStringTemplateEngine;
 
 import br.com.ohara.model.Manga;
 
@@ -27,4 +31,22 @@ public interface MangaDao {
 
 	@SqlQuery("select *" + " from Manga " + " where idManga = :idManga;")
 	Manga consultarPorId(@Bind("idManga") Long id);
+	
+	// !! DBF -  FILTRO DE PESQUISA
+	@SqlQuery(" SELECT * FROM Manga  \n" +
+            " WHERE 1 = 1 \n" +
+            " <if(titulo)>  and titulo like :titulo \n<endif>" +
+            " <if(autor)>  and autor like :autor \n<endif>" +
+            " <if(status)>  and status like :status \n<endif>" +
+            " <if(anoDePublicacao)>  and anoDePublicacao = :anoDePublicacao  \n<endif>" +
+            " ORDER BY idManga;")
+    @AllowUnusedBindings
+    @DefineNamedBindings
+    @UseStringTemplateEngine
+    List<Manga> getByFilter(
+            @Bind String titulo,
+            @Bind String autor,
+            @Bind String anoDePublicacao,
+            @Bind String status
+    );
 }
