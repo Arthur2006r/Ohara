@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Visto } from '../model/visto';
 import { firstValueFrom } from 'rxjs';
+import { MangaService } from './manga.service';
+import { Manga } from '../model/manga';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class VistoService {
   url: string = 'http://localhost:8087/api/v1/lido';
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private mangaService: MangaService) { }
 
   async salvar(visto: Visto): Promise<Visto> {
     return await firstValueFrom(this.httpClient.post<Visto>(this.url, JSON.stringify(visto), this.httpHeaders));
@@ -31,7 +33,28 @@ export class VistoService {
   }
 
   async excluir(idManga: number | null, idUsuario: number | null): Promise<Visto> {
-    let urlAuxiliar = this.url + "/" + idUsuario + "/" + idManga;
+    if (!idManga || !idUsuario) {
+      throw new Error('Parâmetros inválidos para exclusão.');
+    }
+    const urlAuxiliar = `${this.url}/${idUsuario}/${idManga}`;
     return await firstValueFrom(this.httpClient.delete<Visto>(urlAuxiliar));
+  }
+
+  async consultarLidoDoUsuario(idUsuario: number): Promise<any[]> {
+    const urlAuxiliar = `${this.url}/usuario/${idUsuario}`;
+    const lido = await firstValueFrom(this.httpClient.get<Visto[]>(urlAuxiliar));
+    const lidoMangas = await Promise.all( 
+      lido.map(async (lido) => {
+        if (lido.idManga !== null) { 
+          const manga = await this.mangaService.buscarPorId(lido.idManga); 
+          return { lido, manga }; 
+        } else {
+
+          return { lido, manga: null };
+        }
+      })
+    );
+
+    return lidoMangas;
   }
 }

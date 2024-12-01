@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-meu-perfil',
@@ -23,7 +24,7 @@ export class MeuPerfilPage implements OnInit {
     { titulo: 'Listas', value: 'listas' }
   ];
 
-  constructor(private usuarioService: UsuarioService, private alertController: AlertController, private navController: NavController) {
+  constructor(private usuarioService: UsuarioService, private alertController: AlertController, private navController: NavController, private router: Router) {
     this.usuario = new Usuario();
   }
 
@@ -41,6 +42,18 @@ export class MeuPerfilPage implements OnInit {
     } else {
       console.warn('ID do usuário não encontrado');
     }
+  }
+
+  mangasCurtidos(): void{
+    this.router.navigate(['/mangas-curtidos']);
+  }
+
+  lerDepois(): void{
+    this.router.navigate(['/ler-depois']);
+  }
+  
+  mangasLidos(): void{
+    this.router.navigate(['/lidos']);
   }
 
   async sair() {

@@ -62,7 +62,20 @@ const routes: Routes = [
   {
     path: 'associacoes-usuario-manga/:associacao/:idUsuario',
     loadChildren: () => import('./pages/associacoes-usuario-manga/associacoes-usuario-manga.module').then( m => m.AssociacoesUsuarioMangaPageModule)
+  },
+  {
+    path: 'mangas-curtidos',
+    loadChildren: () => import('./pages/mangas-curtidos/mangas-curtidos.module').then( m => m.MangasCurtidosPageModule)
+  },
+  {
+    path: 'ler-depois',
+    loadChildren: () => import('./pages/ler-depois/ler-depois.module').then( m => m.LerDepoisPageModule)
+  },
+  {
+    path: 'lidos',
+    loadChildren: () => import('./pages/lidos/lidos.module').then( m => m.LidosPageModule)
   }
+
 
 ];
 

@@ -42,6 +42,11 @@ public class LerDepoisService {
         return lD;
     }
     
+    //
+	public List<LerDepois> listarLerDepoisPorUsuario(Long idUsuario) {
+	    return lerDepoisDao.consultarPorUsuario(idUsuario);
+	}
+    
     public LerDepois excluir(Long idUsuario, Long idManga) {
     	LerDepois uAux = lerDepoisDao.consultarPorId(idUsuario, idManga);
         if (uAux == null) {

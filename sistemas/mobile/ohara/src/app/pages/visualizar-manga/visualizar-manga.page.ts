@@ -50,6 +50,7 @@ export class VisualizarMangaPage implements OnInit {
     this.lerDepois = new LerDepois();
     this.visto = new Visto();
   }
+  
   ngOnInit() {
     this.idUsuario = this.usuarioService.recuperarAutenticacao();
 

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Review } from '../model/review';
 import { firstValueFrom } from 'rxjs';
+import { UsuarioService } from './usuario.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ReviewService {
   url: string = 'http://localhost:8087/api/v1/review';
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private usuarioService: UsuarioService) { }
 
   async salvar(review: Review): Promise<Review> {
     if (review.idReview === null) {
@@ -53,4 +54,6 @@ export class ReviewService {
     let urlAuxiliar = this.url + "/" + "meus" + "/" + idManga + "/" + idUsuario;
     return await firstValueFrom(this.httpClient.get<Review[]>(urlAuxiliar));
   }
+
+  
 }

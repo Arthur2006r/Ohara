@@ -39,6 +39,12 @@ public class CurtidaController {
     public ResponseEntity<Curtida> consultarMinhaCurtida(@PathVariable Long idManga, @PathVariable Long idUsuario) {
         return ResponseEntity.ok(curtidaService.consultarMinhaCurtida(idManga, idUsuario));
     }
+	
+	//
+	@GetMapping("/usuario/{idUsuario}")
+	public ResponseEntity<List<Curtida>> listarCurtidasPorUsuario(@PathVariable Long idUsuario) {
+	    return ResponseEntity.ok(curtidaService.listarCurtidasPorUsuario(idUsuario));
+	}
 
 	@DeleteMapping({ "/{idUsuario}/{idManga}" })
 	public ResponseEntity<Curtida> excluir(@PathVariable Long idUsuario, @PathVariable Long idManga) {

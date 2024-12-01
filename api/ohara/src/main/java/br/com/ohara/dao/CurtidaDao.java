@@ -29,4 +29,8 @@ public interface CurtidaDao {
 
 	@SqlUpdate("DELETE FROM Curtida WHERE idUsuario = :idUsuario AND idManga = :idManga")
 	Integer excluir(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);
+	
+	@SqlQuery("SELECT * FROM Curtida WHERE idUsuario = :idUsuario")
+	@RegisterBeanMapper(Curtida.class)
+	List<Curtida> consultarPorUsuario(@Bind("idUsuario") Long idUsuario);
 }

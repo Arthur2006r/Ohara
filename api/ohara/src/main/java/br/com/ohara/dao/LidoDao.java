@@ -9,6 +9,7 @@ import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
+import br.com.ohara.model.Curtida;
 import br.com.ohara.model.LerDepois;
 import br.com.ohara.model.Lido;
 
@@ -30,4 +31,8 @@ public interface LidoDao {
 
 	@SqlUpdate("DELETE FROM Lido WHERE idUsuario = :idUsuario and idManga = :idManga")
 	Integer excluir(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);
+	
+	@SqlQuery("SELECT * FROM Lido WHERE idUsuario = :idUsuario")
+	@RegisterBeanMapper(Lido.class)
+	List<Lido>consultarPorUsuario(@Bind("idUsuario") Long idUsuario);
 }
