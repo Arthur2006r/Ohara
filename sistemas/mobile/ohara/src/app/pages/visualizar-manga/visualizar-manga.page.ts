@@ -22,6 +22,14 @@ import { text } from 'ionicons/icons';
 })
 export class VisualizarMangaPage implements OnInit {
 
+  stars: number[] = [1, 2, 3, 4, 5];
+
+  selectedValue: number = 0;
+  isMouseover = true;
+  nota: number = 0;
+
+  public data: any;
+
   manga: Manga;
   idUsuario: number;
 
@@ -66,7 +74,7 @@ export class VisualizarMangaPage implements OnInit {
     this.idUsuario = this.usuarioService.recuperarAutenticacao();
   }
 
-  public actionSheetButtons = [
+  /* public actionSheetButtons = [
     {
       text: this.isCurtido ? 'Descurtir' : 'Curtir',
       icon: this.isCurtido ? 'heart' : 'heart-outline',
@@ -88,11 +96,7 @@ export class VisualizarMangaPage implements OnInit {
         this.marcarLerDepois()
     },
 
-    {
-      text: 'Realizar Review',
-      handler: () =>
-        this.addReview()
-    },
+  
 
     {
       text: 'Voltar',
@@ -102,6 +106,7 @@ export class VisualizarMangaPage implements OnInit {
       },
     },
   ];
+  */
 
   recuperarAvaliacao() {
     this.avaliacaoService.consultarMinhaAvaliacao(this.manga.idManga, this.idUsuario)
@@ -198,8 +203,8 @@ export class VisualizarMangaPage implements OnInit {
     this.vistoService.salvar(this.avaliacao);
   }
 
-  addReview(){
-    this.router.navigate(['/add-review']);
+  addReview(idManga: number | null): void {
+    this.router.navigate(['/add-review', idManga]);
   }
 
   abrirAvaliacoes(idManga: number | null): void {
@@ -208,6 +213,17 @@ export class VisualizarMangaPage implements OnInit {
 
   abrirReviews(idManga: number | null): void {
     this.router.navigate(['/reviews', idManga]);
+  }
+
+  countStar(star: number): void {
+    this.nota = star;
+  }
+
+  removeClass(){
+    if (this.isMouseover){
+      this.selectedValue = 0;
+      console.log(this.selectedValue);
+    }
   }
 
 }

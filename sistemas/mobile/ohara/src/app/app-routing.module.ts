@@ -52,7 +52,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/avaliacoes/avaliacoes.module').then( m => m.AvaliacoesPageModule)
   },
   {
-    path: 'add-review',
+    path: 'add-review/:idManga',
     loadChildren: () => import('./pages/add-review/add-review.module').then( m => m.AddReviewPageModule)
   },
   {

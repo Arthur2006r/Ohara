@@ -90,15 +90,23 @@
   gap: 2px;
 }
 
-.icone {
-  height: 6vh;
-  width: 6vw;
-}
 
 hr {
   margin-top: -1vh;
   background-color: #fcfcfc;
   width: 90%;
+}
+
+.acoes-usuario{
+  display: flex;
+  justify-content: center;
+  gap:3vw
+}
+
+.acoes-usuario-icone{
+  height: 3vh;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
 }
 
 .mais-opcoes {
@@ -121,5 +129,32 @@ hr {
 .botao-avaliacoes{
   margin-right: 5vw;
 }
+
+.rating-list {
+  display: inline-block;
+  list-style: none;
+}
+
+.rating-list li{
+  display: inline-block;
+  font-size: 18px;
+  color:#ddd;
+}
+
+.rating-list li:hover {
+  color: yellow;
+}
+
+.rating-list li:hover ~ li {
+  color: yellow;
+}
+
+.rating-list li.selected {
+  color: yellow;
+}
+
+
+
+
 
 

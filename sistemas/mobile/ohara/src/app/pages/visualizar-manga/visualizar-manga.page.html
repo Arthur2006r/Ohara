@@ -16,10 +16,14 @@
 
     <div class="espaco-capa">
       <img class="capa" [src]="getCapa()" />
+
+      <!--
       <ion-button color="light" class="mais-opcoes" id="abrir-opcoes">...</ion-button>
       <ion-action-sheet trigger="abrir-opcoes" header="O que deseja fazer?"
         [buttons]="actionSheetButtons"></ion-action-sheet>
+      -->
     </div>
+
 
     <div class="titulo-favorito">
       <h2 class="titulo">{{ manga.titulo }}</h2>
@@ -29,6 +33,17 @@
       <p class="autor"> por {{ manga.autor}}</p>
     </div>
 
+   <!-- Campo de estrelas
+    <ul class="list-inline rating-list">
+      <li *ngFor="let star of stars; let i = index" (click)="countStar(star)" [ngClass]="{'selected': (star <= nota)}">
+        <span class="material-icons">
+          <ion-icon name="star"></ion-icon>
+        </span>
+      </li>
+    </ul>
+    <p>Sua nota: {{ nota }}</p>
+
+  -->
     <ion-img class="estrelas" src="/assets/imagens/estrelas.png"></ion-img>
 
 
@@ -37,21 +52,42 @@
     <div class="informacoes-adicionais">
 
       <div class="infos">
-        <ion-img class="icone" src="/assets/imagens/capitulos.png"></ion-img>
+        <ion-icon name="clipboard-outline"></ion-icon>
         <p class="qtdDeCapitulos"> {{ manga.qtdDeCapitulos}} Capitulos</p>
       </div>
 
       <div class="infos">
-        <ion-img class="icone" src="/assets/imagens/volumes.png"></ion-img>
+        <ion-icon classe="infos-icones" name="book-outline"></ion-icon>
         <p class="qtdDeVolumes"> {{ manga.qtdDeVolumes}} Volumes</p>
       </div>
 
       <div class="infos">
-        <ion-img class="icone" src="/assets/imagens/calendario.png"></ion-img>
+        <ion-icon name="calendar-number-outline"></ion-icon>
         <p class="anoP">{{ manga.anoDePublicacao | date:'yyyy' }}</p> <!-- Mostrar somente o ano -->
       </div>
 
     </div>
+
+    <div class="acoes-usuario">
+      <div class="acoes" (click)="marcarVisto()">
+        <img [src]="visto.idManga !== 0 ? 'assets/imagens/visto.png' : 'assets/imagens/nao-visto.png'"
+          class="acoes-usuario-icone" />
+      </div>
+      <div class="acoes" (click)="marcarLerDepois()">
+        <img [src]="lerDepois.idManga !== 0 ? 'assets/imagens/nao-ler.png' : 'assets/imagens/ler-depois.png'"
+          class="acoes-usuario-icone" />
+      </div>
+      <div class="acoes" (click)="marcarCurtida()">
+        <img [src]="curtida.idManga !== 0 ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'"
+          class="acoes-usuario-icone" />
+      </div>
+      <div class="acoes">
+        <ion-icon name="pencil" class="acoes-usuario-icone" (click)="addReview(manga.idManga)"></ion-icon>
+      </div>
+
+
+    </div>
+
 
     <hr>
 

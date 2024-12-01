@@ -73,7 +73,7 @@ export class AddReviewPage implements OnInit {
 
     this.reviewService.salvar(this.review)
     this.exibirreview('Registro salvo com sucesso!!!');
-    this.navController.navigateBack('/visualizar-manga');
+    this.navController.navigateBack('/home');
   }
 
   async exibirreview(texto: string) {
