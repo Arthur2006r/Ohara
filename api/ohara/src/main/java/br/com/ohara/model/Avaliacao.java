@@ -11,7 +11,6 @@ public class Avaliacao {
 	@NotNull
 	private Long idUsuario;
 	
-	@NotNull
 	private Usuario usuario;
 	
 	@NotNull

@@ -9,7 +9,6 @@ import lombok.Data;
 public class Review {
 	private Long idReview;
 	
-	@NotNull
 	private Usuario usuario;
 	
 	@NotNull

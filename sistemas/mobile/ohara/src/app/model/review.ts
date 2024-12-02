@@ -2,7 +2,7 @@ import { Usuario } from "./usuario";
 
 export class Review {
     idReview: number | null;
-    usuario: Usuario;
+    usuario: Usuario | null;
     idUsuario: number;
     idManga: number | null;
     descricao: string;

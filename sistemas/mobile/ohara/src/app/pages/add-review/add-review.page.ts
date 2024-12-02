@@ -72,9 +72,9 @@ export class AddReviewPage implements OnInit {
       // Configura o ID do manga
       this.review.idManga = this.manga.idManga;
 
-      // Busca o usuário e associa à review
-      const usuario = await this.usuarioService.buscarPorId(this.idUsuario);
-      this.review.usuario = <Usuario>usuario;
+      this.review.usuario = null;
+
+      this.review.idUsuario = this.idUsuario;
 
       // Configura a descrição
       this.review.descricao = this.formGroup.value.descricao;
