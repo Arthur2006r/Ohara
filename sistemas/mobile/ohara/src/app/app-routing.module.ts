@@ -61,9 +61,6 @@ const routes: Routes = [
   },
   {
     path: 'associacoes-usuario-manga/:associacao/:idUsuario',
-<<<<<<< HEAD
-    loadChildren: () => import('./pages/associacoes-usuario-manga/associacoes-usuario-manga.module').then(m => m.AssociacoesUsuarioMangaPageModule)
-=======
     loadChildren: () => import('./pages/associacoes-usuario-manga/associacoes-usuario-manga.module').then( m => m.AssociacoesUsuarioMangaPageModule)
   },
   {
@@ -77,7 +74,7 @@ const routes: Routes = [
   {
     path: 'lidos',
     loadChildren: () => import('./pages/lidos/lidos.module').then( m => m.LidosPageModule)
->>>>>>> cb8dfac481dca3130eeacb510eac0a915d5b5818
+
   }
 
 

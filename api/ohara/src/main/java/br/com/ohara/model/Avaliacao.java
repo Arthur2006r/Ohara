@@ -12,6 +12,9 @@ public class Avaliacao {
 	private Long idUsuario;
 	
 	@NotNull
+	private Usuario usuario;
+	
+	@NotNull
 	private Long idManga;
 	
 	@Min(value = 0, message = "A nota não deve ser menor que zero")

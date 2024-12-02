@@ -13,6 +13,9 @@ public class Review {
 	private Usuario usuario;
 	
 	@NotNull
+	private Long idUsuario;
+	
+	@NotNull
 	private Long idManga;
 	
 	@NotBlank

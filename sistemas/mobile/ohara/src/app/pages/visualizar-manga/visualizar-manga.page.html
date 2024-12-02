@@ -1,13 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="">
-<<<<<<< HEAD
     <ion-buttons slot="start">
-      <ion-back-button defautHref="/home"></ion-back-button>
+      <ion-back-button defautHref="/tabs/home"></ion-back-button>
     </ion-buttons>
-=======
-    <ion-back-button slot="start"></ion-back-button>
-    <ion-title>Visualizar Mangá</ion-title>
->>>>>>> cb8dfac481dca3130eeacb510eac0a915d5b5818
   </ion-toolbar>
 </ion-header>
 
@@ -95,17 +90,17 @@
       <div class="caixaAvaliacao">
         <span>Minha Avaliação</span>
         <!-- Estrelas de Avaliação -->
-         <div class="linhaCaixaAvaliacao">
+        <div class="linhaCaixaAvaliacao">
           <div class="estrela-container">
-          <ion-icon *ngFor="let estrela of estrelas; let i = index" name="star" [color]="getCorEstrela(i)"
-            (click)="avaliar(i + 1)" size="large" color="primary"></ion-icon>
+            <ion-icon *ngFor="let estrela of estrelas; let i = index" name="star" [color]="getCorEstrela(i)"
+              (click)="avaliar(i + 1)" size="large" color="primary"></ion-icon>
+          </div>
+
+          <button class="btn-fechar" (click)="excluirAvaliacao()">
+            x
+          </button>
         </div>
 
-        <button class="btn-fechar" (click)="excluirAvaliacao()">
-          x
-        </button>
-         </div>
-        
       </div>
 
       <br>

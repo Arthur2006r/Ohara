@@ -209,6 +209,7 @@ export class VisualizarMangaPage implements OnInit {
     const avaliacaoCorreta: Avaliacao = {
       idManga: this.manga.idManga,
       idUsuario: this.idUsuario,
+      usuario: null,
       nota: nota,
     };
 

@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { Manga } from 'src/app/model/manga';
 import { Review } from 'src/app/model/review';
-import { Usuario } from 'src/app/model/usuario';
 import { MangaService } from 'src/app/services/manga.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { UsuarioService } from 'src/app/services/usuario.service';

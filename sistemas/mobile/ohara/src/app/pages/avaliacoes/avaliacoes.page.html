@@ -22,8 +22,7 @@
     <ion-item-sliding *ngFor="let avaliacao of avaliacoes">
       <ion-item>
         <ion-label>
-          <p>{{setNomeUsuario(avaliacao.idUsuario)}}</p>
-          <h2>Por {{ nomeUsuario }}</h2>
+          <h2>Por {{ avaliacao.usuario?.nome }}</h2>
           <div class="estrela-container">
             <ion-icon *ngFor="let estrela of estrelas; let i = index" name="star"
               [color]="getCorEstrela(i, avaliacao.nota)" size="large" color="primary"></ion-icon>
