@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Manga } from 'src/app/model/manga';
 import { Review } from 'src/app/model/review';
 import { MangaService } from 'src/app/services/manga.service';
@@ -20,7 +20,7 @@ export class ReviewsPage implements OnInit {
   reviews: Review[];
   valorSegment: string;
 
-  constructor(private reviewService: ReviewService, private usuarioService: UsuarioService, private activatedRoute: ActivatedRoute, private loadingController: LoadingController, private mangaService: MangaService, private navController: NavController) {
+  constructor(private reviewService: ReviewService, private usuarioService: UsuarioService, private activatedRoute: ActivatedRoute, private loadingController: LoadingController, private mangaService: MangaService, private navController: NavController, private  alertController: AlertController, private toastController: ToastController) {
     this.idUsuario = 0;
     this.manga = new Manga();
     this.reviews = [];
@@ -101,5 +101,42 @@ export class ReviewsPage implements OnInit {
         console.log('Erro: ', erro);
       });
     }, 500);
+  }
+
+  isUserReview(review: Review): boolean {
+    return review.usuario?.idUsuario === this.idUsuario;
+  }
+
+  async excluirReview(review: Review) {
+    const alert = await this.alertController.create({
+      header: 'Você deseja excluir essa review?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Excluir Review',
+          cssClass: 'danger',
+          handler: () => {
+            this.reviewService.excluir(review.idReview)
+              .then(() => {
+                this.exibirMensagem('Registro excluído com sucesso!!!');
+              }).catch(() => {
+                this.exibirMensagem('Erro ao excluir o registro.');
+              });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async exibirMensagem(texto: string) {
+    const toast = await this.toastController.create({
+      message: texto,
+      duration: 1500
+    });
+    toast.present()
   }
 }
