@@ -61,8 +61,25 @@ const routes: Routes = [
   },
   {
     path: 'associacoes-usuario-manga/:associacao/:idUsuario',
+<<<<<<< HEAD
     loadChildren: () => import('./pages/associacoes-usuario-manga/associacoes-usuario-manga.module').then(m => m.AssociacoesUsuarioMangaPageModule)
+=======
+    loadChildren: () => import('./pages/associacoes-usuario-manga/associacoes-usuario-manga.module').then( m => m.AssociacoesUsuarioMangaPageModule)
+  },
+  {
+    path: 'mangas-curtidos',
+    loadChildren: () => import('./pages/mangas-curtidos/mangas-curtidos.module').then( m => m.MangasCurtidosPageModule)
+  },
+  {
+    path: 'ler-depois',
+    loadChildren: () => import('./pages/ler-depois/ler-depois.module').then( m => m.LerDepoisPageModule)
+  },
+  {
+    path: 'lidos',
+    loadChildren: () => import('./pages/lidos/lidos.module').then( m => m.LidosPageModule)
+>>>>>>> cb8dfac481dca3130eeacb510eac0a915d5b5818
   }
+
 
 ];
 

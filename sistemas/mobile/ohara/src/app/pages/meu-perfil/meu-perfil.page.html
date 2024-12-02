@@ -9,7 +9,8 @@
   <ion-content class="ion-padding">
     <ion-list>
       <!-- Consertar rota dos itens -->
-      <ion-item *ngFor="let item of menu" [routerLink]="item.rota ? [item.rota] : null" (click)="item.click ? item.click() : null">
+      <ion-item *ngFor="let item of menu" [routerLink]="item.rota ? [item.rota] : null"
+        (click)="item.click ? item.click() : null">
         <ion-icon slot="start" [name]="item.icone" [color]="item.cor"></ion-icon>
         <ion-label>{{item.titulo}}</ion-label>
       </ion-item>
@@ -29,7 +30,7 @@
     </ion-buttons>
   </ion-toolbar>
 
-  <!-- Cadeia dos botões do segments -->
+  <!-- Cadeia dos botões do segments 
   <ion-toolbar>
     <ion-segment value="all">
       <ion-segment-button class="menu-opcoes" *ngFor="let item of segment" [value]="item.value">
@@ -37,7 +38,9 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-</ion-header>
+-->
+
+  </ion-header>
 
 <ion-content id="main-content" [fullscreen]="true">
   <ion-row>
@@ -59,6 +62,49 @@
     </ion-text>
   </ion-row>
 
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="personalizacao-coluna" size="4">
+          <ion-card button (click)="mangasCurtidos()">
+            <ion-card-content>
+              <ion-icon name="heart-outline" size="large"></ion-icon>
+              <p class="texto-cards">Mangás Curtidos</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
 
+        <ion-col class="personalizacao-coluna" size="4">
+          <ion-card button (click)="mangasLidos()">
+            <ion-card-content>
+              <ion-icon name="book-outline" size="large"></ion-icon>
+              <p class="texto-cards">Mangás Lidos</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="personalizacao-coluna" size="4">
+          <ion-card button (click)="lerDepois()">
+            <ion-card-content>
+              <ion-icon name="mail-unread-outline" size="large"></ion-icon>
+              <p class="texto-cards">Ler Depois</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col class="personalizacao-coluna" size="4">
+          <ion-card button>
+            <ion-card-content>
+              <ion-icon name="list-outline" size="large"></ion-icon>
+              <p class="texto-cards">Listas Salvas</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-content>
 
 </ion-content>

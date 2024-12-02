@@ -1,33 +1,67 @@
 .nomeDoUsuario {
-    text-align: center;
-    margin-top: 1vh;
+  text-align: center;
+  margin-top: 1vh;
 }
 
 .menu {
-    margin-top: 1vh;
+  margin-top: 1vh;
 }
 
 .menu-opcoes {
-    border: 2px solid;
-    width: 80%;
-    margin-left: 1.5vw;
-    height: 60%;
-    border-radius: 10vw;
+  border: 2px solid;
+  width: 80%;
+  margin-left: 1.5vw;
+  height: 60%;
+  border-radius: 10vw;
 }
 
 .avatar {
-    width: 20vw;
-    height: 20vh;
-    margin-top: auto;
-    margin-left: 5vw;
+  width: 20vw;
+  height: 20vh;
+  margin-top: auto;
+  margin-left: 5vw;
 }
 
 .dados-usuario {
-    margin-left: 5vw;
-    margin-top: 5vh;
+  margin-left: 5vw;
+  margin-top: 5vh;
 }
 
 .menu-opcoes ion-label {
-    font-size: 8px;
-    color: #FFFFFF;
+  font-size: 8px;
+  color: #FFFFFF;
 }
+
+ion-card {
+  margin: 10px; /* Adiciona margem ao redor de cada card */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 120px;
+  /* Altura dos cartões */
+  width: 130px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ion-icon {
+  color: #4a4a4a;
+  margin-bottom: 8px;
+}
+
+.texto-cards {
+  color: black;
+}
+
+.personalizacao-coluna {
+  margin: 0 20px; /* Adiciona margem horizontal (esquerda e direita) */
+}
+

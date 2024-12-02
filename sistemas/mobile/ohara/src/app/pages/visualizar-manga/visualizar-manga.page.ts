@@ -48,6 +48,7 @@ export class VisualizarMangaPage implements OnInit {
 
     this.estrelas = Array(5).fill(0);
   }
+  
   ngOnInit() {
     this.idUsuario = this.usuarioService.recuperarAutenticacao();
 

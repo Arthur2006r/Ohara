@@ -40,6 +40,11 @@ public class CurtidaService {
 		}
 		return c;
 	}
+	
+	//
+	public List<Curtida> listarCurtidasPorUsuario(Long idUsuario) {
+	    return curtidaDao.consultarPorUsuario(idUsuario);
+	}
 
 	public Curtida excluir(Long idUsuario, Long idManga) {
 		Curtida uAux = curtidaDao.consultarPorId(idUsuario, idManga);

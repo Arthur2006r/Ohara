@@ -40,6 +40,11 @@ public class LidoService {
         return v;
     }
     
+    //
+	public List<Lido> listarLidosPorUsuario(Long idUsuario) {
+	    return lidoDao.consultarPorUsuario(idUsuario);
+	}
+    
     public Lido excluir(Long idUsuario, Long idManga) {
     	Lido uAux = lidoDao.consultarPorId(idUsuario, idManga);
         if (uAux == null) {

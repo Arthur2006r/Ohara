@@ -32,8 +32,8 @@ export class MangaService {
     return firstValueFrom(this.httpClient.get<Manga[]>(urlAuxiliar));
   }
 
-  async buscarPorId(idManga: number | null): Promise<Manga> {
-    let urlAuxiliar = this.url + "/" + idManga;
+  async buscarPorId(idManga: number): Promise<Manga> {
+    const urlAuxiliar = `${this.url}/${idManga}`;
     return await firstValueFrom(this.httpClient.get<Manga>(urlAuxiliar));
   }
  

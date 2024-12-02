@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ohara.model.Curtida;
 import br.com.ohara.model.LerDepois;
 import br.com.ohara.model.Lido;
 import br.com.ohara.service.LidoService;
@@ -39,6 +40,12 @@ public class LidoController {
     public ResponseEntity<Lido> consultarMeuLido(@PathVariable Long idManga, @PathVariable Long idUsuario) {
         return ResponseEntity.ok(lidoService.consultarMeuLido(idManga, idUsuario));
     }
+	
+	//
+	@GetMapping("/usuario/{idUsuario}")
+	public ResponseEntity<List<Lido>> listarCurtidasPorUsuario(@PathVariable Long idUsuario) {
+	    return ResponseEntity.ok(lidoService.listarLidosPorUsuario(idUsuario));
+	}
 
 	@DeleteMapping({ "/{idUsuario}/{idManga}" })
 	public ResponseEntity<Lido> excluir(@PathVariable Long idUsuario, @PathVariable Long idManga) {

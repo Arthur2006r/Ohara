@@ -31,4 +31,9 @@ public interface LerDepoisDao {
 
 	@SqlUpdate("DELETE FROM LerDepois WHERE idManga = :idManga and idManga = :idManga")
 	Integer excluir(@Bind("idUsuario") Long idUsuario, @Bind("idManga") Long idManga);
+	
+	//
+	@SqlQuery("SELECT * FROM LerDepois WHERE idUsuario = :idUsuario")
+	@RegisterBeanMapper(LerDepois.class)
+	List<LerDepois> consultarPorUsuario(@Bind("idUsuario") Long idUsuario);
 }

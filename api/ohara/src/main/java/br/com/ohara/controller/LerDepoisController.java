@@ -40,6 +40,12 @@ public class LerDepoisController {
     public ResponseEntity<LerDepois> consultarMeuLerDepois(@PathVariable Long idManga, @PathVariable Long idUsuario) {
         return ResponseEntity.ok(lerDepoisService.consultarMeuLerDepois(idManga, idUsuario));
     }
+	
+	//
+	@GetMapping("/usuario/{idUsuario}")
+	public ResponseEntity<List<LerDepois>> listarCurtidasPorUsuario(@PathVariable Long idUsuario) {
+	    return ResponseEntity.ok(lerDepoisService.listarLerDepoisPorUsuario(idUsuario));
+	}
 
 	@DeleteMapping({ "/{idUsuario}/{idManga}" })
 	public ResponseEntity<LerDepois> excluir(@PathVariable Long idUsuario, @PathVariable Long idManga) {
