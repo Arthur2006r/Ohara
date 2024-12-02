@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController, ToastController } from '@ionic/angular';
 import { Manga } from 'src/app/model/manga';
 import { Review } from 'src/app/model/review';
+import { Usuario } from 'src/app/model/usuario';
 import { MangaService } from 'src/app/services/manga.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -66,14 +67,28 @@ export class AddReviewPage implements OnInit {
     }
   }
 
-  salvar() {
-    this.review.idManga = this.manga.idManga;
-    this.review.idUsuario = this.idUsuario;
-    this.review.descricao = this.formGroup.value.descricao;
+  async salvar() {
+    try {
+      // Configura o ID do manga
+      this.review.idManga = this.manga.idManga;
 
-    this.reviewService.salvar(this.review)
-    this.exibirreview('Registro salvo com sucesso!!!');
-    this.navController.navigateBack('/home');
+      // Busca o usuário e associa à review
+      const usuario = await this.usuarioService.buscarPorId(this.idUsuario);
+      this.review.usuario = <Usuario>usuario;
+
+      // Configura a descrição
+      this.review.descricao = this.formGroup.value.descricao;
+
+      // Salva a review
+      await this.reviewService.salvar(this.review);
+
+      // Exibe a mensagem de sucesso e redireciona
+      this.exibirreview('Registro salvo com sucesso!!!');
+      this.navController.navigateBack(`/visualizar-manga/${this.manga.idManga}`);
+    } catch (erro) {
+      console.error('Erro ao salvar review:', erro);
+      this.exibirreview('Erro ao salvar o registro. Tente novamente.');
+    }
   }
 
   async exibirreview(texto: string) {

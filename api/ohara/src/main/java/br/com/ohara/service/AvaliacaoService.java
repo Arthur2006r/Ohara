@@ -22,7 +22,7 @@ public class AvaliacaoService {
     public Avaliacao inserir(Avaliacao u) {
         int linhasAfetadas = avaliacaoDao.inserir(u);
         if (linhasAfetadas <= 0) {
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao inserir a nova curtida.");
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao inserir a nova avaliação.");
 		}
 
         return u;
@@ -65,7 +65,7 @@ public class AvaliacaoService {
         return avaliacaoDao.consultarSeguidosManga(idManga, idUsuario);
     }
 	
-	public List<Avaliacao> consultarMinha(Long idManga, Long idUsuario) {
+	public Avaliacao consultarMinha(Long idManga, Long idUsuario) {
         return avaliacaoDao.consultarMinha(idManga, idUsuario);
     }
 

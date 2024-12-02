@@ -41,7 +41,7 @@ public class AvaliacaoController {
         return ResponseEntity.ok(avaliacaoService.consultarTodos());
     }
 	
-	@GetMapping({"/todos", "/{idManga}"})
+	@GetMapping({"/todos/{idManga}"})
     public ResponseEntity<List<Avaliacao>> consultarTodos(@PathVariable Long idManga) {
         return ResponseEntity.ok(avaliacaoService.consultarTodosManga(idManga));
     }
@@ -52,12 +52,12 @@ public class AvaliacaoController {
     }
 	
 	@GetMapping({"/minha/{idManga}/{idUsuario}"})
-    public ResponseEntity<List<Avaliacao>> consultarMinha(@PathVariable Long idManga, @PathVariable Long idUsuario) {
+    public ResponseEntity<Avaliacao> consultarMinha(@PathVariable Long idManga, @PathVariable Long idUsuario) {
         return ResponseEntity.ok(avaliacaoService.consultarMinha(idManga, idUsuario));
     }
 
 	@DeleteMapping({ "/{idUsuario}/{idManga}" })
-	public ResponseEntity<Avaliacao> excluir(@PathVariable Long idUsuario, Long idManga) {
+	public ResponseEntity<Avaliacao> excluir(@PathVariable Long idUsuario, @PathVariable Long idManga) {
 		return ResponseEntity.ok(avaliacaoService.excluir(idUsuario, idManga));
 	}
 }

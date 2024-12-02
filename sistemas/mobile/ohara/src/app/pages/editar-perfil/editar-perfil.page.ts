@@ -115,10 +115,6 @@ export class EditarPerfilPage implements OnInit {
     await alert.present();
   }
 
-  voltar() {
-    this.navController.back();
-  }
-
   async exibirMensagem(texto: string) {
     const toast = await this.toastController.create({
       message: texto,

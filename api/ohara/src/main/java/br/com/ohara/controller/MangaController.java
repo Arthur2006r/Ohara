@@ -48,6 +48,11 @@ public class MangaController {
 	public ResponseEntity<Manga> consultarPorId(@PathVariable Long id) {
 		return ResponseEntity.ok(mangaService.consultarPorId(id));
 	}
+	
+	@GetMapping({ "/nota/{id}" })
+	public ResponseEntity<Double> calcularNota(@PathVariable Long id) {
+		return ResponseEntity.ok(mangaService.calcularNota(id));
+	}
 
 	// !! DBF - Busca por filtro
 	@RequestMapping(value = "/filtro", method = { RequestMethod.GET, RequestMethod.POST })

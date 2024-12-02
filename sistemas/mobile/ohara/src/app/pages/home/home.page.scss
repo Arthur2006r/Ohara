@@ -27,13 +27,12 @@
     margin-top: 8vh;
 }
 
-/* Ajustar a lista de mangas */
 .manga-list {
     display: grid;
     justify-content: center; /* Centraliza a grade no meio */
     grid-template-columns: repeat(4, 90px); /* Ajustar o número de colunas conforme necessário */
     grid-template-rows: repeat(4, 150px);
-    gap: 2vw; /* Espaçamento entre os elementos */
+    gap: 2vh 2vw; /* Primeiro valor: espaçamento entre linhas, segundo: entre colunas */
     margin-top: 2vh;
 }
 

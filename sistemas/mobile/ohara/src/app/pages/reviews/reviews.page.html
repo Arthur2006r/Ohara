@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar color="light">
-    <ion-buttons slot="start" (click)="voltar()">
-      <img class="botao-voltar" src="/assets/imagens/botao-voltar.png">
+    <ion-buttons slot="start">
+      <ion-back-button defautHref="/visualizar-manga"></ion-back-button>
     </ion-buttons>
     <ion-title class="titulo">Reviews de <span class="titulo-manga">{{manga.titulo}}</span>
-      </ion-title>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-segment value="default" (ionChange)="segmentChanged($event)">
+<ion-segment [(ngModel)]="valorSegment" value="default" (ionChange)="segmentChanged($event)">
   <ion-segment-button value="todos">
     <ion-label>Todos</ion-label>
   </ion-segment-button>
@@ -27,7 +27,7 @@
     <ion-item-sliding *ngFor="let review of reviews">
       <ion-item>
         <ion-label>
-          <h2>Por {{review.idUsuario}}</h2>
+          <h2>Por {{ review.usuario.nome }}</h2>
           <p>{{review.descricao}}</p>
         </ion-label>
       </ion-item>

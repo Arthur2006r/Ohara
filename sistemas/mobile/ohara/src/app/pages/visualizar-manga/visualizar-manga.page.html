@@ -1,9 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="">
-    <ion-buttons slot="start" (click)="voltar()">
-      <img class="botao-voltar" src="/assets/imagens/botao-voltar.png">
+    <ion-buttons slot="start">
+      <ion-back-button defautHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Visualizar Mangá</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -33,19 +32,10 @@
       <p class="autor"> por {{ manga.autor}}</p>
     </div>
 
-   <!-- Campo de estrelas
-    <ul class="list-inline rating-list">
-      <li *ngFor="let star of stars; let i = index" (click)="countStar(star)" [ngClass]="{'selected': (star <= nota)}">
-        <span class="material-icons">
-          <ion-icon name="star"></ion-icon>
-        </span>
-      </li>
-    </ul>
-    <p>Sua nota: {{ nota }}</p>
-
-  -->
-    <ion-img class="estrelas" src="/assets/imagens/estrelas.png"></ion-img>
-
+    <div class="avaliacaoManga">
+      <span>{{nota}} </span>
+      <ion-icon class="estrelaNota" name="star" color="warning"></ion-icon>
+    </div>
 
     <p class="status">{{ manga.status }}</p>
 
@@ -69,26 +59,63 @@
     </div>
 
     <div class="acoes-usuario">
-      <div class="acoes" (click)="marcarVisto()">
-        <img [src]="visto.idManga !== 0 ? 'assets/imagens/visto.png' : 'assets/imagens/nao-visto.png'"
-          class="acoes-usuario-icone" />
-      </div>
-      <div class="acoes" (click)="marcarLerDepois()">
-        <img [src]="lerDepois.idManga !== 0 ? 'assets/imagens/nao-ler.png' : 'assets/imagens/ler-depois.png'"
-          class="acoes-usuario-icone" />
-      </div>
-      <div class="acoes" (click)="marcarCurtida()">
-        <img [src]="curtida.idManga !== 0 ? 'assets/imagens/curtido.png' : 'assets/imagens/nao-curtido.png'"
-          class="acoes-usuario-icone" />
-      </div>
-      <div class="acoes">
-        <ion-icon name="pencil" class="acoes-usuario-icone" (click)="addReview(manga.idManga)"></ion-icon>
+      <br>
+      <hr>
+      <div class="caixaBotoes">
+        <!-- Ícone de Visto -->
+        <div class="acoes" (click)="marcarVisto()">
+          <ion-icon name="eye" [color]="visto.idManga !== 0 ? 'success' : 'medium'"
+            class="acoes-usuario-icone"></ion-icon>
+          <span>Lido</span>
+        </div>
+
+        <!-- Ícone de Ler Depois -->
+        <div class="acoes" (click)="marcarLerDepois()">
+          <ion-icon name="time" [color]="lerDepois.idManga !== 0 ? 'primary' : 'medium'"
+            class="acoes-usuario-icone"></ion-icon>
+          <span>Ler Depois</span>
+        </div>
+
+        <!-- Ícone de Curtir -->
+        <div class="acoes" (click)="marcarCurtida()">
+          <ion-icon name="heart" [color]="curtida.idManga !== 0 ? 'danger' : 'medium'"
+            class="acoes-usuario-icone"></ion-icon>
+          <span>Curtir</span>
+        </div>
       </div>
 
+      <br>
+      <hr>
 
+      <div class="caixaAvaliacao">
+        <span>Minha Avaliação</span>
+        <!-- Estrelas de Avaliação -->
+         <div class="linhaCaixaAvaliacao">
+          <div class="estrela-container">
+          <ion-icon *ngFor="let estrela of estrelas; let i = index" name="star" [color]="getCorEstrela(i)"
+            (click)="avaliar(i + 1)" size="large" color="primary"></ion-icon>
+        </div>
+
+        <button class="btn-fechar" (click)="excluirAvaliacao()">
+          x
+        </button>
+         </div>
+        
+      </div>
+
+      <br>
+      <hr>
+
+      <div class="caixaReview">
+        <!-- Ícone de Avaliação (pencil) -->
+        <div class="botaoReview" (click)="addReview(manga.idManga)">
+          <ion-icon name="create" class="acoes-usuario-icone"></ion-icon>
+          <span>Fazer Review</span>
+        </div>
+      </div>
     </div>
 
-
+    <br>
     <hr>
 
     <div class="sinopse-container"> <!-- Colocar opção de "ler mais" -->

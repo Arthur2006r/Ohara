@@ -20,11 +20,15 @@ export class AvaliacoesPage implements OnInit {
   avaliacoes: Avaliacao[];
   valorSegment: string;
 
+  nomeUsuario: string = "";
+  estrelas: number[] = [];
+
   constructor(private avaliacaoService: AvaliacaoService, private usuarioService: UsuarioService, private mangaService: MangaService, private activatedRoute: ActivatedRoute, private loadingController: LoadingController) {
     this.idUsuario = 0;
     this.manga = new Manga();
     this.avaliacoes = [];
     this.valorSegment = 'todos';
+    this.estrelas = Array(5).fill(0);
   }
 
   ngOnInit() {
@@ -60,9 +64,10 @@ export class AvaliacoesPage implements OnInit {
 
   async filtraravaliacoes() {
     if (this.valorSegment === 'seguidos') {
-      await this.avaliacaoService.listarSeguidosManga(this.manga.idManga, this.idUsuario).then((json) => {
+      /*await this.avaliacaoService.listarSeguidosManga(this.manga.idManga, this.idUsuario).then((json) => {
         this.avaliacoes = <Avaliacao[]>(json);
-      });
+      });*/
+      this.avaliacoes = [];
     } else {
       await this.avaliacaoService.listarTodosManga(this.manga.idManga).then((json) => {
         this.avaliacoes = <Avaliacao[]>(json);
@@ -90,5 +95,34 @@ export class AvaliacoesPage implements OnInit {
         console.log('Erro: ', erro);
       });
     }, 500);
+  }
+
+  async getUsuario(idUsuario: number | null): Promise<Usuario | null> {
+    if (idUsuario === null) return null;  
+
+    try {
+      const usuario = await this.usuarioService.buscarPorId(idUsuario);  
+      return <Usuario>usuario; 
+    } catch (error) {
+      console.error('Erro ao buscar usuário:', error);
+      return null;  
+    }
+  }
+
+  async getNomeUsuario(idUsuario: number | null): Promise<string> {
+    const usuario = await this.getUsuario(idUsuario); 
+    return usuario ? usuario.nome : 'Usuário Desconhecido'; 
+  }
+
+  setNomeUsuario(idUsuario: number | null) {
+    this.getNomeUsuario(idUsuario).then((json) => {
+      this.nomeUsuario = <string>(json);
+    });
+  }
+
+  getCorEstrela(index: number, nota: number): string {
+    const n = nota - index;
+    if (n >= 1) return 'warning';
+    return 'medium';
   }
 }

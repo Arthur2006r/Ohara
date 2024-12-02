@@ -72,4 +72,8 @@ public class MangaService {
 		return mangaDao.getByFilter(mangaFilter.getTitulo(), mangaFilter.getAutor(), mangaFilter.getAnoDePublicacao(),
 				mangaFilter.getStatus());
 	}
+
+	public double calcularNota(Long id) {
+		return mangaDao.calcularNota(id);
+	}
 }

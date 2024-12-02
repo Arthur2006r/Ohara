@@ -10,7 +10,7 @@ public class Review {
 	private Long idReview;
 	
 	@NotNull
-	private Long idUsuario;
+	private Usuario usuario;
 	
 	@NotNull
 	private Long idManga;

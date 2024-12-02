@@ -37,4 +37,8 @@ export class MangaService {
     return await firstValueFrom(this.httpClient.get<Manga>(urlAuxiliar));
   }
  
+  async calcularNota(idManga: number | null): Promise<number> {
+    let urlAuxiliar = this.url + "/nota/" + idManga;
+    return await firstValueFrom(this.httpClient.get<number>(urlAuxiliar));
+  }
 }

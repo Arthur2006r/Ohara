@@ -18,27 +18,22 @@ export class AvaliacaoService {
   constructor(private httpClient: HttpClient) { }
 
   async salvar(avaliacao: Avaliacao): Promise<Avaliacao> {
-    const urlVerificacao = `${this.url}/existe?usuario=${avaliacao.idUsuario}&manga=${avaliacao.idManga}`;
-    
-    // Verifica se a avaliação já existe
-    const existe = await firstValueFrom(this.httpClient.get<boolean>(urlVerificacao));
+    try {
+      const avAux = await this.consultarMinhaAvaliacao(avaliacao.idManga, avaliacao.idUsuario);
 
-    if (!existe) {
-      // Criar nova avaliação (POST)
-      return await firstValueFrom(
-        this.httpClient.post<Avaliacao>(this.url, avaliacao, this.httpHeaders)
-      );
-    } else {
-      // Atualizar avaliação existente (PUT)
-      return await firstValueFrom(
-        this.httpClient.put<Avaliacao>(this.url, avaliacao, this.httpHeaders)
-      );
+      if (avAux) {
+        return await firstValueFrom(
+          this.httpClient.put<Avaliacao>(this.url, JSON.stringify(avaliacao), this.httpHeaders)
+        );
+      } else {
+        return await firstValueFrom(
+          this.httpClient.post<Avaliacao>(this.url, JSON.stringify(avaliacao), this.httpHeaders)
+        );
+      }
+    } catch (erro) {
+      console.error('Erro ao salvar avaliação:', erro);
+      throw erro;
     }
-  }
-  
-  private async verificarAvaliacaoExistente(idUsuario: number, idManga: number): Promise<boolean> {
-    const url = `${this.url}/existe?usuario=${idUsuario}&manga=${idManga}`;
-    return await firstValueFrom(this.httpClient.get<boolean>(url));
   }
 
   async listarTodos(): Promise<Avaliacao[]> {
@@ -60,8 +55,8 @@ export class AvaliacaoService {
     return await firstValueFrom(this.httpClient.get<Avaliacao>(urlAuxiliar));
   }
 
-  async excluir(id: number | null): Promise<Avaliacao> {
-    let urlAuxiliar = this.url + "/" + id;
+  async excluir(idUsuario: number | null, idManga: number | null): Promise<Avaliacao> {
+    let urlAuxiliar = this.url + "/" + idUsuario + "/" + idManga;
     return await firstValueFrom(this.httpClient.delete<Avaliacao>(urlAuxiliar));
   }
 }

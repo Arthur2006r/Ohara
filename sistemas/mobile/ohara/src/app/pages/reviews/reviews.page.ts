@@ -45,7 +45,7 @@ export class ReviewsPage implements OnInit {
     if (!isNaN(idManga)) {
       this.mangaService.buscarPorId(idManga)
         .then((json) => {
-          this.manga = <Manga>json; // Aqui você garante que o manga é atribuído
+          this.manga = <Manga>json;
         })
         .catch(error => {
           console.error('Erro ao buscar mangá', error);
@@ -71,9 +71,10 @@ export class ReviewsPage implements OnInit {
         this.reviews = <Review[]>(json);
       });
     } else if (this.valorSegment === 'seguidos') {
-      await this.reviewService.listarSeguidosManga(this.manga.idManga, this.idUsuario).then((json) => {
+      /*await this.reviewService.listarSeguidosManga(this.manga.idManga, this.idUsuario).then((json) => {
         this.reviews = <Review[]>(json);
-      });
+      });*/
+      this.reviews = [];
     } else {
       await this.reviewService.listarTodosManga(this.manga.idManga).then((json) => {
         this.reviews = <Review[]>(json);
@@ -101,9 +102,5 @@ export class ReviewsPage implements OnInit {
         console.log('Erro: ', erro);
       });
     }, 500);
-  }
-
-  voltar() {
-    this.navController.back();
   }
 }

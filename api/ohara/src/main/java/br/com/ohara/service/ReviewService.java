@@ -20,15 +20,20 @@ public class ReviewService {
     }
 
     public Review inserir(Review r) {
-    	if (r.getIdReview() != null) {
+        if (r.getIdReview() != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID deve ser nulo ao inserir um novo comentário.");
         }
-    	
+
+        if (r.getUsuario() == null || r.getUsuario().getIdUsuario() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário é obrigatório.");
+        }
+
         Long id = reviewDao.inserir(r);
         if (id == null) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar ID para o novo comentário.");
         }
 
+        r.setIdReview(id);
         return r;
     }
     

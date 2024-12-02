@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MangaService } from 'src/app/services/manga.service';
 import { CurtidaService } from 'src/app/services/curtida.service';
@@ -22,14 +22,6 @@ import { text } from 'ionicons/icons';
 })
 export class VisualizarMangaPage implements OnInit {
 
-  stars: number[] = [1, 2, 3, 4, 5];
-
-  selectedValue: number = 0;
-  isMouseover = true;
-  nota: number = 0;
-
-  public data: any;
-
   manga: Manga;
   idUsuario: number;
 
@@ -41,14 +33,20 @@ export class VisualizarMangaPage implements OnInit {
   lerDepois: LerDepois;
   visto: Visto;
 
+  estrelas: number[] = [];
 
-  constructor(private avaliacaoService: AvaliacaoService, private curtidaService: CurtidaService, private lerDepoisService: LerDepoisService, private vistoService: VistoService, private usuarioService: UsuarioService, private navController: NavController, private route: ActivatedRoute, private mangaService: MangaService, private activatedRoute: ActivatedRoute, private router: Router) {
+  nota: string;
+
+  constructor(private avaliacaoService: AvaliacaoService, private curtidaService: CurtidaService, private lerDepoisService: LerDepoisService, private vistoService: VistoService, private usuarioService: UsuarioService, private navController: NavController, private route: ActivatedRoute, private mangaService: MangaService, private activatedRoute: ActivatedRoute, private router: Router, private alertController: AlertController, private toastController: ToastController) {
     this.manga = new Manga();
     this.idUsuario = 0;
     this.avaliacao = new Avaliacao();
     this.curtida = new Curtida();
     this.lerDepois = new LerDepois();
     this.visto = new Visto();
+    this.nota = "0,0";
+
+    this.estrelas = Array(5).fill(0);
   }
   ngOnInit() {
     this.idUsuario = this.usuarioService.recuperarAutenticacao();
@@ -64,6 +62,8 @@ export class VisualizarMangaPage implements OnInit {
           this.recuperarCurtida();
           this.recuperarLerDepois();
           this.recuperarVisto();
+
+          this.calcularNota();
         })
         .catch(error => {
           console.error('Erro ao buscar mangá', error);
@@ -114,7 +114,7 @@ export class VisualizarMangaPage implements OnInit {
         this.avaliacao = <Avaliacao>json;
       })
       .catch((erro) => {
-        console.error('Erro ao buscar curtida:', erro);
+        console.error('Erro ao buscar avaliacao:', erro);
       });
   }
 
@@ -148,8 +148,15 @@ export class VisualizarMangaPage implements OnInit {
       });
   }
 
-  voltar() {
-    this.navController.back();
+  calcularNota() {
+    this.mangaService.calcularNota(this.manga.idManga)
+      .then((json) => {
+        let valor = <number>json;
+        this.nota = valor.toFixed(1).replace('.', ',');
+      })
+      .catch((erro) => {
+        console.error('Erro ao buscar nota:', erro);
+      });
   }
 
   getCapa(): string {
@@ -191,16 +198,30 @@ export class VisualizarMangaPage implements OnInit {
       this.visto.idManga = this.manga.idManga;
       this.visto.idUsuario = this.idUsuario;
       this.vistoService.salvar(this.visto);
+      this.lerDepoisService.excluir(this.manga.idManga, this.idUsuario);
     } else {
       this.vistoService.excluir(this.manga.idManga, this.idUsuario);
     }
   }
 
-  avaliar() {
-    this.avaliacao.idManga = this.manga.idManga;
-    this.visto.idUsuario = this.idUsuario;
-    // this.avaliacao.nota = *nota do input*;
-    this.vistoService.salvar(this.avaliacao);
+  avaliar(nota: number) {
+    const avaliacaoCorreta: Avaliacao = {
+      idManga: this.manga.idManga,
+      idUsuario: this.idUsuario,
+      nota: nota,
+    };
+
+    this.avaliacaoService.salvar(avaliacaoCorreta)
+      .then(() => {
+        console.log('Avaliação salva com sucesso!');
+        this.visto.idManga = this.manga.idManga;
+        this.visto.idUsuario = this.idUsuario;
+        this.vistoService.salvar(this.visto);
+        this.lerDepoisService.excluir(this.manga.idManga, this.idUsuario);
+      })
+      .catch((error) => {
+        console.error('Erro ao salvar avaliação:', error);
+      });
   }
 
   addReview(idManga: number | null): void {
@@ -215,15 +236,42 @@ export class VisualizarMangaPage implements OnInit {
     this.router.navigate(['/reviews', idManga]);
   }
 
-  countStar(star: number): void {
-    this.nota = star;
+  getCorEstrela(index: number): string {
+    const nota = this.avaliacao.nota - index;
+    if (nota >= 1) return 'warning';
+    return 'medium';
   }
 
-  removeClass(){
-    if (this.isMouseover){
-      this.selectedValue = 0;
-      console.log(this.selectedValue);
-    }
+  async excluirAvaliacao() {
+    const alert = await this.alertController.create({
+      header: 'Você deseja excluir sua avaliação?',
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Excluir Avaliação',
+          cssClass: 'danger',
+          handler: () => {
+            this.avaliacaoService.excluir(this.avaliacao.idUsuario, this.avaliacao.idManga)
+              .then(() => {
+                this.exibirMensagem('Registro excluído com sucesso!!!');
+              }).catch(() => {
+                this.exibirMensagem('Erro ao excluir o registro.');
+              });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
+  async exibirMensagem(texto: string) {
+    const toast = await this.toastController.create({
+      message: texto,
+      duration: 1500
+    });
+    toast.present()
+  }
 }

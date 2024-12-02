@@ -32,6 +32,10 @@ public interface MangaDao {
 	@SqlQuery("select *" + " from Manga " + " where idManga = :idManga;")
 	Manga consultarPorId(@Bind("idManga") Long id);
 	
+	@SqlQuery("SELECT AVG(nota) FROM Avaliacao WHERE idManga = :idManga")
+	Double calcularNota(@Bind("idManga") Long idManga);
+
+	
 	// !! DBF -  FILTRO DE PESQUISA
 	@SqlQuery(" SELECT * FROM Manga  \n" +
             " WHERE 1 = 1 \n" +

@@ -16,11 +16,9 @@
   position: relative;
   text-align: center;
   margin-top: -15vh;
-
-  /* Centraliza as informações do Mangá e define a posição da capa sob o banner */
 }
 
-.espaco-capa{
+.espaco-capa {
   position: relative;
 }
 
@@ -29,7 +27,6 @@
   height: 25vh;
   display: block;
   margin: auto;
-  /* Centraliza a imagem da capa do manga */
 }
 
 .autor {
@@ -42,21 +39,21 @@
   margin-top: 2vh;
   font-weight: bold;
   font-style: italic;
-  text-align: center;      
+  text-align: center;
 }
 
-.estrelas{
- height: 10vh;
- width: 30vw;
+.estrelas {
+  height: 10vh;
+  width: 30vw;
   margin-left: auto;
   margin-right: auto;
- margin-top: -3vh;
+  margin-top: -3vh;
 }
 
 .titulo-favorito {
-  display: flex;              
-  justify-content: center;    
-  position: relative;         /* Necessario para posicionar o icone no canto direito */
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
 .status {
@@ -66,16 +63,17 @@
 
 .sinopse {
   font-size: 16px;
+  text-align: justify;
   color: #888383;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .informacoes-adicionais {
-  /* Alinhar as informações do manga */
   display: flex;
   justify-content: center;
   gap: 10vw;
 }
-
 
 .informacoes-adicionais,
 .p {
@@ -83,13 +81,11 @@
 }
 
 .infos {
-  /* Alinhar os icones de volume, capitulo e data */
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2px;
 }
-
 
 hr {
   margin-top: -1vh;
@@ -97,36 +93,68 @@ hr {
   width: 90%;
 }
 
-.acoes-usuario{
+.acoes-usuario {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap:3vw
+  align-items: center;
+  gap: 1vh;
 }
 
-.acoes-usuario-icone{
-  height: 3vh;
-  margin-top: 1vh;
-  margin-bottom: 2vh;
+.acoes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.acoes-usuario-icone {
+  font-size: 4vh;
+  margin-bottom: 0.5vh;
+}
+
+.acoes-usuario .acoes span {
+  font-size: 12px;
+  color: #888;
+}
+
+.estrela-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.estrela-container ion-icon {
+  font-size: 4vh;
+}
+
+.estrela-nome {
+  text-align: center;
+}
+
+.acoes-usuario .acoes span {
+  font-size: 12px;
+  color: #888;
 }
 
 .mais-opcoes {
   position: absolute;
   --border-radius: 50%;
   width: 2vw;
-  height: 0.5vh;  
+  height: 0.5vh;
   margin-top: -27vh;
   margin-left: 16vw;
-}  
+}
 
-.botoes{
+.botoes {
   margin-top: 3vh;
 }
 
-.botao-reviews{
+.botao-reviews {
   margin-left: 5vw;
 }
 
-.botao-avaliacoes{
+.botao-avaliacoes {
   margin-right: 5vw;
 }
 
@@ -135,17 +163,17 @@ hr {
   list-style: none;
 }
 
-.rating-list li{
+.rating-list li {
   display: inline-block;
   font-size: 18px;
-  color:#ddd;
+  color: #ddd;
 }
 
 .rating-list li:hover {
   color: yellow;
 }
 
-.rating-list li:hover ~ li {
+.rating-list li:hover~li {
   color: yellow;
 }
 
@@ -153,8 +181,58 @@ hr {
   color: yellow;
 }
 
+.caixaBotoes {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 9vw;
+}
 
+.caixaAvaliacao span {
+  font-size: 1.5vh;
+  color: #ffffff6f;
+}
 
+.linhaCaixaAvaliacao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
 
+.botaoReview {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: green;
+  align-items: center;
+  width: 35vw;
+  height: 5vh;
+  padding-left: 1vw;
+  border-radius: 10px;
+}
 
+.btn-fechar {
+  background-color: #fe444771;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 3vw;
+}
 
+.btn-fechar:hover {
+  background-color: #d9363e;
+}
+
+.avaliacaoManga {
+  margin-bottom: 3.5vh;
+}
+
+.avaliacaoManga ion-icon {
+  margin-bottom: -0.2vh;
+}
