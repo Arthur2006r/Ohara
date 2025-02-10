@@ -75,7 +75,23 @@ const routes: Routes = [
     path: 'lidos',
     loadChildren: () => import('./pages/lidos/lidos.module').then( m => m.LidosPageModule)
 
+  },  {
+    path: 'listas',
+    loadChildren: () => import('./pages/listas/listas.module').then( m => m.ListasPageModule)
+  },
+  {
+    path: 'add-lista',
+    loadChildren: () => import('./pages/add-lista/add-lista.module').then( m => m.AddListaPageModule)
+  },
+  {
+    path: 'editar-lista',
+    loadChildren: () => import('./pages/editar-lista/editar-lista.module').then( m => m.EditarListaPageModule)
+  },
+  {
+    path: 'perfil-outro-usuario',
+    loadChildren: () => import('./pages/perfil-outro-usuario/perfil-outro-usuario.module').then( m => m.PerfilOutroUsuarioPageModule)
   }
+
 
 
 ];

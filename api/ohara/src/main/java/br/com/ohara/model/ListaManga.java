@@ -5,11 +5,9 @@ import lombok.Data;
 
 @Data
 public class ListaManga {
-	private Long idListaManga;
+	@NotNull
+	private Long idLista;
 
 	@NotNull
-	private Long idUsuario;
-
-	@NotNull
-	private Long idManga;
+	private long idManga;
 }

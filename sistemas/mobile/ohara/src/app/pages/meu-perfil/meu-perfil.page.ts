@@ -56,6 +56,10 @@ export class MeuPerfilPage implements OnInit {
     this.router.navigate(['/lidos']);
   }
 
+  listas(): void{
+    this.router.navigate(['/listas']);
+  }
+
   async sair() {
     const alert = await this.alertController.create({
       header: 'Sair da sua conta?',

@@ -46,8 +46,33 @@ CREATE TABLE IF NOT EXISTS `ohara`.`Manga` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ohara`.`Lista` (
   `idLista` BIGINT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`idLista`)
+  `idUsuario` BIGINT NOT NULL,
+  `titulo` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`idLista`),
+  CONSTRAINT `fk_Lista_Usuario`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `ohara`.`Usuario` (`idUsuario`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `ohara`.`ListaManga`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ohara`.`ListaManga` (
+  `idLista` BIGINT NOT NULL,
+  `idManga` BIGINT NOT NULL,
+  PRIMARY KEY (`idLista`, `idManga`),
+  CONSTRAINT `fk_ListaManga_Manga`
+    FOREIGN KEY (`idManga`)
+    REFERENCES `ohara`.`Manga` (`idManga`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ListaManga_Lista`
+    FOREIGN KEY (`idLista`)
+    REFERENCES `ohara`.`Lista` (`idLista`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
 -- -----------------------------------------------------

@@ -1,0 +1,20 @@
+.manga-list {
+    display: grid;
+    justify-content: center; /* Centraliza a grade no meio */
+    grid-template-columns: repeat(4, 90px); /* Ajustar o número de colunas conforme necessário */
+    grid-template-rows: repeat(4, 150px);
+    gap: 2vh 2vw; /* Primeiro valor: espaçamento entre linhas, segundo: entre colunas */
+    margin-top: 2vh;
+}
+
+/* Ajustar o estilo dos itens */
+.manga-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    height: 18vh;
+    width: auto; /* Mantém a proporção da imagem */
+}

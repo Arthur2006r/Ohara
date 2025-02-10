@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ohara.model.Lista;
+import br.com.ohara.model.ListaManga;
 import br.com.ohara.service.ListaService;
 import jakarta.validation.Valid;
 
@@ -30,12 +31,12 @@ public class ListaController {
         return ResponseEntity.ok(listaService.inserir(lista));
     }
 
-    @GetMapping({"/{idUsuario}"})
-    public ResponseEntity<List<Lista>> consultarTodos(@PathVariable Long idUsuario) {
+    @GetMapping({"/ListasUsuario", "/{idUsuario}"})
+    public ResponseEntity<List<Lista>> consultarTodosUsuario(@PathVariable Long idUsuario) {
         return ResponseEntity.ok(listaService.consultarTodosUsuario(idUsuario));
     }
 
-    @GetMapping({"/{id}"})
+    @GetMapping({"/PorId", "/{id}"})
     public ResponseEntity<Lista> consultarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(listaService.consultarPorId(id));
     }

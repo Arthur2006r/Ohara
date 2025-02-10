@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listas"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastro de Lista</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="formGroup" (ngSubmit)="salvar()">
+    <ion-item>
+      <ion-label position="stacked">Título da Lista</ion-label>
+      <ion-input type="text" formControlName="titulo"></ion-input>
+    </ion-item>
+
+    <div class="manga-list">
+      <div *ngFor="let manga of mangasLista" class="manga-item">
+        <img class="ion-img" [src]="manga.capa" alt="Capa do Mangá"/>
+      </div>
+    </div>
+
+    <ion-button type="submit" expand="block" color="primary" id="open-modal">Adicionar Mangá</ion-button>
+
+    <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid">Salvar</ion-button>
+  </form>
+
+  <ion-modal ref="modal" trigger="open-modal" :can-dismiss="canDismiss" :presenting-element="page?.$el">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Modal</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="dismiss()">Cancelar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="manga-list">
+        <div *ngFor="let mangaModal of mangasModal" class="manga-item">
+          <img class="ion-img" [src]="mangaModal.capa" alt="Capa do Mangá"
+            (click)="adicionarMangaLista(mangaModal.idManga)" />
+        </div>
+      </div>
+    </ion-content>
+  </ion-modal>
+</ion-content>

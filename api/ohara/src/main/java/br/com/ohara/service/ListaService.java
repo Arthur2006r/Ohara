@@ -9,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.ohara.dao.ListaDao;
 import br.com.ohara.model.Lista;
+import br.com.ohara.model.ListaManga;
 import br.com.ohara.model.Usuario;
 
 @Service
@@ -20,7 +21,7 @@ public class ListaService {
     }
 
     public Lista inserir(Lista l) {
-        if (l.getIdUsuario() != null) {
+        if (l.getIdLista() != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID deve ser nulo ao inserir uma nova lista.");
         }
 
@@ -29,12 +30,16 @@ public class ListaService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar ID para a nova lista.");
         }
 
-        l.setIdUsuario(id);
+        l.getUsuario().setIdUsuario(id);
         return l;
     }
 
     public List<Lista> consultarTodosUsuario(Long idUsuario) {
-        return listaDao.consultarTodosUsuario(idUsuario);
+    	List<Lista> listaManga = listaDao.consultarTodosUsuario(idUsuario);
+        if (listaManga == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Associação Lista não encontrada.");
+        }
+        return listaManga;
     }
 
     public Lista consultarPorId(Long id) {
@@ -46,7 +51,7 @@ public class ListaService {
     }
 
     public Lista alterar(Lista l) {
-        Long id = l.getIdUsuario();
+        Long id = l.getUsuario().getIdUsuario();
         if (id == null) {
             throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Id é informação obrigatória.");
         }

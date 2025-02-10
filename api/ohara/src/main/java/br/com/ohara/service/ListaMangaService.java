@@ -9,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.ohara.dao.ListaMangaDao;
 import br.com.ohara.model.ListaManga;
+import br.com.ohara.model.Manga;
 import br.com.ohara.model.Usuario;
 
 @Service
@@ -20,42 +21,27 @@ public class ListaMangaService {
     }
 
     public ListaManga inserir(ListaManga lm) {
-    	if (lm.getIdListaManga() != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID deve ser nulo ao inserir uma nova associação ListaManga.");
-        }
-    	
-        Long id = listaMangaDao.inserir(lm);
-        if (id == null) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao gerar ID para o novo comentário.");
-        }
+        listaMangaDao.inserir(lm);
 
         return lm;
     }
     
-    public List<ListaManga> consultarPorLista(Long idLista) {
-        return listaMangaDao.consultarPorLista(idLista);
-    }
-
-    public ListaManga consultarPorId(Long id) {
-    	ListaManga listaManga = listaMangaDao.consultarPorId(id);
-        if (listaManga == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Associação ListaManga não encontrada com o id: " + id + ".");
-        }
-        return listaManga;
-    }
-    
-    public ListaManga excluir(Long idUsuarioComentaManga) {
-    	ListaManga uAux = listaMangaDao.consultarPorId(idUsuarioComentaManga);
-        if (uAux == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Comentário não encontrada.");
+    public ListaManga excluir(Long idLista, Long idManga) {
+    	ListaManga lm = listaMangaDao.consultarPorId(idLista, idManga);
+        if (lm == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Associação ListaManga não encontrada.");
         }
 
-        Integer qtd = listaMangaDao.excluir(idUsuarioComentaManga);
+        Integer qtd = listaMangaDao.excluir(idLista, idManga);
 
         if (qtd != 1) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "A quantidade de entidades excluídas é " + qtd + ".");
         }
 
-        return uAux;
+        return lm;
     }
+	
+	public List<Manga> consultarMangasLista(Long idLista) {
+		return listaMangaDao.consultarMangasLista(idLista);
+	}
 }
