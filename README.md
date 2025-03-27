@@ -1,5 +1,5 @@
 # Ohara
-Este repositório contém a aplicação Ohara, um sistema mobile dedicado à avaliação de mangás, oferecendo aos usuários uma plataforma centralizada para gerenciar leituras, compartilhar opiniões e acessar informações detalhadas sobre suas obras favoritas.
+Este repositório contém a aplicação Ohara, um sistema mobile dedicado à avaliação de mangás, oferecendo aos usuários uma plataforma centralizada para gerenciar leituras, compartilhar opiniões e acessar informações detalhadas sobre suas obras favoritas. Além disso, conta com um sistema web responsável por alimentar o banco de dados do sistema com informações obtidas de uma API externa de mangás.
 
 ## Características:
 
@@ -14,15 +14,31 @@ Este repositório contém a aplicação Ohara, um sistema mobile dedicado à ava
 
 ## Tecnologias Utilizadas:
 
-- **Flutter:** Framework utilizado para o desenvolvimento do aplicativo mobile.
-- **Dart:** Linguagem de programação principal do sistema mobile.
-- **Node.js:** Utilizado para a API de suporte ao sistema.
-- **MongoDB:** Banco de dados utilizado para armazenar perfis, avaliações e listas de mangás.
+- **HTML & CSS:** Utilizados para a estrutura e estilização da aplicação.
+- **Ionic:** Framework utilizado para o desenvolvimento do aplicativo mobile.
+- **TypeScript:** Linguagem principal utilizada no frontend.
+- **Java:** Linguagem utilizada para a implementação das APIs do sistema.
+- **PHP:** Utilizado para a implementação da lógica de negócio no backend.
+- **MySQL:** Banco de dados utilizado para armazenar perfis, avaliações e listas de mangás.
 - **Figma:** Ferramenta utilizada para prototipação da interface do usuário.
-- **Firebase:** Utilizado para autenticação e armazenamento de algumas informações dinâmicas.
 
 ## Planejamento e Desenvolvimento
 
 O desenvolvimento do sistema seguiu um planejamento estruturado em etapas, incluindo pesquisa, levantamento de requisitos, modelagem de dados, prototipação de interface e implementação iterativa das funcionalidades.
+
+## Vídeo do Sistema de Alimentação do Banco de Dados 
+Para visualizar o vídeo demonstrativo do sistema de alimentação do bd, clique no link abaixo:
+
+
+
+
+https://github.com/user-attachments/assets/4fd2d7a3-30da-4b9e-8634-6c024c7ea89d
+
+
+
+
+
+## Vídeo do Sistema do Avaliador
+Para visualizar o vídeo demonstrativo do sistema de avaliador do Ohara, clique no link abaixo:
 
 
