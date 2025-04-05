@@ -27,7 +27,6 @@ Este repositório contém a aplicação Ohara, um sistema mobile dedicado à ava
 O desenvolvimento do sistema seguiu um planejamento estruturado em etapas, incluindo pesquisa, levantamento de requisitos, modelagem de dados, prototipação de interface e implementação iterativa das funcionalidades.
 
 ## Vídeo do Sistema de Alimentação do Banco de Dados 
-Para visualizar o vídeo demonstrativo do sistema de alimentação do bd, clique no link abaixo:
 
 
 
@@ -39,6 +38,5 @@ https://github.com/user-attachments/assets/4fd2d7a3-30da-4b9e-8634-6c024c7ea89d
 
 
 ## Vídeo do Sistema do Avaliador
-Para visualizar o vídeo demonstrativo do sistema de avaliador do Ohara, clique no link abaixo:
 
 
